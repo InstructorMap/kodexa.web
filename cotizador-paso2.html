@@ -17,42 +17,54 @@
   <main class="p-5 space-y-4">
     <h1 class="text-xl font-extrabold text-slate-900">Pasarelas & Fiscalidad ARCA</h1>
     <p class="text-xs text-slate-500">Configurá cobros automáticos y facturación electrónica.</p>
-
-    <div class="space-y-3 pt-2">
-      <div class="bg-white border-2 border-blue-600 rounded-xl p-4 text-xs">
-        <div class="flex justify-between font-bold text-slate-900">
-          <span>Mercado Pago Pro Checkout</span>
-          <span class="text-blue-600">+$35.000 ARS</span>
-        </div>
-        <p class="text-slate-500 mt-1">Cobro con QR, tarjetas y webhooks directos.</p>
-      </div>
-
-      <div class="bg-white border-2 border-blue-600 rounded-xl p-4 text-xs">
-        <div class="flex justify-between font-bold text-slate-900">
-          <span>Facturación Automática ARCA / AFIP</span>
-          <span class="text-blue-600">+$42.000 ARS</span>
-        </div>
-        <p class="text-slate-500 mt-1">Facturas A, B y C instantáneas con CAE oficial.</p>
-      </div>
-
-      <div class="bg-white border-2 border-blue-600 rounded-xl p-4 text-xs">
-        <div class="flex justify-between font-bold text-slate-900">
-          <span>Alertas WhatsApp & Carga Excel</span>
-          <span class="text-blue-600">+$33.000 ARS</span>
-        </div>
-        <p class="text-slate-500 mt-1">Avisos de compra y catálogo precargado.</p>
-      </div>
-    </div>
+    <div id="addons" class="space-y-3 pt-2"></div>
   </main>
 
   <nav class="fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 p-4 flex items-center justify-between shadow-lg z-50">
     <div>
       <span class="text-[10px] text-slate-400 block font-bold uppercase">Total Acumulado</span>
-      <span class="font-extrabold text-blue-600 text-lg">$350.000 ARS</span>
+      <span id="total" class="font-extrabold text-blue-600 text-lg">$0 ARS</span>
     </div>
-    <a href="cotizador-paso3-resumen.html" class="bg-blue-600 text-white font-bold text-xs px-6 py-3 rounded-xl shadow-md">
-      Ver Resumen Final →
-    </a>
+    <a href="cotizador-paso3-resumen.html" class="bg-blue-600 text-white font-bold text-xs px-6 py-3 rounded-xl shadow-md">Ver Resumen Final →</a>
   </nav>
+
+  <script src="app.js"></script>
+  <script>
+    const addonsList = [
+      { id: 'mercadopago', title: 'Mercado Pago Pro Checkout',           desc: 'Cobro con QR, tarjetas y webhooks directos.' },
+      { id: 'afip',        title: 'Facturación Automática ARCA / AFIP',  desc: 'Facturas A, B y C instantáneas con CAE oficial.' },
+      { id: 'whatsapp',    title: 'Alertas WhatsApp & Carga Excel',      desc: 'Avisos de compra y catálogo precargado.' }
+    ];
+
+    function render() {
+      const state = KODEXA.getState();
+      const container = document.getElementById('addons');
+      container.innerHTML = addonsList.map(a => {
+        const active = state.addons.includes(a.id);
+        const price = KODEXA.CATALOG.addons[a.id].price;
+        return `
+          <div data-addon="${a.id}" class="cursor-pointer rounded-xl p-4 text-xs transition ${active
+            ? 'bg-white border-2 border-blue-600'
+            : 'bg-white border border-slate-200 hover:border-slate-300'}">
+            <div class="flex justify-between font-bold text-slate-900">
+              <span>${a.title}</span>
+              <span class="${active ? 'text-blue-600' : 'text-slate-400'}">+${KODEXA.formatARS(price)} ARS</span>
+            </div>
+            <p class="text-slate-500 mt-1">${a.desc}</p>
+            ${active ? '<span class="inline-block mt-2 text-[10px] bg-blue-50 text-blue-700 font-bold px-2 py-0.5 rounded">INCLUIDO</span>' : ''}
+          </div>`;
+      }).join('');
+      document.getElementById('total').textContent = KODEXA.formatARS(KODEXA.total(state)) + ' ARS';
+      container.querySelectorAll('[data-addon]').forEach(el => {
+        el.addEventListener('click', () => {
+          KODEXA.toggleAddon(el.dataset.addon);
+          render();
+        });
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', render);
+    document.addEventListener('kodexa:state', render);
+  </script>
 </body>
 </html>
