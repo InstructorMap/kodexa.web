@@ -8,7 +8,10 @@ Sitio comercial estático de KODEXA Digital Solutions, preparado para GitHub Pag
 - Logotipo horizontal e isotipo V5 dedicados; favicon alineado con la marca.
 - Composición responsive para escritorio, tablet y móvil.
 - Navegación, tarjetas, formularios y estados interactivos con una misma identidad.
-- Cotizador unificado; rutas históricas redirigen a esa experiencia.
+- Cotizador modular V2: web, e-commerce, PWA, Android híbrido/nativo, SaaS multi-tenant, sistemas operativos e integraciones.
+- Estimaciones híbridas: precios iniciales para soluciones simples y rangos para productos complejos.
+- Módulos técnicos configurables: autenticación, roles, pagos, QR, GPS, WebRTC Push-to-Talk, offline, push, IA y más.
+- Especificación comercial y límites del cotizador en `docs/COTIZADOR.md`.
 
 ## Arquitectura actual
 Frontend estático. El cotizador calcula en el navegador y deriva a WhatsApp con un mensaje que la persona revisa y envía. No hay autenticación, backend, almacenamiento central, CRM ni conexión a Supabase.
