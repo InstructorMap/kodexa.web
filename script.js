@@ -96,13 +96,13 @@
       addMessage("¡Hola! Puedo ayudarte a explorar soluciones, orientar el alcance o iniciar una cotización. ¿Qué querés mejorar?");
     } else if (/cotiz|presupuesto|precio|cuanto sale|cuanto cuesta|valor/.test(value)) {
       addMessage("Podés configurar una referencia inicial de inversión. El importe es orientativo y el alcance final se confirma mediante una propuesta escrita.");
-      addActions([{label:"Abrir cotizador",href:"contacto.html?tipo=general&origen=copiloto"}]);
+      addActions([{label:"Iniciar consulta",href:"contacto.html?tipo=general&origen=copiloto"}]);
     } else if (/tienda|venta|ecommerce|e-commerce|catalogo|carrito/.test(value)) {
       addMessage("Para vender online podemos diseñar un e-commerce con catálogo, carrito, checkout y herramientas de gestión. Las pasarelas y sus credenciales se validan según el proveedor.");
       addActions([{label:"Ver comercio electrónico",href:"soluciones.html#ecommerce"},{label:"Iniciar consulta",href:"contacto.html?tipo=ecommerce&origen=copiloto"}]);
     } else if (/web|pagina|landing|sitio/.test(value)) {
       addMessage("Podemos construir una web institucional o landing orientada a presentar tu propuesta, generar confianza y facilitar consultas.");
-      addActions([{label:"Ver soluciones web",href:"soluciones.html#web"},{label:"Cotizar proyecto",href:"cotizador.html"}]);
+      addActions([{label:"Ver soluciones web",href:"soluciones.html#web"},{label:"Iniciar consulta",href:"contacto.html?tipo=web&origen=copiloto"}]);
     } else if (/saas|sistema|gestion|plataforma|usuarios|multi.?tenant/.test(value)) {
       addMessage("Desarrollamos sistemas web y plataformas SaaS con módulos, roles y permisos según el alcance. La autenticación y el backend se diseñan como parte de la arquitectura; no están habilitados en este sitio comercial.");
       addActions([{label:"Ver plataformas SaaS",href:"soluciones.html#saas"},{label:"Conversar sobre arquitectura",href:"contacto.html?tipo=saas&origen=copiloto"}]);
@@ -114,7 +114,7 @@
       addActions([{label:"Consultar integración",href:"contacto.html?tipo=integraciones&origen=copiloto"}]);
     } else if (/tiempo|demora|plazo|cuando estaria/.test(value)) {
       addMessage("Los plazos se estiman después de definir alcance, contenidos, integraciones y validaciones. Preferimos darte un plazo realista antes que prometer uno sin analizar el proyecto.");
-      addActions([{label:"Definir mi proyecto",href:"cotizador.html"}]);
+      addActions([{label:"Definir mi proyecto",href:"contacto.html?tipo=general&origen=copiloto"}]);
     } else if (/contact|humano|persona|asesor|whatsapp|hablar/.test(value)) {
       addMessage("Claro. Podés contactar directamente al equipo de KODEXA.");
       addActions([{label:"Abrir WhatsApp",href:"contacto.html?tipo=general&origen=copiloto"}]);
