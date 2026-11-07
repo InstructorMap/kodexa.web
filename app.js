@@ -74,10 +74,16 @@
   const money = value => "$" + Math.round(value).toLocaleString("es-AR");
   const solution = () => CATALOG.solutions[state.solution];
   const factor = () => {
-    const org = { single: 1, small: 1.08, medium: 1.18, large: 1.32 }[state.orgs] || 1;
-    const users = { up_to_50: 1, up_to_500: 1.08, up_to_5000: 1.2, above_5000: 1.38 }[state.users] || 1;
-    // Las plataformas se informan como alcance; no se aplica un recargo porcentual arbitrario.
-    // Android híbrida ya contempla Web + Android como un único producto.
+    const scalesWithOrganizations = ["saas", "operations"].includes(state.solution);
+    const scalesWithUsers = ["pwa", "apk", "native", "saas", "operations", "custom"].includes(state.solution);
+    const org = scalesWithOrganizations
+      ? ({ single: 1, small: 1.08, medium: 1.18, large: 1.32 }[state.orgs] || 1)
+      : 1;
+    const users = scalesWithUsers
+      ? ({ up_to_50: 1, up_to_500: 1.08, up_to_5000: 1.2, above_5000: 1.38 }[state.users] || 1)
+      : 1;
+    // No se penalizan webs informativas por volumen de usuarios ni se aplica
+    // un recargo automático por canales. Web + Android ya está incluido en APK híbrida.
     return org * users;
   };
   const includedModuleIds = () => INCLUDED_BY_SOLUTION[state.solution] || [];
