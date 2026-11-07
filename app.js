@@ -109,7 +109,7 @@
   }
 
   function syncPlatformInputs() {
-    $("[name='platform']").forEach(el => {
+    $$("[name='platform']").forEach(el => {
       el.checked = state.platforms.includes(el.value);
       el.disabled = el.value === "android" && (state.solution === "apk" || state.solution === "native");
     });
@@ -197,7 +197,7 @@
     $$("[name='orgs']").forEach(el => el.addEventListener("change", () => { if (el.checked) state.orgs = el.value; renderSummary(); }));
     $$("[name='users']").forEach(el => el.addEventListener("change", () => { if (el.checked) state.users = el.value; renderSummary(); }));
     $$("[name='platform']").forEach(el => el.addEventListener("change", () => {
-      state.platforms = $("[name='platform']:checked").map(x => x.value);
+      state.platforms = $$("[name='platform']:checked").map(x => x.value);
       if ((state.solution === "apk" || state.solution === "native") && !state.platforms.includes("android")) {
         state.platforms.push("android");
       }
@@ -205,7 +205,7 @@
       $("#platform-error").textContent = "";
       renderSummary();
     }));
-    $("[name='maintenance']").forEach(el => el.addEventListener("change", () => { if (el.checked) state.maintenance = el.value; renderSummary(); }));
+    $$("[name='maintenance']").forEach(el => el.addEventListener("change", () => { if (el.checked) state.maintenance = el.value; renderSummary(); }));
     $$("[name='timeline']").forEach(el => el.addEventListener("change", () => { if (el.checked) state.timeline = el.value; }));
     ["name","company","phone","email","notes"].forEach(key => {
       const el = $("#client-" + key);
