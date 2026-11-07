@@ -91,6 +91,8 @@
 
   function setStep(step) {
     state.step = Math.max(1, Math.min(4, step));
+    const platformError = $("#platform-error");
+    if (platformError) platformError.textContent = "";
     $$(".quote-stage").forEach(el => el.hidden = Number(el.dataset.stage) !== state.step);
     $$(".quote-stepper button").forEach(btn => {
       const n = Number(btn.dataset.go);
@@ -200,9 +202,10 @@
         state.platforms.push("android");
       }
       syncPlatformInputs();
+      $("#platform-error").textContent = "";
       renderSummary();
     }));
-    $$("[name='maintenance']").forEach(el => el.addEventListener("change", () => { if (el.checked) state.maintenance = el.value; renderSummary(); }));
+    $("[name='maintenance']").forEach(el => el.addEventListener("change", () => { if (el.checked) state.maintenance = el.value; renderSummary(); }));
     $$("[name='timeline']").forEach(el => el.addEventListener("change", () => { if (el.checked) state.timeline = el.value; }));
     ["name","company","phone","email","notes"].forEach(key => {
       const el = $("#client-" + key);
