@@ -3,19 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KODEXA Digital Solutions — Páginas web, tiendas online y sistemas digitales</title>
-  <meta name="description" content="KODEXA Digital Solutions: creamos páginas web, tiendas online y sistemas digitales para que tu negocio tenga presencia, venda y trabaje mejor.">
-  <meta name="keywords" content="desarrollo web, e-commerce, tiendas online, sistemas web, ARCA, AFIP, facturación electrónica, Argentina">
+  <title>KODEXA Digital Solutions — Soluciones tecnológicas profesionales</title>
+  <meta name="description" content="KODEXA Digital Solutions: páginas web, tiendas online, sistemas SaaS y plataformas digitales para hacer crecer tu negocio. Facturación ARCA/AFIP incluida.">
+  <meta name="keywords" content="desarrollo web, e-commerce, tiendas online, sistemas SaaS, plataformas digitales, ARCA, AFIP, facturación electrónica, Argentina">
   <meta name="author" content="KODEXA Digital Solutions">
   <meta property="og:title" content="KODEXA Digital Solutions">
-  <meta property="og:description" content="Soluciones digitales para hacer crecer tu negocio. Páginas web, tiendas online y sistemas SaaS.">
+  <meta property="og:description" content="Soluciones tecnológicas profesionales. Páginas web, tiendas online y plataformas SaaS.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="assets/logo.svg">
-  <meta name="theme-color" content="#020B24">
+  <meta name="theme-color" content="#020817">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -24,9 +24,8 @@
   <header class="header" role="banner">
     <div class="container header-inner">
       <a href="#inicio" class="logo" aria-label="KODEXA inicio">
-        <img src="assets/logo.svg" alt="KODEXA Digital Solutions" width="160" height="40">
+        <img src="assets/logo.svg" alt="KODEXA Digital Solutions" width="170" height="44">
       </a>
-
       <nav class="nav" role="navigation" aria-label="Principal">
         <a href="#inicio">Inicio</a>
         <a href="#servicios">Servicios</a>
@@ -34,227 +33,295 @@
         <a href="#proceso">Cómo trabajamos</a>
         <a href="#contacto">Contacto</a>
       </nav>
-
       <a href="#contacto" class="btn btn-primary header-cta">Solicitar presupuesto</a>
-
-      <button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false">
-        <span></span>
-      </button>
+      <button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false"><span></span></button>
     </div>
   </header>
 
   <!-- ============ HERO ============ -->
   <section class="hero" id="inicio">
-    <canvas id="heroParticles" class="hero-particles"></canvas>
     <div class="container">
-      <div class="hero-inner">
+      <div class="hero-grid">
         <div class="hero-content reveal">
           <div class="hero-badge">
             <span class="dot"></span>
             <span>Disponibles para nuevos proyectos · 2025</span>
           </div>
-
           <h1>
             Soluciones digitales<br>
-            para hacer <span class="accent">crecer tu negocio.</span>
+            para <em>hacer crecer</em><br>
+            tu negocio.
           </h1>
-
-          <p class="lead">Tu negocio merece más que una red social. Merece crecer.</p>
-          <p class="desc">Creamos páginas web, tiendas online y sistemas digitales para que tu negocio tenga presencia, venda y trabaje mejor.</p>
-
+          <p class="hero-lead">Tu negocio merece más que una red social. Merece crecer.</p>
+          <p class="hero-desc">Creamos páginas web, tiendas online y sistemas digitales para que tu negocio tenga presencia, venda y trabaje mejor.</p>
           <div class="hero-cta">
-            <a href="#planes" class="btn btn-gold">Ver promociones</a>
-            <a href="#contacto" class="btn btn-ghost">Contanos tu proyecto</a>
+            <a href="#planes" class="btn btn-gold btn-lg">Ver promociones</a>
+            <a href="#contacto" class="btn btn-ghost btn-lg">Contanos tu proyecto</a>
           </div>
-
           <div class="hero-stats">
             <div>
-              <div class="num">+50</div>
+              <div class="num" data-count="50" data-prefix="+">+50</div>
               <div class="lbl">Proyectos entregados</div>
             </div>
             <div>
-              <div class="num">24h</div>
+              <div class="num" data-count="24" data-suffix="h">24h</div>
               <div class="lbl">Respuesta promedio</div>
             </div>
             <div>
-              <div class="num">100%</div>
+              <div class="num" data-count="100" data-suffix="%">100%</div>
               <div class="lbl">Clientes satisfechos</div>
             </div>
           </div>
         </div>
 
         <div class="hero-visual reveal">
-          <div class="halo"></div>
-          <img src="assets/hero-robot.svg" alt="Asistente KODEXA" width="400" height="400" loading="eager">
-
-          <div class="holo-panel p1">
-            <div class="label">Web</div>
-            <div class="value">Página online</div>
-            <div class="bar"></div>
-          </div>
-          <div class="holo-panel p2">
-            <div class="label">Store</div>
-            <div class="value">+180% ventas</div>
-            <div class="bar"></div>
-          </div>
-          <div class="holo-panel p3">
-            <div class="label">SaaS</div>
-            <div class="value">Sistema activo</div>
-            <div class="bar"></div>
+          <div class="bento">
+            <div class="arca-badge">
+              <div class="icon">✓</div>
+              <div>
+                <div class="lbl">ARCA / AFIP</div>
+                <div class="val">Homologado</div>
+              </div>
+            </div>
+            <div class="bento-cell big dash">
+              <img src="assets/mock-dashboard.svg" alt="Dashboard SaaS en tiempo real" loading="eager" width="320" height="220">
+            </div>
+            <div class="bento-cell term">
+              <img src="assets/mock-terminal.svg" alt="Deploy automatizado" loading="lazy" width="320" height="220">
+            </div>
+            <div class="bento-cell store">
+              <img src="assets/mock-store.svg" alt="Tienda e-commerce" loading="lazy" width="320" height="220">
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ============ SERVICIOS ============ -->
-  <section id="servicios">
+  <!-- ============ LOGOS BAR ============ -->
+  <section class="logos-bar">
+    <div class="logos-bar-title">Stack tecnológico</div>
+    <div class="logos-track">
+      <span>Mercado Pago</span><span>ARCA / AFIP</span><span>WhatsApp API</span><span>Supabase</span><span>Next.js</span><span>React</span><span>Node.js</span><span>PostgreSQL</span>
+      <span>Mercado Pago</span><span>ARCA / AFIP</span><span>WhatsApp API</span><span>Supabase</span><span>Next.js</span><span>React</span><span>Node.js</span><span>PostgreSQL</span>
+    </div>
+  </section>
+
+  <!-- ============ CAPACIDADES ============ -->
+  <section class="section" id="servicios">
     <div class="container">
-      <div class="text-center reveal">
-        <span class="section-label">Servicios</span>
-        <h2 class="section-title">Todo lo que tu negocio necesita<br>para <span class="accent">digitalizarse</span></h2>
-        <p class="section-sub">Desde la presencia online hasta los sistemas internos, en un solo lugar.</p>
+      <div class="text-center reveal" style="max-width: 720px; margin: 0 auto 80px;">
+        <span class="eyebrow">Capacidades</span>
+        <h2 class="section-title">No hacemos webs.<br>Construimos <em>plataformas.</em></h2>
+        <p class="section-lead mx-auto">Cada proyecto es una pieza de ingeniería digital diseñada para escalar con tu negocio.</p>
       </div>
 
-      <div class="services-grid">
-        <div class="service-card reveal">
-          <div class="service-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
-          </div>
-          <h3>Páginas web profesionales</h3>
-          <p>Sitios modernos, rápidos y optimizados para posicionar tu marca y captar clientes.</p>
-          <a href="#contacto" class="service-link">Consultar →</a>
+      <!-- Capability 1: Web -->
+      <div class="capability reveal">
+        <div class="capability-content">
+          <div class="tag">01 — Web profesional</div>
+          <h3>Sitios que <em>venden</em> desde el primer segundo.</h3>
+          <p>Diseño editorial, performance de élite y SEO técnico. Cada página está pensada para convertir visitas en clientes reales.</p>
+          <ul>
+            <li>Diseño responsive mobile-first</li>
+            <li>Optimización Core Web Vitals</li>
+            <li>SEO técnico y semántico</li>
+            <li>Integración con analítica</li>
+          </ul>
+          <a href="#contacto" class="btn btn-ghost">Contanos tu idea →</a>
         </div>
-
-        <div class="service-card reveal">
-          <div class="service-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
-          </div>
-          <h3>Tiendas online</h3>
-          <p>E-commerce con carrito, pagos integrados, stock y facturación automática ARCA.</p>
-          <a href="#contacto" class="service-link">Consultar →</a>
+        <div class="capability-visual">
+          <img src="assets/mock-store.svg" alt="Ejemplo de tienda online" loading="lazy" width="320" height="220">
         </div>
+      </div>
 
-        <div class="service-card reveal">
-          <div class="service-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
-          </div>
-          <h3>PWA y aplicaciones web</h3>
-          <p>Aplicaciones web progresivas con experiencia nativa, sin tiendas de apps.</p>
-          <a href="#contacto" class="service-link">Consultar →</a>
+      <!-- Capability 2: SaaS -->
+      <div class="capability reverse reveal">
+        <div class="capability-content">
+          <div class="tag">02 — Plataformas SaaS</div>
+          <h3>Sistemas que <em>trabajan</em> por vos.</h3>
+          <p>Dashboards, intranets y plataformas B2B con datos en tiempo real, autenticación y reportes que alimentan decisiones.</p>
+          <ul>
+            <li>Paneles administrativos a medida</li>
+            <li>Reportes y métricas en vivo</li>
+            <li>Roles, permisos y multi-tenant</li>
+            <li>APIs documentadas</li>
+          </ul>
+          <a href="#contacto" class="btn btn-ghost">Ver demo →</a>
         </div>
-
-        <div class="service-card reveal">
-          <div class="service-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7V4h16v3M9 20h6M12 4v16"/></svg>
-          </div>
-          <h3>Sistemas SaaS y plataformas</h3>
-          <p>Plataformas de gestión, paneles B2B e intranets con reportes en tiempo real.</p>
-          <a href="#contacto" class="service-link">Consultar →</a>
+        <div class="capability-visual">
+          <img src="assets/mock-dashboard.svg" alt="Dashboard SaaS" loading="lazy" width="320" height="220">
         </div>
+      </div>
 
-        <div class="service-card reveal">
-          <div class="service-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
-          </div>
-          <h3>Mantenimiento y soporte</h3>
-          <p>Actualizaciones, backups, monitoreo y soporte técnico continuo.</p>
-          <a href="#contacto" class="service-link">Consultar →</a>
+      <!-- Capability 3: PWA -->
+      <div class="capability reveal">
+        <div class="capability-content">
+          <div class="tag">03 — Apps web / PWA</div>
+          <h3>Experiencias <em>nativas</em>, sin tiendas de apps.</h3>
+          <p>Aplicaciones web progresivas con notificaciones push, modo offline y performance indistinguible de una app nativa.</p>
+          <ul>
+            <li>Instalación sin App Store</li>
+            <li>Push notifications</li>
+            <li>Funcionamiento offline</li>
+            <li>Performance nativa</li>
+          </ul>
+          <a href="#contacto" class="btn btn-ghost">Explorar PWA →</a>
+        </div>
+        <div class="capability-visual">
+          <img src="assets/mock-pwa.svg" alt="Aplicación PWA" loading="lazy" width="320" height="220">
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ============ PROPUESTA DE VALOR ============ -->
-  <section class="values">
+  <!-- ============ SHOWCASE (tabs) ============ -->
+  <section class="section" id="showcase">
     <div class="container">
-      <div class="text-center reveal">
-        <span class="section-label">Por qué elegirnos</span>
-        <h2 class="section-title">Hacé crecer tu<br><span class="accent">negocio online</span></h2>
-        <p class="section-sub">Tecnología moderna con atención personalizada de principio a fin.</p>
+      <div class="text-center reveal" style="max-width: 720px; margin: 0 auto 48px;">
+        <span class="eyebrow">Showcase interactivo</span>
+        <h2 class="section-title">Explorá lo que <em>construimos.</em></h2>
       </div>
 
-      <div class="values-grid">
-        <div class="value-item reveal">
-          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg></div>
-          <h3>Diseño profesional</h3>
-          <p>Interfaces modernas y funcionales, pensadas para convertir.</p>
+      <div class="showcase reveal">
+        <div class="showcase-tabs" role="tablist">
+          <button class="showcase-tab active" data-tab="dashboard" role="tab" aria-selected="true">Dashboard</button>
+          <button class="showcase-tab" data-tab="store" role="tab" aria-selected="false">E-commerce</button>
+          <button class="showcase-tab" data-tab="pwa" role="tab" aria-selected="false">PWA</button>
+          <button class="showcase-tab" data-tab="api" role="tab" aria-selected="false">API</button>
         </div>
-        <div class="value-item reveal">
-          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
-          <h3>Tecnología moderna</h3>
-          <p>Stack actual, rápido y escalable. Sin deuda técnica.</p>
+
+        <div class="showcase-panel" data-panel="dashboard">
+          <div class="showcase-info">
+            <h3>Dashboard SaaS en vivo</h3>
+            <p>Panel de control con métricas en tiempo real, gráficos interactivos y gestión de usuarios.</p>
+            <ul>
+              <li>Gráficos de ventas y tráfico</li>
+              <li>Filtros por fecha y segmento</li>
+              <li>Export a CSV / PDF</li>
+              <li>Roles y permisos granulares</li>
+            </ul>
+          </div>
+          <div class="showcase-visual">
+            <img src="assets/mock-dashboard.svg" alt="Dashboard SaaS" loading="lazy" width="320" height="220">
+          </div>
         </div>
-        <div class="value-item reveal">
-          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
-          <h3>Atención personalizada</h3>
-          <p>Hablás directo con quien desarrolla tu proyecto.</p>
+
+        <div class="showcase-panel" data-panel="store" hidden>
+          <div class="showcase-info">
+            <h3>Tienda e-commerce completa</h3>
+            <p>Catálogo, carrito, checkout con Mercado Pago y facturación ARCA automatizada.</p>
+            <ul>
+              <li>Carrito persistente y checkout en 1 paso</li>
+              <li>Integración Mercado Pago Pro</li>
+              <li>Facturación automática ARCA/AFIP</li>
+              <li>Gestión de stock y alertas WhatsApp</li>
+            </ul>
+          </div>
+          <div class="showcase-visual">
+            <img src="assets/mock-store.svg" alt="Tienda online" loading="lazy" width="320" height="220">
+          </div>
         </div>
-        <div class="value-item reveal">
-          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 7h7l-5.5 4.5 2 7L12 17l-6.5 3.5 2-7L2 9h7z"/></svg></div>
-          <h3>Soluciones a medida</h3>
-          <p>Nada de plantillas genéricas. Cada proyecto es único.</p>
+
+        <div class="showcase-panel" data-panel="pwa" hidden>
+          <div class="showcase-info">
+            <h3>Aplicación web progresiva</h3>
+            <p>Experiencia nativa con instalación directa, push notifications y modo offline.</p>
+            <ul>
+              <li>Instalación sin tiendas de apps</li>
+              <li>Notificaciones push reales</li>
+              <li>Funcionamiento sin conexión</li>
+              <li>Performance de app nativa</li>
+            </ul>
+          </div>
+          <div class="showcase-visual">
+            <img src="assets/mock-pwa.svg" alt="PWA app" loading="lazy" width="320" height="220">
+          </div>
         </div>
-        <div class="value-item reveal">
-          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
-          <h3>Acompañamiento técnico</h3>
-          <p>Soporte post-lanzamiento incluido en todos los planes.</p>
-        </div>
-        <div class="value-item reveal">
-          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-          <h3>Seguridad y confianza</h3>
-          <p>Respaldo tecnológico de ASARI S.A.S. y buenas prácticas.</p>
+
+        <div class="showcase-panel" data-panel="api" hidden>
+          <div class="showcase-info">
+            <h3>Deploy automatizado</h3>
+            <p>CI/CD con tests, build y deploy automático. Cada push a main es una nueva versión en producción.</p>
+            <ul>
+              <li>Pipeline de CI/CD completo</li>
+              <li>Tests automatizados</li>
+              <li>Deploy en menos de 2 minutos</li>
+              <li>Rollback instantáneo</li>
+            </ul>
+          </div>
+          <div class="showcase-visual">
+            <img src="assets/mock-terminal.svg" alt="Terminal de deploy" loading="lazy" width="320" height="220">
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ============ CÓMO TRABAJAMOS ============ -->
-  <section id="proceso">
+  <!-- ============ PROCESO ============ -->
+  <section class="section" id="proceso">
     <div class="container">
-      <div class="text-center reveal">
-        <span class="section-label">Proceso</span>
-        <h2 class="section-title">Cómo <span class="accent">trabajamos</span></h2>
-        <p class="section-sub">Un proceso claro, sin sorpresas, con vos en cada etapa.</p>
+      <div class="text-center reveal" style="max-width: 720px; margin: 0 auto 80px;">
+        <span class="eyebrow">Proceso</span>
+        <h2 class="section-title">Cómo <em>trabajamos.</em></h2>
+        <p class="section-lead mx-auto">Un proceso claro, sin sorpresas, con vos en cada etapa.</p>
       </div>
 
-      <div class="process-track">
-        <div class="process-step reveal">
-          <div class="num">01</div>
-          <h3>Escuchamos tu idea</h3>
-          <p>Nos contás qué necesitás y qué querés lograr con tu proyecto.</p>
+      <div class="timeline">
+        <div class="timeline-line" style="height: 0;"></div>
+
+        <div class="timeline-step reveal">
+          <div class="content">
+            <div class="num">FASE 01</div>
+            <h3>Escuchamos tu idea</h3>
+            <p>Nos contás qué necesitás y qué querés lograr. Definimos juntos el alcance real del proyecto.</p>
+          </div>
+          <div class="dot"></div>
         </div>
-        <div class="process-step reveal">
-          <div class="num">02</div>
-          <h3>Diseñamos tu solución</h3>
-          <p>Armamos la propuesta técnica y visual adaptada a tu negocio.</p>
+
+        <div class="timeline-step reveal">
+          <div class="content">
+            <div class="num">FASE 02</div>
+            <h3>Diseñamos tu solución</h3>
+            <p>Armamos la propuesta técnica y visual. Prototipamos la experiencia antes de escribir una línea de código.</p>
+          </div>
+          <div class="dot"></div>
         </div>
-        <div class="process-step reveal">
-          <div class="num">03</div>
-          <h3>Desarrollamos tu proyecto</h3>
-          <p>Construimos, testeamos y ajustamos hasta que quede perfecto.</p>
+
+        <div class="timeline-step reveal">
+          <div class="content">
+            <div class="num">FASE 03</div>
+            <h3>Desarrollamos tu proyecto</h3>
+            <p>Construimos con sprints semanales, tests automatizados y demos para que veas el avance real.</p>
+          </div>
+          <div class="dot"></div>
         </div>
-        <div class="process-step reveal">
-          <div class="num">04</div>
-          <h3>Publicamos y acompañamos</h3>
-          <p>Lanzamos online y te acompañamos con soporte continuo.</p>
+
+        <div class="timeline-step reveal">
+          <div class="content">
+            <div class="num">FASE 04</div>
+            <h3>Publicamos y acompañamos</h3>
+            <p>Lanzamos, monitoreamos y te acompañamos con soporte técnico continuo post-lanzamiento.</p>
+          </div>
+          <div class="dot"></div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ============ PLANES ============ -->
-  <section id="planes">
+  <section class="section" id="planes">
     <div class="container">
-      <div class="text-center reveal">
-        <span class="section-label">Planes</span>
-        <h2 class="section-title">Elegí el plan para<br><span class="accent">tu proyecto</span></h2>
-        <p class="section-sub">Precios claros, sin letra chica. Cotizá tu proyecto en minutos.</p>
+      <div class="text-center reveal" style="max-width: 720px; margin: 0 auto 80px;">
+        <span class="eyebrow">Planes</span>
+        <h2 class="section-title">Elegí el plan para<br><em>tu proyecto.</em></h2>
+        <p class="section-lead mx-auto">Precios claros, sin letra chica. Cotizá tu proyecto en minutos.</p>
       </div>
 
       <div class="plans-grid">
-        <div class="plan-card reveal">
-          <h3>Landing Pro</h3>
+        <div class="plan reveal">
+          <div class="plan-name">Landing Pro</div>
+          <h3>Presencia de alto impacto</h3>
           <p class="tagline">Presencia online de alto impacto</p>
           <div class="price">$140.000</div>
           <span class="price-note">ARS · pago único</span>
@@ -268,9 +335,10 @@
           <a href="cotizador-paso1.html" class="btn btn-ghost">Cotizar</a>
         </div>
 
-        <div class="plan-card featured reveal">
-          <h3>Tienda E-commerce</h3>
-          <p class="tagline">Vendé online sin límites</p>
+        <div class="plan featured reveal">
+          <div class="plan-name">E-commerce</div>
+          <h3>Vendé online sin límites</h3>
+          <p class="tagline">La opción más elegida por negocios</p>
           <div class="price">$220.000</div>
           <span class="price-note">ARS · pago único</span>
           <ul>
@@ -283,9 +351,10 @@
           <a href="cotizador-desktop.html" class="btn btn-gold">Cotizar ahora</a>
         </div>
 
-        <div class="plan-card reveal">
-          <h3>Sistema Web</h3>
-          <p class="tagline">Digitalizá tu operación</p>
+        <div class="plan reveal">
+          <div class="plan-name">Sistema Web</div>
+          <h3>Digitalizá tu operación</h3>
+          <p class="tagline">Para empresas que escalan</p>
           <div class="price">$380.000</div>
           <span class="price-note">ARS · pago único</span>
           <ul>
@@ -302,47 +371,47 @@
   </section>
 
   <!-- ============ CTA FINAL ============ -->
-  <section id="contacto">
+  <section class="section" id="contacto">
     <div class="container">
       <div class="cta-final reveal">
-        <span class="section-label">Empecemos</span>
-        <h2>Transformá tus ideas en<br>soluciones digitales.</h2>
-        <p>Tu próximo proyecto puede comenzar hoy. Contanos qué necesitás y te respondemos en menos de 24 horas.</p>
-        <a href="https://wa.me/5491112345678?text=Hola%20KODEXA,%20quiero%20cotizar%20mi%20proyecto" target="_blank" rel="noopener" class="btn btn-primary">Solicitá tu presupuesto</a>
+        <div>
+          <span class="eyebrow">Empecemos</span>
+          <h2>Transformá tus ideas<br>en <em>soluciones digitales.</em></h2>
+          <p>Tu próximo proyecto puede comenzar hoy. Contanos qué necesitás y te respondemos en menos de 24 horas.</p>
+        </div>
+        <div class="cta-actions">
+          <a href="https://wa.me/5491112345678?text=Hola%20KODEXA,%20quiero%20cotizar%20mi%20proyecto" target="_blank" rel="noopener" class="btn btn-primary btn-lg">Solicitá tu presupuesto</a>
+          <a href="#planes" class="btn btn-ghost btn-lg">Ver planes</a>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- ============ FOOTER ============ -->
-  <footer class="footer" id="contacto-footer">
+  <footer class="footer">
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <a href="#inicio" class="logo">
-            <img src="assets/logo.svg" alt="KODEXA" width="160" height="40">
-          </a>
-          <p>Ecosistema digital completo. Páginas web, tiendas online y sistemas digitales para hacer crecer tu negocio.</p>
-          <div class="socials">
+          <img src="assets/logo.svg" alt="KODEXA" width="170" height="44">
+          <p>Ecosistema digital completo. Páginas web, tiendas online y plataformas digitales para hacer crecer tu negocio.</p>
+          <div class="footer-socials">
             <a href="https://wa.me/5491112345678" target="_blank" rel="noopener" aria-label="WhatsApp">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/></svg>
             </a>
             <a href="mailto:hola@kodexa.com" aria-label="Email">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg>
             </a>
           </div>
         </div>
-
         <div>
           <h4>Servicios</h4>
           <ul>
             <li><a href="#servicios">Páginas web</a></li>
             <li><a href="#servicios">Tiendas online</a></li>
             <li><a href="#servicios">PWA y apps web</a></li>
-            <li><a href="#servicios">Sistemas SaaS</a></li>
-            <li><a href="#servicios">Mantenimiento</a></li>
+            <li><a href="#servicios">Plataformas SaaS</a></li>
           </ul>
         </div>
-
         <div>
           <h4>Navegación</h4>
           <ul>
@@ -352,7 +421,6 @@
             <li><a href="#contacto">Contacto</a></li>
           </ul>
         </div>
-
         <div>
           <h4>Contacto</h4>
           <ul>
@@ -362,15 +430,13 @@
           </ul>
         </div>
       </div>
-
       <div class="footer-bottom">
         <span>© 2025 KODEXA Digital Solutions · Respaldo tecnológico: ASARI S.A.S.</span>
-        <span>Todos los derechos reservados</span>
+        <span class="mono">v2.0 · build 2025</span>
       </div>
     </div>
   </footer>
 
-  <!-- WhatsApp flotante -->
   <a href="https://wa.me/5491112345678?text=Hola%20KODEXA,%20quiero%20cotizar%20mi%20proyecto" target="_blank" rel="noopener" class="wa-float" aria-label="Contactar por WhatsApp">
     <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/></svg>
   </a>
