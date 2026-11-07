@@ -1,47 +1,176 @@
 <!doctype html>
-<html lang="es-AR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Iniciar proyecto — KODEXA</title><meta name="description" content="Configurá una referencia inicial para tu proyecto digital con KODEXA."><meta name="theme-color" content="#050d20"><link rel="icon" href="assets/kodexa-v5-icon.svg" type="image/svg+xml"><link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="kodexa-v5.css"><link rel="stylesheet" href="kodexa-identity.css"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet"></head>
-<body class="v5 quote-page"><a class="skip-link" href="#main">Saltar al contenido</a><header class="site-header"><div class="container header-inner"><a class="brand" href="index.html"><img src="assets/kodexa-v5-logo.svg" width="210" height="56" alt="KODEXA Digital Solutions"></a><a class="button button-small button-secondary header-action" href="index.html">← Volver al sitio</a></div></header>
-<main id="main" class="quote-main"><div class="container"><div class="quote-heading"><span class="eyebrow">KODEXA / NUEVO PROYECTO</span><h1>Empecemos por<br><em>darle forma a tu idea.</em></h1><p>Elegí una base, sumá funcionalidades y dejanos tus datos para continuar la conversación.</p></div>
-<div class="quote-layout"><section class="quote-config" aria-label="Configuración del proyecto"><div class="quote-step"><span>01</span><div><h2>¿Qué querés construir?</h2><p>Seleccioná el punto de partida más cercano a tu necesidad.</p></div></div><div class="quote-options" id="quote-bases">
-<button type="button" class="quote-option" data-base="landing"><span class="quote-option-check"></span><span><b>Landing Page Pro</b><small>Presencia digital y captación de consultas.</small></span><strong data-base-price="landing"></strong></button>
-<button type="button" class="quote-option" data-base="ecommerce"><span class="quote-option-check"></span><span><b>Tienda digital e-commerce</b><small>Catálogo, carrito y operación de ventas.</small></span><strong data-base-price="ecommerce"></strong></button>
-<button type="button" class="quote-option" data-base="gestion"><span class="quote-option-check"></span><span><b>Sistema de gestión web</b><small>Paneles, módulos y procesos a medida.</small></span><strong data-base-price="gestion"></strong></button></div>
-<div class="quote-step quote-step-next"><span>02</span><div><h2>¿Qué necesitás integrar?</h2><p>Podés agregar o quitar funcionalidades. Se validan según proveedor y alcance.</p></div></div><div class="quote-addons" id="quote-addons">
-<label class="quote-addon"><input type="checkbox" data-addon="mercadopago"><span><b>Integración Mercado Pago</b><small>Checkout y flujo de cobro sujeto a credenciales y aprobación.</small></span><strong data-addon-price="mercadopago"></strong></label>
-<label class="quote-addon"><input type="checkbox" data-addon="afip"><span><b>Integración fiscal ARCA</b><small>Evaluación de servicios y requisitos del organismo.</small></span><strong data-addon-price="afip"></strong></label>
-<label class="quote-addon"><input type="checkbox" data-addon="whatsapp"><span><b>WhatsApp y automatizaciones</b><small>Notificaciones y flujos de comunicación según alcance.</small></span><strong data-addon-price="whatsapp"></strong></label>
-</div></section>
-<aside class="quote-summary"><div class="quote-summary-top"><span>ESTIMACIÓN INICIAL</span><span class="quote-live"><i></i> ACTUALIZADA</span></div><div class="quote-summary-body"><div id="quote-lines" class="quote-lines"></div><div class="quote-total-label">Referencia estimada</div><div class="quote-total" id="quote-total">$0</div><div class="quote-currency">ARS · importe orientativo</div><div class="quote-note">La estimación no constituye una oferta contractual ni confirma disponibilidad, homologación o aprobación de servicios externos. El presupuesto final se define tras revisar el alcance.</div></div>
-<form id="quote-form" class="quote-form"><label for="quote-name">Nombre o empresa</label><input id="quote-name" name="name" type="text" maxlength="100" autocomplete="name" required placeholder="Cómo te llamás"><label for="quote-contact">WhatsApp o teléfono</label><input id="quote-contact" name="contact" type="tel" maxlength="40" autocomplete="tel" required placeholder="Tu número de contacto"><label for="quote-email">Email <span>(opcional)</span></label><input id="quote-email" name="email" type="email" maxlength="120" autocomplete="email" placeholder="tu@email.com"><label for="quote-details">¿Qué necesitás resolver? <span>(opcional)</span></label><textarea id="quote-details" name="details" rows="3" maxlength="600" placeholder="Contanos brevemente sobre tu proyecto..."></textarea><button class="button button-primary quote-submit" type="submit">Enviar solicitud por WhatsApp <span>↗</span></button><p class="quote-privacy">Al continuar, los datos se incorporan al mensaje de WhatsApp que vas a enviar. Esta web no los transmite a un servidor.</p></form></aside></div></div></main>
-<footer class="site-footer"><div class="container footer-bottom"><span>© <span id="current-year">2026</span> KODEXA Digital Solutions</span><span>Solicitud comercial · Sin registro de usuario</span></div></footer>
-<script src="app.js"></script><script>
-(function(){
-"use strict";
-const WA="5492213642475", api=window.KODEXA;
-if(!api){document.getElementById("quote-form").hidden=true;return;}
-const money=n=>api.formatARS(n)+" ARS";
-const state=()=>api.getState();
-const render=()=>{
- const s=state(), total=api.total(s);
- document.querySelectorAll("[data-base]").forEach(el=>{const active=el.dataset.base===s.base;el.classList.toggle("is-selected",active);el.setAttribute("aria-pressed",String(active));});
- document.querySelectorAll("[data-addon]").forEach(el=>{el.checked=s.addons.includes(el.dataset.addon);});
- document.querySelectorAll("[data-base-price]").forEach(el=>{const item=api.CATALOG.bases[el.dataset.basePrice];el.textContent=money(item.price);});
- document.querySelectorAll("[data-addon-price]").forEach(el=>{const item=api.CATALOG.addons[el.dataset.addonPrice];el.textContent="+"+money(item.price);});
- const lines=[];const base=api.CATALOG.bases[s.base];if(base)lines.push({label:base.label,price:base.price});s.addons.forEach(id=>{const item=api.CATALOG.addons[id];if(item)lines.push({label:item.label,price:item.price});});
- const host=document.getElementById("quote-lines");host.replaceChildren();
- lines.forEach(item=>{const row=document.createElement("div");row.className="quote-line";const label=document.createElement("span");label.textContent=item.label;const price=document.createElement("b");price.textContent=money(item.price);row.append(label,price);host.append(row);});
- document.getElementById("quote-total").textContent=money(total);
-};
-document.querySelectorAll("#quote-bases [data-base]").forEach(el=>el.addEventListener("click",()=>{api.setBase(el.dataset.base);render();}));
-document.querySelectorAll("#quote-addons [data-addon]").forEach(el=>el.addEventListener("change",()=>{const s=state();const has=s.addons.includes(el.dataset.addon);if(el.checked!==has)api.toggleAddon(el.dataset.addon);render();}));
-document.getElementById("quote-form").addEventListener("submit",event=>{
- event.preventDefault();const form=event.currentTarget;if(!form.reportValidity())return;
- const data=new FormData(form),s=state(),total=api.total(s),base=api.CATALOG.bases[s.base];
- const extras=s.addons.map(id=>api.CATALOG.addons[id]?.label).filter(Boolean);
- const lines=["Hola KODEXA, quiero avanzar con una consulta de proyecto.","Referencia: "+s.ref,"Solución: "+(base?.label||s.base),"Adicionales: "+(extras.join(", ")||"Ninguno"),"Estimación orientativa: "+money(total),"Nombre/empresa: "+data.get("name"),"Contacto: "+data.get("contact"),"Email: "+(data.get("email")||"No informado"),"Detalle: "+(data.get("details")||"A conversar"),"Solicito revisar alcance y presupuesto final."];
- window.open("https://wa.me/"+WA+"?text="+encodeURIComponent(lines.join("\n")),"_blank","noopener,noreferrer");
-});
-document.getElementById("current-year").textContent=String(new Date().getFullYear());render();
-})();
-</script></body></html>
+<html lang="es-AR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#030916">
+  <title>Cotizador de soluciones digitales — KODEXA</title>
+  <meta name="description" content="Configurá tu proyecto digital: sitios web, e-commerce, PWA, aplicaciones Android, plataformas SaaS, sistemas operativos e integraciones.">
+  <link rel="canonical" href="https://instructormap.github.io/kodexa.web/cotizador.html">
+  <link rel="icon" href="assets/kodexa-v5-icon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="kodexa-v5.css">
+  <link rel="stylesheet" href="kodexa-identity.css">
+  <link rel="stylesheet" href="cotizador-pro.css">
+</head>
+<body class="v5 quote-page quote-pro">
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html" aria-label="KODEXA — Inicio"><img src="assets/kodexa-v5-logo.svg" width="210" height="56" alt="KODEXA Digital Solutions"></a>
+      <a class="button button-small button-secondary header-action" href="index.html">← Volver al sitio</a>
+    </div>
+  </header>
+
+  <main id="main" class="quote-main">
+    <div class="container">
+      <section class="quote-pro-hero">
+        <div>
+          <span class="eyebrow">KODEXA / PROJECT CONFIGURATOR</span>
+          <h1>No cotizamos solamente<br><em>una página web.</em></h1>
+          <p>Configurá la solución digital que necesitás. Desde una web comercial hasta una aplicación, un SaaS multiempresa o un sistema operativo con comunicación en tiempo real.</p>
+        </div>
+        <div class="quote-hero-proof">
+          <span><i></i> DISEÑO DE SOLUCIONES</span>
+          <span><i></i> ARQUITECTURA MODULAR</span>
+          <span><i></i> ESTIMACIÓN TRANSPARENTE</span>
+        </div>
+      </section>
+
+      <div class="quote-pro-layout" id="quote-builder">
+        <section class="quote-builder-panel" aria-label="Configurador de proyecto">
+          <nav class="quote-stepper" aria-label="Etapas del cotizador">
+            <button type="button" data-go="1" class="is-current" aria-current="step"><span>01</span><b>Solución</b></button>
+            <button type="button" data-go="2"><span>02</span><b>Arquitectura</b></button>
+            <button type="button" data-go="3"><span>03</span><b>Funcionalidades</b></button>
+            <button type="button" data-go="4"><span>04</span><b>Tu proyecto</b></button>
+          </nav>
+
+          <section class="quote-stage" data-stage="1">
+            <div class="stage-heading"><span class="stage-index">ETAPA 01 / DEFINICIÓN</span><h2>¿Qué producto digital querés construir?</h2><p>Elegí la solución principal. Después vas a poder sumar módulos y definir su complejidad.</p></div>
+            <div id="solution-grid" class="solution-groups"></div>
+          </section>
+
+          <section class="quote-stage" data-stage="2" hidden>
+            <div class="stage-heading"><span class="stage-index">ETAPA 02 / ARQUITECTURA</span><h2>¿Cómo va a funcionar?</h2><p>Estas variables influyen en el diseño técnico, la seguridad, la infraestructura y el esfuerzo de desarrollo.</p></div>
+            <div class="architecture-block">
+              <h3>Organizaciones o clientes independientes</h3>
+              <p>¿La solución será para una sola empresa o para varias organizaciones con sus propios espacios?</p>
+              <div class="choice-grid">
+                <label class="choice-card"><input type="radio" name="orgs" value="single" checked><span><b>Una organización</b><small>Un único espacio de trabajo.</small></span></label>
+                <label class="choice-card"><input type="radio" name="orgs" value="small"><span><b>2 a 5 organizaciones</b><small>Multiempresa inicial.</small></span></label>
+                <label class="choice-card"><input type="radio" name="orgs" value="medium"><span><b>6 a 20 organizaciones</b><small>Operación multi-tenant.</small></span></label>
+                <label class="choice-card"><input type="radio" name="orgs" value="large"><span><b>Más de 20 organizaciones</b><small>Escala SaaS.</small></span></label>
+              </div>
+            </div>
+            <div class="architecture-block">
+              <h3>Usuarios previstos</h3>
+              <p>Una referencia de volumen para dimensionar permisos, rendimiento y operación.</p>
+              <div class="choice-grid choice-grid-four">
+                <label class="choice-card"><input type="radio" name="users" value="up_to_50" checked><span><b>Hasta 50</b><small>Inicial</small></span></label>
+                <label class="choice-card"><input type="radio" name="users" value="up_to_500"><span><b>51 a 500</b><small>Mediano</small></span></label>
+                <label class="choice-card"><input type="radio" name="users" value="up_to_5000"><span><b>501 a 5.000</b><small>Alto</small></span></label>
+                <label class="choice-card"><input type="radio" name="users" value="above_5000"><span><b>Más de 5.000</b><small>Escala</small></span></label>
+              </div>
+            </div>
+            <div class="architecture-block">
+              <h3>Plataformas de acceso</h3>
+              <p>Podés seleccionar más de una. La aplicación nativa Android y la híbrida se cotizan por separado.</p>
+              <div class="choice-grid">
+                <label class="choice-card"><input type="checkbox" name="platform" value="web" checked><span><b>Web / navegador</b><small>Desktop, tablet y móvil.</small></span></label>
+                <label class="choice-card"><input type="checkbox" name="platform" value="android"><span><b>Android</b><small>APK / AAB o nativa según solución.</small></span></label>
+                <label class="choice-card"><input type="checkbox" name="platform" value="ios"><span><b>iOS</b><small>Evaluación de distribución y requisitos Apple.</small></span></label>
+              </div>
+              <p id="platform-error" class="field-error" role="alert"></p>
+            </div>
+          </section>
+
+          <section class="quote-stage" data-stage="3" hidden>
+            <div class="stage-heading"><span class="stage-index">ETAPA 03 / ALCANCE FUNCIONAL</span><h2>Elegí las capacidades que necesitás.</h2><p>Los módulos se agregan a la estimación. Podés seleccionar varios o dejar que KODEXA recomiende la arquitectura.</p></div>
+            <div class="module-callout"><b>Capacidades construidas en proyectos reales</b><span>Multi-tenant, paneles operativos, credenciales QR, geolocalización, notificaciones y Push-to-Talk sobre WebRTC.</span></div>
+            <div id="module-groups" class="module-groups"></div>
+          </section>
+
+          <section class="quote-stage" data-stage="4" hidden>
+            <div class="stage-heading"><span class="stage-index">ETAPA 04 / PROPUESTA</span><h2>Terminemos de definir el proyecto.</h2><p>La estimación se actualiza con lo que seleccionaste. Dejanos un contacto para revisar el alcance y preparar una propuesta.</p></div>
+            <div class="architecture-block">
+              <h3>Operación y continuidad</h3>
+              <p>La infraestructura y los servicios de terceros se calculan según uso real. El mantenimiento se cotiza por separado.</p>
+              <div class="choice-grid">
+                <label class="choice-card"><input type="radio" name="maintenance" value="none" checked><span><b>Sin mantenimiento</b><small>Solo desarrollo inicial.</small></span></label>
+                <label class="choice-card"><input type="radio" name="maintenance" value="essential"><span><b>Esencial</b><small>Correcciones y mantenimiento evolutivo básico.</small></span></label>
+                <label class="choice-card"><input type="radio" name="maintenance" value="continuous"><span><b>Continuo</b><small>Soporte y evolución planificada.</small></span></label>
+              </div>
+            </div>
+            <div class="architecture-block">
+              <h3>¿Cuándo necesitás ponerlo en marcha?</h3>
+              <div class="choice-grid">
+                <label class="choice-card"><input type="radio" name="timeline" value="urgente"><span><b>Lo antes posible</b><small>Evaluar prioridad y disponibilidad.</small></span></label>
+                <label class="choice-card"><input type="radio" name="timeline" value="30-60 días"><span><b>30 a 60 días</b><small>Plazo objetivo.</small></span></label>
+                <label class="choice-card"><input type="radio" name="timeline" value="60-90 días"><span><b>60 a 90 días</b><small>Planificación.</small></span></label>
+                <label class="choice-card"><input type="radio" name="timeline" value="flexible" checked><span><b>Flexible</b><small>Definir con KODEXA.</small></span></label>
+              </div>
+            </div>
+            <form id="quote-client-form" class="quote-client-form">
+              <div class="form-grid">
+                <label>Nombre y apellido *<input id="client-name" name="name" required minlength="2" maxlength="100" autocomplete="name" placeholder="Tu nombre"></label>
+                <label>Empresa / organización<input id="client-company" name="company" maxlength="120" autocomplete="organization" placeholder="Nombre de tu organización"></label>
+                <label>WhatsApp / teléfono *<input id="client-phone" name="phone" type="tel" required minlength="7" maxlength="40" autocomplete="tel" placeholder="Tu número de contacto"></label>
+                <label>Email<input id="client-email" name="email" type="email" maxlength="120" autocomplete="email" placeholder="tu@email.com"></label>
+              </div>
+              <label>¿Qué problema querés resolver o qué debería hacer la solución?<textarea id="client-notes" name="notes" rows="4" maxlength="1200" placeholder="Contanos el objetivo, cómo trabajan hoy y qué resultado esperan..."></textarea></label>
+              <p id="client-error" class="field-error" role="alert"></p>
+              <p class="privacy-note">Tus datos no se guardan en esta web ni se envían a una base de datos. Al enviar, se prepara un mensaje en WhatsApp para que puedas revisarlo antes de compartirlo.</p>
+            </form>
+          </section>
+
+          <div class="quote-navigation">
+            <button type="button" id="quote-back" class="button button-secondary" hidden>← Anterior</button>
+            <span class="navigation-spacer"></span>
+            <button type="button" id="quote-next" class="button button-primary">Continuar <span>→</span></button>
+            <button type="submit" form="quote-client-form" id="quote-send" class="button button-primary" hidden>Enviar proyecto por WhatsApp <span>↗</span></button>
+          </div>
+        </section>
+
+        <aside class="quote-live-summary" aria-label="Resumen de estimación">
+          <div class="summary-topline"><span>KODEXA / ESTIMACIÓN</span><span class="summary-live"><i></i> EN VIVO</span></div>
+          <div class="summary-content">
+            <span class="summary-eyebrow">INVERSIÓN INICIAL ORIENTATIVA</span>
+            <div class="summary-price" id="summary-range">Desde $380.000</div>
+            <div class="summary-mode" id="summary-mode">Precio inicial</div>
+            <div class="summary-divider"></div>
+            <div class="summary-item"><small>SOLUCIÓN</small><b id="summary-solution">Landing page</b></div>
+            <div class="summary-item"><small>ORGANIZACIONES</small><b id="summary-orgs">Una organización</b></div>
+            <div class="summary-item"><small>USUARIOS</small><b id="summary-users">Hasta 50</b></div>
+            <div class="summary-item"><small>PLATAFORMAS</small><b id="summary-platforms">Web</b></div>
+            <div class="summary-item"><small>MÓDULOS</small><b id="summary-modules">Sin módulos adicionales</b></div>
+            <div class="summary-divider"></div>
+            <div class="summary-recurring"><small>MANTENIMIENTO MENSUAL</small><b id="summary-monthly">No seleccionado</b></div>
+            <p class="summary-ops" id="summary-ops">Infraestructura y servicios externos: variables, se dimensionan aparte.</p>
+            <small class="summary-factor" id="summary-factor">Complejidad estimada ×1.00</small>
+          </div>
+          <div class="summary-foot">
+            <b>Una estimación, no un presupuesto contractual.</b>
+            <p>El valor final depende del relevamiento funcional, diseño, integraciones, seguridad, pruebas y condiciones de operación.</p>
+          </div>
+        </aside>
+      </div>
+
+      <section class="quote-transparency">
+        <div><span class="eyebrow">TRANSPARENCIA KODEXA</span><h2>Desarrollo, operación y evolución son cosas distintas.</h2></div>
+        <div class="transparency-grid">
+          <article><b>01 / Desarrollo</b><p>Diseño, arquitectura, implementación, pruebas y puesta en marcha del producto.</p></article>
+          <article><b>02 / Infraestructura</b><p>Hosting, base de datos, almacenamiento, voz, mensajería y servicios externos según consumo.</p></article>
+          <article><b>03 / Continuidad</b><p>Mantenimiento, soporte, seguridad, actualizaciones y nuevas funcionalidades.</p></article>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer"><div class="container footer-bottom"><span>© <span id="current-year">2026</span> KODEXA Digital Solutions</span><span>Ingeniería digital · Soluciones a medida</span></div></footer>
+  <script src="app.js"></script>
+</body>
+</html>
