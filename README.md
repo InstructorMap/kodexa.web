@@ -1,28 +1,28 @@
-# KODEXA V4 — Digital Engineering Studio
+# KODEXA V5 — Digital Engineering Studio
 
 Sitio comercial estático de KODEXA Digital Solutions, preparado para GitHub Pages.
 
-## Experiencia V4
-- Landing institucional responsive con identidad visual KODEXA.
-- Páginas de soluciones y enfoque tecnológico.
-- Cotizador unificado responsive basado en el catálogo de `app.js`.
-- KODEXA Copiloto local basado en reglas, con derivación a cotización y WhatsApp.
-- Metadatos SEO, Open Graph, `robots.txt` y `sitemap.xml`.
-- Accesibilidad base: enlace para saltar al contenido, navegación etiquetada, foco visible, estados ARIA y soporte para movimiento reducido.
+## Identidad y experiencia V5
+- Sistema visual global compartido entre inicio, soluciones, tecnología y cotizador.
+- Dirección dark-cinematic: navy profundo, iluminación azul/cian, geometría técnica y superficies translúcidas.
+- Logotipo horizontal e isotipo V5 dedicados; favicon alineado con la marca.
+- Composición responsive para escritorio, tablet y móvil.
+- Navegación, tarjetas, formularios y estados interactivos con una misma identidad.
+- Cotizador unificado; rutas históricas redirigen a esa experiencia.
 
 ## Arquitectura actual
-Esta versión continúa siendo frontend estático. El cotizador calcula en el navegador y abre WhatsApp con un mensaje que la persona revisa y envía. No hay autenticación, cuentas, backend, almacenamiento central, CRM ni conexión a Supabase.
+Frontend estático. El cotizador calcula en el navegador y deriva a WhatsApp con un mensaje que la persona revisa y envía. No hay autenticación, backend, almacenamiento central, CRM ni conexión a Supabase.
 
 ## Publicación
-El sitio está preparado para GitHub Pages desde la raíz de `main`:
+GitHub Pages desde la raíz de `main`:
 https://instructormap.github.io/kodexa.web/
 
-## Antes de operar comercialmente
-- Confirmar que el número de WhatsApp configurado corresponde al canal oficial.
-- Confirmar que `hola@kodexa.com` es una dirección operativa.
+## Pendiente de validación comercial
+- Confirmar que el número de WhatsApp configurado es el canal oficial.
+- Confirmar que hola@kodexa.com es una dirección operativa.
 - Revisar precios y alcance del catálogo en `app.js`.
-- Definir alcance, impuestos, vigencia y condiciones comerciales en cada propuesta.
+- Definir alcance, impuestos, vigencia y condiciones comerciales de cada propuesta.
 - Configurar dominio propio y analítica/consentimiento si se decide utilizarlos.
 
-## Evolución posterior
-La futura conexión con Supabase deberá implementarse como una etapa separada: autenticación, perfiles, organizaciones/tenants, roles, políticas RLS, persistencia de leads y gestión de proyectos. No se simulan esas capacidades en V4.
+## Alcance técnico y siguiente etapa
+Esta versión no incorpora Supabase ni simula capacidades de backend. Una futura etapa deberá definir autenticación, perfiles, organizaciones/tenants, roles, políticas RLS, persistencia de leads y gestión de proyectos antes de implementarlas.
