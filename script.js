@@ -96,34 +96,34 @@
       addMessage("¡Hola! Puedo ayudarte a explorar soluciones, orientar el alcance o iniciar una cotización. ¿Qué querés mejorar?");
     } else if (/cotiz|presupuesto|precio|cuanto sale|cuanto cuesta|valor/.test(value)) {
       addMessage("Podés configurar una referencia inicial de inversión. El importe es orientativo y el alcance final se confirma mediante una propuesta escrita.");
-      addActions([{label:"Abrir cotizador",href:"cotizador.html"}]);
+      addActions([{label:"Abrir cotizador",href:"contacto.html?tipo=general&origen=copiloto"}]);
     } else if (/tienda|venta|ecommerce|e-commerce|catalogo|carrito/.test(value)) {
       addMessage("Para vender online podemos diseñar un e-commerce con catálogo, carrito, checkout y herramientas de gestión. Las pasarelas y sus credenciales se validan según el proveedor.");
-      addActions([{label:"Ver comercio electrónico",href:"soluciones.html#ecommerce"},{label:"Cotizar tienda",href:"cotizador.html"}]);
+      addActions([{label:"Ver comercio electrónico",href:"soluciones.html#ecommerce"},{label:"Iniciar consulta",href:"contacto.html?tipo=ecommerce&origen=copiloto"}]);
     } else if (/web|pagina|landing|sitio/.test(value)) {
       addMessage("Podemos construir una web institucional o landing orientada a presentar tu propuesta, generar confianza y facilitar consultas.");
       addActions([{label:"Ver soluciones web",href:"soluciones.html#web"},{label:"Cotizar proyecto",href:"cotizador.html"}]);
     } else if (/saas|sistema|gestion|plataforma|usuarios|multi.?tenant/.test(value)) {
       addMessage("Desarrollamos sistemas web y plataformas SaaS con módulos, roles y permisos según el alcance. La autenticación y el backend se diseñan como parte de la arquitectura; no están habilitados en este sitio comercial.");
-      addActions([{label:"Ver plataformas SaaS",href:"soluciones.html#saas"},{label:"Conversar sobre arquitectura",href:"https://wa.me/"+WA_NUMBER+"?text="+encodeURIComponent("Hola KODEXA, quiero conversar sobre una plataforma SaaS."),external:true}]);
+      addActions([{label:"Ver plataformas SaaS",href:"soluciones.html#saas"},{label:"Conversar sobre arquitectura",href:"contacto.html?tipo=saas&origen=copiloto"}]);
     } else if (/pwa|aplicacion|app|offline/.test(value)) {
       addMessage("Una PWA permite ofrecer una experiencia web instalable. Las capacidades offline y notificaciones dependen de la arquitectura y compatibilidad de cada dispositivo.");
-      addActions([{label:"Ver aplicaciones PWA",href:"soluciones.html#pwa"}]);
+      addActions([{label:"Ver aplicaciones PWA",href:"contacto.html?tipo=pwa&origen=copiloto"}]);
     } else if (/arca|afip|fiscal|factur/.test(value)) {
       addMessage("Podemos evaluar integraciones fiscales. La facturación y el uso de servicios de ARCA dependen de requisitos, credenciales y autorizaciones; no afirmamos homologación ni habilitación sin verificarlas.");
-      addActions([{label:"Consultar integración",href:"https://wa.me/"+WA_NUMBER+"?text="+encodeURIComponent("Hola KODEXA, quiero evaluar una integración con servicios de ARCA."),external:true}]);
+      addActions([{label:"Consultar integración",href:"contacto.html?tipo=integraciones&origen=copiloto"}]);
     } else if (/tiempo|demora|plazo|cuando estaria/.test(value)) {
       addMessage("Los plazos se estiman después de definir alcance, contenidos, integraciones y validaciones. Preferimos darte un plazo realista antes que prometer uno sin analizar el proyecto.");
       addActions([{label:"Definir mi proyecto",href:"cotizador.html"}]);
     } else if (/contact|humano|persona|asesor|whatsapp|hablar/.test(value)) {
       addMessage("Claro. Podés contactar directamente al equipo de KODEXA.");
-      addActions([{label:"Abrir WhatsApp",href:"https://wa.me/"+WA_NUMBER+"?text="+encodeURIComponent("Hola KODEXA, quisiera conversar sobre un proyecto."),external:true}]);
+      addActions([{label:"Abrir WhatsApp",href:"contacto.html?tipo=general&origen=copiloto"}]);
     } else if (/seguimiento|estado de mi proyecto|mi proyecto/.test(value)) {
       addMessage("Este asistente todavía no accede a cuentas de clientes ni consulta estados de proyectos. Para una consulta concreta, te derivo al equipo.");
-      addActions([{label:"Consultar al equipo",href:"https://wa.me/"+WA_NUMBER+"?text="+encodeURIComponent("Hola KODEXA, quisiera consultar por el estado de mi proyecto."),external:true}]);
+      addActions([{label:"Consultar al equipo",href:"contacto.html?tipo=general&origen=seguimiento"}]);
     } else {
       addMessage("Para orientarte con precisión, contame si buscás una web, una tienda online, una aplicación o un sistema de gestión. También podés hablar con el equipo.");
-      addActions([{label:"Ver soluciones",href:"soluciones.html"},{label:"Hablar con KODEXA",href:"https://wa.me/"+WA_NUMBER+"?text="+encodeURIComponent("Hola KODEXA, necesito asesoramiento sobre una solución digital."),external:true}]);
+      addActions([{label:"Ver soluciones",href:"soluciones.html"},{label:"Hablar con KODEXA",href:"contacto.html?tipo=general&origen=copiloto"}]);
     }
   };
 
