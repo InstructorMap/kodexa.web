@@ -15,7 +15,7 @@
   const params = new URLSearchParams(window.location.search);
   const typeField = document.getElementById("lead-type");
   const requestedType = params.get("tipo");
-  if (requestedType && TYPES[requestedType]) typeField.value = requestedType;
+  if (requestedType && TYPES[requestedType]) typeField.value = requestedType;\n  else if (requestedType === "general") typeField.value = "otro";
   const source = (params.get("origen") || "contacto-directo").replace(/[^a-zA-Z0-9_-]/g,"").slice(0,50);
   const utm = {
     source: (params.get("utm_source") || "").slice(0,80),
