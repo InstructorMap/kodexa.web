@@ -4,36 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>KODEXA Digital Solutions</title>
-  <script>
-    // Enrutador inteligente según resolución o User-Agent
-    const isMobile = window.innerWidth < 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    if (isMobile) {
-      window.location.replace("mobile/index.html");
-    } else {
-      window.location.replace("desktop/index.html");
-    }
-  </script>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <style>body { font-family: 'Plus Jakarta Sans', sans-serif; }</style>
+  <style>body { font-family: system-ui, sans-serif; }</style>
+  <script>
+    const isMobile = window.innerWidth < 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    // Redirigimos a archivos que SÍ existen en la raíz (evita 404 de mobile/ y desktop/)
+    window.location.replace(isMobile ? "cotizador-paso1.html" : "cotizador-desktop.html");
+  </script>
 </head>
-<body class="bg-[#f8f9ff] text-slate-800 min-h-screen flex items-center justify-center p-6">
+<body class="bg-[#f8f9ff] min-h-screen flex items-center justify-center p-6">
   <div class="bg-white border border-slate-200 rounded-3xl p-8 max-w-md w-full text-center shadow-xl space-y-6">
-    <div class="w-14 h-14 rounded-2xl bg-blue-600 text-white font-black text-2xl mx-auto flex items-center justify-center shadow-lg shadow-blue-500/25">K</div>
-    <div>
-      <h1 class="text-2xl font-extrabold text-slate-900">KODEXA Digital Solutions</h1>
-      <p class="text-xs text-slate-500 mt-1">Ecosistema Digital Completo • ASARI S.A.S.</p>
-    </div>
-    <p class="text-xs text-slate-600 leading-relaxed">
-      Redirigiendo a la versión óptima para tu dispositivo... Si la redirección no ocurre en unos segundos, seleccioná tu experiencia:
-    </p>
-    <div class="space-y-3 pt-2">
-      <a href="desktop/index.html" class="block w-full py-3 px-4 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-xl shadow-md transition">
-        💻 Acceder a Versión Desktop (Escritorio)
-      </a>
-      <a href="mobile/index.html" class="block w-full py-3 px-4 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-xl transition">
-        📱 Acceder a Versión Mobile (Móvil)
-      </a>
+    <div class="w-14 h-14 rounded-2xl bg-blue-600 text-white font-black text-2xl mx-auto flex items-center justify-center">K</div>
+    <h1 class="text-2xl font-extrabold text-slate-900">KODEXA Digital Solutions</h1>
+    <p class="text-xs text-slate-600">Redirigiendo... si no ocurre, elegí:</p>
+    <div class="space-y-3">
+      <a href="cotizador-desktop.html" class="block w-full py-3 px-4 bg-blue-600 text-white text-xs font-bold rounded-xl">💻 Versión Desktop</a>
+      <a href="cotizador-paso1.html" class="block w-full py-3 px-4 bg-slate-100 text-slate-700 text-xs font-bold rounded-xl">📱 Versión Mobile</a>
     </div>
   </div>
 </body>
