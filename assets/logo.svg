@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 80" width="320" height="80" role="img" aria-label="KODEXA Digital Solutions">
+  <defs>
+    <linearGradient id="kGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#E0EAFF"/>
+    </linearGradient>
+    <linearGradient id="orbitGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFB800"/>
+      <stop offset="50%" stop-color="#FFD66B"/>
+      <stop offset="100%" stop-color="#FFB800"/>
+    </linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="2" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Símbolo K -->
+  <g transform="translate(8, 8)">
+    <!-- Órbita dorada envolvente -->
+    <ellipse cx="32" cy="32" rx="28" ry="14" fill="none" stroke="url(#orbitGrad)" stroke-width="2" transform="rotate(-30 32 32)" filter="url(#glow)" opacity="0.9"/>
+    <!-- Punto orbital -->
+    <circle cx="56" cy="18" r="2.5" fill="#FFB800" filter="url(#glow)"/>
+    <!-- K geométrica -->
+    <g stroke="url(#kGrad)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none">
+      <path d="M14 14 L14 50"/>
+      <path d="M14 32 L38 14"/>
+      <path d="M14 32 L40 50"/>
+    </g>
+    <!-- Acento celeste -->
+    <circle cx="42" cy="32" r="2" fill="#00C8FF"/>
+  </g>
+
+  <!-- Wordmark -->
+  <g transform="translate(96, 0)" font-family="Plus Jakarta Sans, system-ui, sans-serif" fill="#FFFFFF">
+    <text x="0" y="40" font-size="26" font-weight="800" letter-spacing="2">KODEXA</text>
+    <text x="0" y="58" font-size="8.5" font-weight="600" letter-spacing="4.5" fill="#9BB4D6">DIGITAL SOLUTIONS</text>
+  </g>
+</svg>
