@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 220" width="320" height="220">
+  <rect width="320" height="220" rx="14" fill="#020817" stroke="#1E3A8A" stroke-width="1"/>
+  <rect x="0" y="0" width="320" height="28" rx="14" fill="#061127"/>
+  <rect x="0" y="14" width="320" height="14" fill="#061127"/>
+  <circle cx="14" cy="14" r="3" fill="#FF5F57"/>
+  <circle cx="26" cy="14" r="3" fill="#FEBC2E"/>
+  <circle cx="38" cy="14" r="3" fill="#28C840"/>
+  <text x="60" y="18" font-family="JetBrains Mono, monospace" font-size="9" fill="#7A9BD9">~/kodexa/deploy</text>
+  <g font-family="JetBrains Mono, monospace" font-size="10" fill="#94A3B8">
+    <text x="16" y="52"><tspan fill="#22C55E">$</tspan> kodexa init --project=saas</text>
+    <text x="16" y="70"><tspan fill="#06B6D4">▸</tspan> Analizando stack...</text>
+    <text x="16" y="86"><tspan fill="#06B6D4">▸</tspan> DB: <tspan fill="#FBBF24">postgres</tspan> ✓</text>
+    <text x="16" y="102"><tspan fill="#06B6D4">▸</tspan> Auth: <tspan fill="#FBBF24">JWT</tspan> ✓</text>
+    <text x="16" y="118"><tspan fill="#06B6D4">▸</tspan> Fiscal: <tspan fill="#FBBF24">arca</tspan> ✓</text>
+    <text x="16" y="140" fill="#22C55E">✓ Build OK · 1.42s</text>
+    <text x="16" y="162" fill="#FFFFFF">kodexa</text>
+    <text x="76" y="162" fill="#22C55E">ready</text>
+    <rect x="124" y="153" width="7" height="12" fill="#22C55E">
+      <animate attributeName="opacity" values="1;0;1" dur="1s" repeatCount="indefinite"/>
+    </rect>
+    <text x="16" y="188" fill="#475569">// deploy completado</text>
+    <text x="16" y="204" fill="#475569">// 0 errores · 42 rutas</text>
+  </g>
+</svg>
