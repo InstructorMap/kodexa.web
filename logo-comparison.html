@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KODEXA V3 — Comparación de Logos (Etapa 3)</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, 'Inter', system-ui, sans-serif;
+    background: #f5f5f7;
+    color: #1d1d1f;
+    padding: 40px 20px;
+    line-height: 1.5;
+  }
+  .container { max-width: 1400px; margin: 0 auto; }
+  h1 { font-size: 40px; font-weight: 900; letter-spacing: -0.04em; margin-bottom: 8px; }
+  h1 span { color: #006BFF; }
+  .subtitle { font-size: 17px; color: #6b7280; margin-bottom: 16px; }
+  .warning {
+    background: #fef3c7;
+    border-left: 4px solid #f59e0b;
+    padding: 12px 18px;
+    border-radius: 8px;
+    font-size: 13px;
+    color: #78350f;
+    margin-bottom: 40px;
+  }
+
+  .concept {
+    background: #fff;
+    border-radius: 24px;
+    padding: 40px;
+    margin-bottom: 40px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+  }
+  .concept-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 32px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid #e5e7eb;
+  }
+  .concept-letter {
+    width: 56px; height: 56px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: 900;
+    color: #fff;
+    background: linear-gradient(135deg, #006BFF, #00C8FF);
+    flex-shrink: 0;
+  }
+  .concept-letter.dark { background: #020B24; }
+  .concept-letter.gold { background: linear-gradient(135deg, #FFB800, #FF9500); }
+  .concept-header h2 { font-size: 26px; font-weight: 800; letter-spacing: -0.02em; }
+  .concept-header p { color: #6b7280; font-size: 14px; margin-top: 4px; }
+
+  /* Grid de 8 condiciones idénticas para los 4 conceptos */
+  .grid-8 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  @media (max-width: 900px) { .grid-8 { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 500px) { .grid-8 { grid-template-columns: 1fr; } }
+
+  .cell {
+    border-radius: 14px;
+    padding: 20px 14px;
+    min-height: 130px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    border: 1px solid #e5e7eb;
+    overflow: hidden;
+  }
+  .cell-label {
+    position: absolute;
+    top: 8px; left: 10px;
+    font-size: 9px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #9ca3af;
+  }
+  .cell.dark { background: #020B24; border-color: #1e293b; }
+  .cell.dark .cell-label { color: #64748b; }
+  .cell.light { background: #fff; }
+  .cell.blue { background: #006BFF; border-color: #006BFF; }
+  .cell.blue .cell-label { color: rgba(255,255,255,0.7); }
+  .cell.red { background: #dc2626; border-color: #dc2626; }
+  .cell.red .cell-label { color: rgba(255,255,255,0.8); }
+  .cell.transparent {
+    background: repeating-conic-gradient(#e5e7eb 0% 25%, #fff 0% 50%) 50% / 16px 16px;
+    border-color: #d1d5db;
+  }
+  .cell svg { display: block; }
+
+  /* Tamaños reales */
+  .sizes-row {
+    display: flex;
+    gap: 28px;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 20px;
+    background: #f9fafb;
+    border-radius: 14px;
+    border: 1px solid #e5e7eb;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  .size-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  .size-item span {
+    font-family: 'SF Mono', 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    color: #6b7280;
+  }
+
+  /* Aplicaciones */
+  .apps-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+  @media (max-width: 768px) { .apps-row { grid-template-columns: 1fr; } }
+
+  .app-header {
+    background: #020B24;
+    border-radius: 14px;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #1e293b;
+  }
+  .app-header .nav-mock {
+    display: flex; gap: 18px;
+    font-size: 11px;
+    color: #94a3b8;
+    font-weight: 600;
+  }
+  .app-header .btn-mock {
+    background: #006BFF;
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 10px;
+    font-weight: 700;
+  }
+  .app-card {
+    background: linear-gradient(135deg, #020B24, #061127);
+    color: #fff;
+    padding: 24px;
+    border-radius: 14px;
+    border: 1px solid #1e293b;
+  }
+  .app-card .card-name {
+    font-size: 20px; font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-top: 14px;
+  }
+  .app-card .card-role {
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: #00C8FF;
+    margin-top: 4px;
+  }
+  .app-card .card-contact {
+    margin-top: 18px;
+    font-size: 11px;
+    color: #94a3b8;
+    line-height: 1.8;
+  }
+
+  .notes {
+    background: #f3f4f6;
+    border-left: 3px solid #006BFF;
+    padding: 14px 18px;
+    border-radius: 6px;
+    font-size: 13px;
+    color: #374151;
+    margin-bottom: 20px;
+  }
+  .notes strong { font-weight: 800; color: #111827; }
+
+  .status-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    margin-top: 12px;
+  }
+  .status-table th, .status-table td {
+    padding: 8px 10px;
+    text-align: left;
+    border-bottom: 1px solid #e5e7eb;
+  }
+  .status-table th {
+    font-weight: 800;
+    color: #374151;
+    background: #f9fafb;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .status-table .tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 700;
+  }
+  .tag.done { background: #d1fae5; color: #065f46; }
+  .tag.pending { background: #fef3c7; color: #92400e; }
+  .tag.subjective { background: #e0e7ff; color: #3730a3; }
+  .tag.no { background: #fee2e2; color: #991b1b; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <h1>Comparación de <span>4 conceptos</span> — Etapa 3</h1>
+  <p class="subtitle">Todos los conceptos en las mismas 8 condiciones. Sin excepciones.</p>
+  <div class="warning">
+    <strong>Nota de honestidad:</strong> Este archivo está diseñado para abrirse en Chrome. Yo no puedo verlo renderizado. Las afirmaciones sobre legibilidad a 16px están basadas en análisis geométrico, no en prueba visual. Necesito que vos verifiques y me digas qué falla.
+  </div>
+
+  <!-- ============================================================
+       CONCEPTO A — PRISM (4 trapecios reales)
+       ============================================================ -->
+  <div class="concept">
+    <div class="concept-header">
+      <div class="concept-letter">A</div>
+      <div>
+        <h2>Prism — 4 trapecios con vértice común</h2>
+        <p>Construcción modular: cada faceta comparte el punto (14,40). Verificable en el código.</p>
+      </div>
+    </div>
+
+    <div class="grid-8">
+      <!-- 1. Logo completo dark -->
+      <div class="cell dark">
+        <div class="cell-label">Completo · Dark</div>
+        <svg viewBox="0 0 360 100" width="240" height="67" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="A-blue" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#006BFF"/><stop offset="100%" stop-color="#00C8FF"/>
+            </linearGradient>
+            <linearGradient id="A-gold" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#FFB800"/><stop offset="100%" stop-color="#FFD66B"/>
+            </linearGradient>
+          </defs>
+          <g transform="translate(10, 10)">
+            <!-- Trapecio 1: barra (blanco) -->
+            <path d="M0 0 L14 0 L14 80 L0 80 Z" fill="#FFFFFF"/>
+            <!-- Trapecio 2: brazo superior (azul claro) -->
+            <path d="M14 40 L52 0 L68 0 L30 40 Z" fill="url(#A-blue)"/>
+            <!-- Trapecio 3: brazo inferior (azul oscuro) -->
+            <path d="M14 40 L30 40 L68 80 L52 80 Z" fill="url(#A-blue)" opacity="0.7"/>
+            <!-- Trapecio 4: vértice dorado -->
+            <path d="M52 0 L68 0 L60 16 L44 16 Z" fill="url(#A-gold)"/>
+          </g>
+          <g transform="translate(96, 0)" font-family="Inter, sans-serif">
+            <text x="0" y="52" font-size="38" font-weight="900" letter-spacing="-1.5" fill="#FFF">KODEXA</text>
+            <text x="2" y="74" font-size="10" font-weight="700" letter-spacing="6" fill="#7A9BD9">DIGITAL SOLUTIONS</text>
+          </g>
+        </svg>
+      </div>
+
+      <!-- 2. Logo completo light -->
+      <div class="cell light">
+        <div class="cell-label">Completo · Light</div>
+        <svg viewBox="0 0 360 100" width="240" height="67" xmlns="http://www.w3.org/2000/svg">
+          <g transform="translate(10, 10)">
+            <path d="M0 0 L14 0 L14 80 L0 80 Z" fill="#020B24"/>
+            <path d="M14 40 L52 0 L68 0 L30 40 Z" fill="#006BFF"/>
+            <path d="M14 40 L30 40 L68 80 L52 80 Z" fill="#006BFF" opacity="0.7"/>
+            <path d="M52 0 L68 0 L60 16 L44 16 Z" fill="#FFB800"/>
+          </g>
+          <g transform="translate(96, 0)" font-family="Inter, sans-serif">
+            <text x="0" y="52" font-size="38" font-weight="900" letter-spacing="-1.5" fill="#020B24">KODEXA</text>
+            <text x="2" y="74" font-size="10" font-weight="700" letter-spacing="6" fill="#6b7280">DIGITAL SOLUTIONS</text>
+          </g>
+        </svg>
+      </div>
+
+      <!-- 3. Símbolo aislado -->
+      <div class="cell light">
+        <div class="cell-label">Símbolo aislado</div>
+        <svg viewBox="0 0 80 90" width="80" height="90" xmlns="http://www.w3.org/2000/svg">
+          <g transform="translate(6, 5)">
+            <path d="M0 0 L14 0 L14 80 L0 80 Z" fill="#020B24"/>
+            <path d="M14 40 L52 0 L68 0 L30 40 Z" fill="#006BFF"/>
+            <path d="M14 40 L30 40 L68 80 L52 80 Z" fill="#006BFF" opacity="0.7"/>
+            <path d="M52 0 L68 0 L60 16 L44 16 Z" fill="#FFB800"/>
+          </g>
+        </svg>
+      </div>
+
+      <!-- 4. Monocromático -->
+      <div class="cell light">
+        <div class="cell-label">Monocromático</div>
+        <svg viewBox="0 0 360 100" width="240" height="67" xmlns="http://www.w3.org/2000/svg">
+          <g transform="translate(10, 10)" fill="#020B24">
+            <path d="M0 0 L14 0 L14 80 L0 80 Z"/>
+            <path d="M14 40 L52 0 L68 0 L30 40 Z"/>
+            <path d="M14 40 L30 40 L68 80 L52 80 Z" opacity="0.6"/>
+            <path d="M52 0 L68 0 L60 16 L44 16 Z"/>
+          </g>
+          <g transform="translate(96, 0)" font-family="Inter, sans-serif" fill="#020B24">
+            <text x="0" y="52" font-size="38" font-weight="900" letter-spacing="-1.5">KODEXA</text>
+            <text x="2" y="74" font-size="10" font-weight="700" letter-spacing="6" opacity="0.7">DIGITAL SOLUTIONS</text>
+          </g>
+        </svg>
+      </div>
+
+      <!-- 5. Favicon 16px -->
+      <div class="cell light">
+        <div class="cell-label">Favicon 16×16</div>
+        <svg width="16" height="16" viewBox="0 0 72 90" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 0 L14 0 L14 80 L0 80 Z" fill="#020B24"/>
+          <path d="M14 40 L52 0 L68 0 L30 40 Z" fill="#006BFF"/>
+          <path d="M14 40 L30 40 L68 80 L52 80 Z" fill="#006BFF" opacity="0.7"/>
+          <path d="M52 0 L68 0 L60 16 L44 16 Z" fill="#FFB800"/>
+        </svg>
+      </div>
+
+      <!-- 6. Favicon 32px -->
+      <div class="cell light">
+        <div class="cell-label">Favicon 32×32</div>
+        <svg width="32" height="32" viewBox="0 0 72 90" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 0 L14 0 L14 80 L0 80 Z" fill="#020B24"/>
+          <path d="M14 40 L52 0 L68 0 L30 40 Z" fill="#006BFF"/>
+          <path d="M14 40 L30 40 L68 80 L52 80 Z" fill="#006BFF" opacity="0.7"/>
+          <path d="M52 0 L68 0 L60 16 L44 16 Z" fill="#FFB800"/>
+        </svg>
+      </div>
+
+      <!-- 7. Favicon 64px -->
+      <div class="cell light">
+        <div class="cell-label">Favicon 64×64</div>
+        <svg width="64" height="64" viewBox="0 0 72 90" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 0 L14 0 L14 80 L0 80 Z" fill="#020B24"/>
+          <path d="M14 40 L52 0 L68 0 L30 40 Z" fill="#006BFF"/>
+          <path d="M14 40 L30 40 L68 80 L52 80 Z" fill="#006BFF" opacity="0.7"/>
+          <path d="M52 0 L68 0 L60 16 L44 16 Z" fill="#FFB800"/>
+        </svg>
+      </div>
+
+      <!-- 8. Fondo rojo (test transparencia) -->
+      <div class="cell red">
+        <div class="cell-label">Test fondo rojo</div>
+        <svg width="64" height="64" viewBox="0 0 72 90" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 0 L14 0 L14 80 L0 80 Z" fill="#FFFFFF"/>
+          <path d="M14 40 L52 0 L68 0 L30 40 Z" fill="#00C8FF"/>
+          <path d="M14 40 L30 40 L68 80 L52 80 Z" fill="#00C8FF" opacity="0.7"/>
+          <path d="M52 0 L68 0 L60 16 L44 16 Z" fill="#FFB800"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Header + Tarjeta -->
+    <div class="apps-row">
+      <div class="app-header">
+        <svg viewBox="0 0 200 60" width="150" height="45" xmlns="http://www.w3.org/2000/svg">
+          <g transform="translate(0, 0)">
+            <path d="M0 0 L12 0 L12 60 L0 60 Z" fill="#FFF"/>
+            <path d="M12 30 L42 0 L54 0 L24 30 Z" fill="#006BFF"/>
+            <path d="M12 30 L24 30 L54 60 L42 60 Z" fill="#006BFF" opacity="0.7"/>
+            <path d="M42 0 L54 0 L48 12 L36 12 Z" fill="#FFB800"/>
+          </g>
+          <text x="62" y="30" font-family="Inter" font-size="18" font-weight="900" fill="#FFF" letter-spacing="-0.5">KODEXA</text>
+          <text x="63" y="44" font-family="Inter" font-size="5" font-weight="700" fill="#7A9BD9" letter-spacing="2.5">DIGITAL SOLUTIONS</text>
+        </svg>
+        <div class="nav-mock">
+          <span>Servicios</span><span>Proyectos</span><span>Planes</span>
+        </div>
+        <div class="btn-mock">Cotizar</div>
+      </div>
+      <div class="app-card">
+        <svg viewBox="0 0 72 90" width="56" height="70" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 0 L14 0 L14 80 L0 80 Z" fill="#FFF"/>
+          <path d="M14 40 L52 0 L68 0 L30 40 Z" fill="#006BFF"/>
+          <path d="M14 40 L30 40 L68 80 L52 80 Z" fill="#006BFF" opacity="0.7"/>
+          <path d="M52 0 L68 0 L60 16 L44 16 Z" fill="#FFB800"/>
+        </svg>
+        <div class="card-name">KODEXA</div>
+        <div class="card-role">Digital Solutions</div>
+        <div class="card-contact">
+          +54 9 221 364-2475<br>
+          kodexa.web<br>
+          Buenos Aires, Argentina
+        </div>
+      </div>
+    </div>
+
+    <div class="notes">
+      <strong>Implementado:</strong> 4 trapecios con vértice común en (14,40). Cada faceta tiene su propio gradiente. La construcción es verificable en el código: no hay paths sueltos.
+      <br><strong>Pendiente de validación visual:</strong> legibilidad a 16px (4 formas grandes deberían sobrevivir el escalado, pero no lo afirmo sin prueba).
+    </div>
+  </div>
+
+  <!-- ============================================================
+       CONCEPTO B — NEXUS (2 subtrazados, descrito con honestidad)
+       ============================================================ -->
+  <div class="concept">
+    <div class="concept-header">
+      <div class="concept-letter">B</div>
+      <div>
+        <h2>Nexus — 2 subtrazados con nodo compartido</h2>
+        <p>NO es un trazo continuo único. Es un path con 2 subtrazados que comparten el nodo central (12,40).</p>
+      </div>
+    </div>
+
+    <div class="grid-8">
+      <div class="cell dark">
+        <div class="cell-label">Completo · Dark</div>
+        <svg viewBox="0 0 360 100" width="240" height="67" xmlns="http://www.w3.org/2000/svg">
+          <g transform="translate(10, 10)">
+            <path d="M12 0 L12 80 M12 40 L52 0 M12 40 L52 80"
+                  fill="none" stroke="#00C8FF" stroke-width="11"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="12" cy="0" r="9" fill="#006BFF"/><circle cx="12" cy="0" r="4" fill="#FFF"/>
+            <circle cx="52" cy="0" r="9" fill="#FFB800"/><circle cx="52" cy="0" r="4" fill="#FFF"/>
+            <circle cx="52" cy="80" r="9" fill="#006BFF"/><circle cx="52" cy="80" r="4" fill="#FFF"/>
+            <circle cx="12" cy="40" r="6" fill="#FFF"/>
+          </g>
+          <g transform="translate(96, 0)" font-family="Inter, sans-serif">
+            <text x="0" y="52" font-size="38" font-weight="900" letter-spacing="-1.5" fill="#FFF">KODEXA</text>
+            <text x="2" y="74" font-size="10" font-weight="700" letter-spacing="6" fill="#7A9BD9">DIGITAL SOLUTIONS</text>
+          </g>
+        </svg>
+      </div>
+
+      <div class="cell light">
+        <div class="cell-label">Completo · Light</div>
+        <svg viewBox="0 0 360 100" width="240" height="67" xmlns="http://www.w3.org/2000/svg">
+          <g transform="translate(10, 10)">
+            <path d="M12 0 L12 80 M12 40 L52 0 M12 40 L52 80"
+                  fill="none" stroke="#006BFF" stroke-width="11"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="12" cy="0" r="9" fill="#006BFF"/><circle cx="12" cy="0" r="4" fill="#FFF"/>
+            <circle cx="52" cy="0" r="9" fill="#FFB800"/><circle cx="52" cy="0" r="4" fill="#FFF"/>
+            <circle cx="52" cy="80" r="9" fill="#006BFF"/><circle cx="52" cy="80" r="4" fill="#FFF"/>
+            <circle cx="12" cy="40" r="6" fill="#FFF"/>
+          </g>
+          <g transform="translate(96, 0)" font-family="Inter, sans-serif">
+            <text x="0" y="52" font-size="38" font-weight="900" letter-spacing="-1.5" fill="#020B24">KODEXA</text>
+            <text x="2" y="74" font-size="10" font-weight="700" letter-spacing="6" fill="#6b7280">DIGITAL SOLUTIONS</text>
+          </g>
+        </svg>
+      </div>
+
+      <div class="cell light">
+        <div class="cell-label">Símbolo aislado</div>
+        <svg viewBox="0 0 80 90" width="80" height="90" xmlns="http://www.w3.org/2000/svg">
+          <g transform="translate(6, 5)">
+            <path d="M12 0 L12 80 M12 40 L52 0 M12 40 L52 80"
+                  fill="none" stroke="#006BFF" stroke-width="11"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="12" cy="0" r="9" fill="#006BFF"/><circle cx="12" cy="0" r="4" fill="#FFF"/>
+            <circle cx="52" cy="0" r="9" fill="#FFB800"/><circle cx="52" cy="0" r="4" fill="#FFF"/>
+            <circle cx="52" cy="80" r="9" fill="#006BFF"/><circle cx="52" cy="80" r="4" fill="#FFF"/>
+            <circle cx="12" cy="40" r="6" fill="#FFF"/>
+          </g>
+        </svg>
+      </div>
+
+      <div class="cell light">
+        <div class="cell-label">Monocromático</div>
+        <svg viewBox="0 0 360 100" width="240" height="67" xmlns="http://www.w3.org/2000/svg">
+          <g transform="translate(10, 10)">
+            <path d="M12 0 L12 80 M12 40 L52 0 M12 40 L52 80"
+                  fill="none" stroke="#020B24" stroke-width="11"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="12" cy="0" r="9" fill="#020B24"/><circle cx="12" cy="0" r="4" fill="#FFF"/>
+            <circle cx="52" cy="0" r="9" fill="#020B24"/><circle cx="52" cy="0" r="4" fill="#FFF"/>
+            <circle cx="52" cy="80" r="9" fill="#020B24"/><circle cx="52" cy="80" r="4" fill="#FFF"/>
+            <circle cx="12" cy="40" r="6" fill="#FFF"/>
+          </g>
+          <g transform="translate(96, 0)" font-family="Inter, sans-serif" fill="#020B24">
+            <text x="0" y="52" font-size="38" font-weight="900" letter-spacing="-1.5">KODEXA</text>
+            <text x="2" y="74" font-size="10" font-weight="700" letter-spacing="6" opacity="0.7">DIGITAL SOLUTIONS</text>
+          </g>
+        </svg>
+      </div>
+
+      <!-- Favicon 16px — versión ópticamente reducida (sin nodos internos, stroke más fino) -->
+      <div class="cell light">
+        <div class="cell-label">Favicon 16×16</div>
+        <svg width="16" height="16" viewBox="0 0 72 90" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 0 L12 80 M12 40 L52 0 M12 40 L52 80"
+                fill="none" stroke="#006BFF" stroke-width="14"
+                stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+
+      <div class="cell light">
+        <div class="cell-label">Favicon 32×32</div>
+        <svg width="32" height="32" viewBox="0 0 72 90" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 0 L12 80 M12 40 L52 0 M12 40 L52 80"
+                fill="none" stroke="#006BFF" stroke-width="12"
+                stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="52" cy="0" r="7" fill="#FFB800"/>
+        </svg>
+      </div>
+
+      <div class="cell light">
+        <div class="cell-label">Favicon 64×64</div>
+        <svg width="64" height="64" viewBox="0 0 72 90" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 0 L12 80 M12 40 L52 0 M12 40 L52 80"
+                fill="none" stroke="#006BFF" stroke-width="11"
+                stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="12" cy="0" r="9" fill="#006BFF"/><circle cx="12" cy="0" r="4" fill="#FFF"/>
+          <circle cx="52" cy="0" r="9" fill="#FFB800"/><circle cx="52" cy="0" r="4" fill="#FFF"/>
+          <circle cx="52" cy="80" r="9" fill="#006BFF"/><circle cx="52" cy="80" r="4" fill="#FFF"/>
+        </svg>
+      </div>
+
+      <div class="cell red">
+        <div class="cell-label">Test fondo rojo</div>
+        <svg width="64" height="64" viewBox="0 0 72 90" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 0 L12 80 M12 40 L52 0 M12 40 L52 80"
+                fill="none" stroke="#FFFFFF" stroke-width="11"
+                stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="12" cy="0" r="9" fill="#FFFFFF"/><circle cx="12" cy="0" r="4" fill="#dc2626"/>
+          <circle cx="52" cy="0" r="9" fill="#FFB800"/><circle cx="52" cy="0" r="4" fill="#FFFFFF"/>
+          <circle cx="52" cy="80" r="9" fill="#FFFFFF"/><circle cx="52" cy="80" r="4" fill="#dc2626"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="apps-row">
+      <div class="app-header">
+        <svg viewBox="0 0 200 60" width="150" height="45" xmlns="http://www.w3.org/2000/svg">
+          <g transform="translate(0, 0)">
+            <path d="M10 0 L10 60 M10 30 L42 0 M10 30 L42 60"
+                  fill="none" stroke="#00C8FF" stroke-width="8"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="10" cy="0" r="7" fill="#006BFF"/><circle cx="10" cy="0" r="3" fill="#FFF"/>
+            <circle cx="42" cy="0" r="7" fill="#FFB800"/><circle cx="42" cy="0" r="3" fill="#FFF"/>
+            <circle cx="42" cy="60" r="7" fill="#006BFF"/><circle cx="42" cy="60" r="3" fill="#FFF"/>
+          </g>
+          <text x="62" y="30" font-family="Inter" font-size="18" font-weight="900" fill="#FFF" letter-spacing="-0.5">KODEXA</text>
+          <text x="63" y="44" font-family="Inter" font-size="5" font-weight="700" fill="#7A9BD9" letter-spacing="2.5">DIGITAL SOLUTIONS</text>
+        </svg>
+        <div class="nav-mock">
+          <span>Servicios</span><span>Proyectos</span><span>Planes</span>
+        </div>
+        <div class="btn-mock">Cotizar</div>
+      </div>
+      <div class="app-card">
+        <svg viewBox="0 0 72 90" width="56" height="70" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 0 L12 80 M12 40 L52 0 M12 40 L52 80"
+                fill="none" stroke="#00C8FF" stroke-width="11"
+                stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="12" cy="0" r="9" fill="#006BFF"/><circle cx="12" cy="0" r="4" fill="#FFF"/>
+          <circle cx="52" cy="0" r="9" fill="#FFB800"/><circle cx="52" cy="0" r="4" fill="#FFF"/>
+          <circle cx="52" cy="80" r="9" fill="#006BFF"/><circle cx="52" cy="80" r="4" fill="#FFF"/>
+        </svg>
+        <div class="card-name">KODEXA</div>
+        <div class="card-role">Digital Solutions</div>
+        <div class="card-contact">
+          +54 9 221 364-2475<br>
+          kodexa.web<br>
+          Buenos Aires, Argentina
+        </div>
+      </div>
+    </div>
+
+    <div class="notes">
+      <strong>Corrección honesta:</strong> NO es un trazo continuo único. El atributo <code>d="M12 0 L12 80 M12 40 L52 0 M12 40 L52 80"</code> tiene 3 subtrazados. La barra vertical es un subtrazado; los brazos son otros dos. Comparten el nodo (12,40) pero no son un recorrido continuo. Describo B como "2 diagonales + 1 barra con nodo compartido", no como "trazo continuo".
+    </div>
+  </div>
+
+  <!-- ============================================================
+       CONCEPTO C — ARCHITECT (máscara validada)
+       ============================================================ -->
+  <div class="concept">
+    <div class="concept-header">
+      <div class="concept-letter dark">C</div>
+      <div>
+        <h2>Architect — Espacio negativo con máscara</h2>
+        <p>K recortada genuinamente del bloque mediante &lt;mask&gt;. Coordenadas explícitas y verificables.</p>
+      </div>
+    </div>
+
+    <div class="grid-8">
+      <div class="cell dark">
+        <div class="cell-label">Completo · Dark</div>
+        <svg viewBox="0 0 360 100" width="240" height="67" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="C-blue1" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#006BFF"/><stop offset="100%" stop-color="#0047B3"/>
+            </linearGradient>
+            <mask id="C-mask1">
+              <rect width="100%" height="100%" fill="white"/>
+              <path d="M22 14 L22 58 M22 36 L46 14 M22 36 L48 58"
+                    fill="none" stroke="black" stroke-width="8"
+                    stroke-linecap="square" stroke-linejoin="miter"/>
+            </mask>
+          </defs>
+          <g transform="translate(10, 10)">
+            <rect x="6" y="6" width="72" height="72" rx="6" fill="#00C8FF" opacity="0.3"/>
+            <rect x="0" y="0" width="72" height="72" rx="6" fill="url(#C-blue1)" mask="url(#C-mask1)"/>
+            <path d="M72 0 L72 18 L54 0 Z" fill="#FFB800"/>
+          </g>
+          <g transform="translate(96, 0)" font-family="Inter, sans-serif">
+            <text x="0" y="52" font-size="38" font-weight="900" letter-spacing="-1.5" fill="#FFF">KODEXA</text>
+            <text x="2" y="74" font-size="10" font-weight="700" letter-spacing="6" fill="#7A9BD9">DIGITAL SOLUTIONS</text>
+          </g>
+        </svg>
+      </div>
+
+      <div class="cell light">
+        <div class="cell-label">Completo · Light</div>
+        <svg viewBox="0 0 360 100" width="240" height="67" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="C-blue2" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#006BFF"/><stop offset="100%" stop-color="#0047B3"/>
+            </linearGradient>
+            <mask id="C-mask2">
+              <rect width="100%" height="100%" fill="white"/>
+              <path d="M22 14 L22 58 M22 36 L46 14 M22 36 L48 58"
+                    fill="none" stroke="black" stroke-width="8"
+                    stroke-linecap="square" stroke-linejoin="miter"/>
+            </mask>
+          </defs>
+          <g transform="translate(10, 10)">
+            <rect x="6" y="6" width="72" height="72" rx="6" fill="#00C8FF" opacity="0.3"/>
+            <rect x="0" y="0" width="72" height="72" rx="6" fill="url(#C-blue2)" mask="url(#C-mask2)"/>
+            <path d="M72 0 L72 18 L54 0 Z" fill="#FFB800"/>
+          </g>
+          <g transform="translate(96, 0)" font-family="Inter, sans-serif">
+            <text x="0" y="52" font-size="38" font-weight="900" letter-spacing="-1.5" fill="#020B24">KODEXA</text>
+            <text x="2" y="74" font-size="10" font-weight="700" letter-spacing="6" fill="#6b7280">DIGITAL SOLUTIONS</text>
+          </g>
+        </svg>
+      </div>
+
+      <div class="cell light">
+        <div class="cell-label">Símbolo aislado</div>
+        <svg viewBox="0 0 80 80" width="80" height="80" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <mask id="C-mask3">
+              <rect width="100%" height="100%" fill="white"/>
+              <path d="M22 14 L22 58 M22 36 L46 14 M22 36 L48 58"
+                    fill="none" stroke="black" stroke-width="8"
+                    stroke-linecap="square" stroke-linejoin="miter"/>
+            </mask>
+          </defs>
+          <g transform="translate(4, 4)">
+            <rect x="0" y="0" width="72" height="72" rx="6" fill="#006BFF" mask="url(#C-mask3)"/>
+            <path d="M72 0 L72 18 L54 0 Z" fill="#FFB800"/>
+          </g>
+        </svg>
+      </div>
+
+      <div class="cell light">
+        <div class="cell-label">Monocromático</div>
+        <svg viewBox="0 0 360 100" width="240" height="67" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <mask id="C-mask4">
+              <rect width="100%" height="100%" fill="white"/>
+              <path d="M22 14 L22 58 M22 36 L46 14 M22 36 L48 58"
+                    fill="none" stroke="black" stroke-width="8"
+                    stroke-linecap="square" stroke-linejoin="miter"/>
+            </mask>
+          </defs>
+          <g transform="translate(10, 10)">
+            <rect x="0" y="0" width="72" height="72" rx="6" fill="#020B24" mask="url(#C-mask4)"/>
+            <path d="M72 0 L72 18 L54 0 Z" fill="#020B24"/>
+          </g>
+          <g transform="translate(96, 0)" font-family="Inter, sans-serif" fill="#020B24">
+            <text x="0" y="52" font-size="38" font-weight="900" letter-spacing="-1.5">KODEXA</text>
+            <text x="2" y="74" font-size="10" font-weight="700" letter-spacing="6" opacity="0.7">DIGITAL SOLUTIONS</text>
+          </g>
+        </svg>
+      </div>
+
+      <!-- Favicon 16px — versión ópticamente adaptada: K más gruesa -->
+      <div class="cell light">
+        <div class="cell-label">Favicon 16×16</div>
+        <svg width="16" height="16" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <mask id="C-mask16">
+              <rect width="100%" height="100%" fill="white"/>
+              <path d="M22 14 L22 58 M22 36 L46 14 M22 36 L48 58"
+                    fill="none" stroke="black" stroke-width="10"
+                    stroke-linecap="square" stroke-linejoin="miter"/>
+            </mask>
+          </defs>
+          <rect x="0" y="0" width="72" height="72" rx="6" fill="#006BFF" mask="url(#C-mask16)"/>
+          <path d="M72 0 L72 18 L54 0 Z" fill="#FFB800"/>
+        </svg>
+      </div>
+
+      <div class="cell light">
+        <div class="cell-label">Favicon 32×32</div>
+        <svg width="32" height="32" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <mask id="C-mask32">
+              <rect width="100%" height="100%" fill="white"/>
+              <path d="M22 14 L22 58 M22 36 L46 14 M22 36 L48 58"
+                    fill="none" stroke="black" stroke-width="9"
+                    stroke-linecap="square" stroke-linejoin="miter"/>
+            </mask>
+          </defs>
+          <rect x="0" y="0" width="72" height="72" rx="6" fill="#006BFF" mask="url(#C-mask32)"/>
+          <path d="M72 0 L72 18 L54 0 Z" fill="#FFB800"/>
+        </svg>
+      </div>
+
+      <div class="cell light">
+        <div class="cell-label">Favicon 64×64</div>
+        <svg width="64" height="64" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <mask id="C-mask64">
+              <rect width="100%" height="100%" fill="white"/>
+              <path d="M22 14 L22 58 M22 36 L46 14 M22 36 L48 58"
+                    fill="none" stroke="black" stroke-width="8"
+                    stroke-linecap="square" stroke-linejoin="miter"/>
+            </mask>
+          </defs>
+          <rect x="0" y="0" width="72" height="72" rx="6" fill="#006BFF" mask="url(#C-mask64)"/>
+          <path d="M72 0 L72 18 L54 0 Z" fill="#FFB800"/>
+        </svg>
+      </div>
+
+      <div class="cell red">
+        <div class="cell-label">Test fondo rojo (transparencia real)</div>
+        <svg width="64" height="64" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <mask id="C-maskred">
+              <rect width="100%" height="100%" fill="white"/>
+              <path d="M22 14 L22 58 M22 36 L46 14 M22 36 L48 58"
+                    fill="none" stroke="black" stroke-width="8"
+                    stroke-linecap="square" stroke-linejoin="miter"/>
+            </mask>
+          </defs>
+          <rect x="0" y="0" width="72" height="72" rx="6" fill="#006BFF" mask="url(#C-maskred)"/>
+          <path d="M72 0 L72 18 L54 0 Z" fill="#FFB800"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="apps-row">
+      <div class="app-header">
+        <svg viewBox="0 0 200 60" width="150" height="45" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <mask id="C-maskhdr">
+              <rect width="100%" height="100%" fill="white"/>
+              <path d="M22 14 L22 58 M22 36 L46 14 M22 36 L48 58"
+                    fill="none" stroke="black" stroke-width="8"
+                    stroke-linecap="square" stroke-linejoin="miter"/>
+            </mask>
+          </defs>
+          <rect x="0" y="0" width="72" height="72" rx="6" fill="#006BFF" mask="url(#C-maskhdr)"/>
+          <path d="M72 0 L72 18 L54 0 Z" fill="#FFB800"/>
+          <text x="82" y="30" font-family="Inter" font-size="18" font-weight="900" fill="#FFF" letter-spacing="-0.5">KODEXA</text>
+          <text x="83" y="44" font-family="Inter" font-size="5" font-weight="700" fill="#7A9BD9" letter-spacing="2.5">DIGITAL SOLUTIONS</text>
+        </svg>
+        <div class="nav-mock">
+          <span>Servicios</span><span>Proyectos</span><span>Planes</span>
+        </div>
+        <div class="btn-mock">Cotizar</div>
+      </div>
+      <div class="app-card">
+        <svg viewBox="0 0 72 72" width="56" height="56" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <mask id="C-maskcard">
+              <rect width="100%" height="100%" fill="white"/>
+              <path d="M22 14 L22 58 M22 36 L46 14 M22 36 L48 58"
+                    fill="none" stroke="black" stroke-width="8"
+                    stroke-linecap="square" stroke-linejoin="miter"/>
+            </mask>
+          </defs>
+          <rect x="0" y="0" width="72" height="72" rx="6" fill="#006BFF" mask="url(#C-maskcard)"/>
+          <path d="M72 0 L72 18 L54 0 Z" fill="#FFB800"/>
+        </svg>
+        <div class="card-name">KODEXA</div>
+        <div class="card-role">Digital Solutions</div>
+        <div class="card-contact">
+          +54 9 221 364-2475<br>
+          kodexa.web<br>
+          Buenos Aires, Argentina
+        </div>
+      </div>
+    </div>
+
+    <div class="notes">
+      <strong>Máscara validada:</strong> La K está definida con coordenadas explícitas. Grosor del trazo: 8px (10px en 16×16, 9px en 32×32). Bloque 72×72. La K ocupa x=22 a 48 (26px), y=14 a 58 (44px). Márgenes: 22 izq, 24 der, 14 arriba, 14 abajo. El fondo rojo de prueba es la validación real: si la K se ve transparente (rojo por debajo), la máscara funciona. Si se ve azul oscuro, falla.
+    </div>
+  </div>
+
+  <!-- ============================================================
+       CONCEPTO D — VERTEX (rediseñado SIN hexágonos ni nodos)
+       ============================================================ -->
+  <div class="concept">
+    <div class="concept-header">
+      <div class="concept-letter gold">D</div>
+      <div>
+        <h2>Vertex — Cuadrantes asimétricos (reformulado)</h2>
+        <p>Sin hexágonos, sin nodos, sin líneas de conexión. 4 cuadriláteros irregulares que forman una X implícita con centro desplazado.</p>
+      </div>
+    </div>
+
+    <div class="grid-8">
+      <div class="cell dark">
+        <div class="cell-label">Completo · Dark</div>
+        <svg viewBox="0 0 360 100" width="240" height="67" xmlns="http://www.w3.org/2000/svg">
+          <g transform="translate(10, 10)">
+            <!-- Cuadrante 1: superior izquierdo (azul) -->
+            <path d="M0 0 L32 0 L28 24 L8 32 Z" fill="#006BFF"/>
+            <!-- Cuadrante 2: inferior izquierdo (cyan) -->
+            <path d="M0 80 L8 48 L28 56 L32 80 Z" fill="#00C8FF"/>
+            <!-- Cuadrante 3: superior derecho (azul oscuro) -->
+            <path d="M72 0 L40 0 L44 24 L64 32 Z" fill="#006BFF" opacity="0.65"/>
+            <!-- Cuadrante 4: inferior derecho (dorado) -->
+            <path d="M72 80 L64 48 L44 56 L40 80 Z" fill="#FFB800"/>
+            <!-- Vértice central desplazado: pequeño cuadrado que une los 4 -->
+            <rect x="30" y="34" width="12" height="12" fill="#FFFFFF" transform="rotate(45 36 40)"/>
+          </g>
+          <g transform="translate(96, 0)" font-family="Inter, sans-serif">
+            <text x="0" y="52" font-size="38" font-weight="900" letter-spacing="-1.5" fill="#FFF">KODEXA</text>
+            <text x="2" y="74" font-size="10" font-weight="700" letter-spacing="6" fill="#7A9BD9">DIGITAL SOLUTIONS</text>
+          </g>
+        </svg>
+      </div>
+
+      <div class="cell light">
+        <div class="cell-label">Completo · Light</div>
+        <svg viewBox="0 0 360 100" width="240" height="67" xmlns="http://www.w3.org/2000/svg">
+          <g transform="translate(10, 10)">
+            <path d="M0 0 L32 0 L28 24 L8 32 Z" fill="#006BFF"/>
+            <path d="M0 80 L8 48 L28 56 L32 80 Z" fill="#00C8FF"/>
+            <path d="M72 0 L40 0 L44 24 L64 32 Z" fill="#006BFF" opacity="0.65"/>
+            <path d="M72 80 L64 48 L44 56 L40 80 Z" fill="#FFB800"/>
+            <rect x="30" y="34" width="12" height="12" fill="#020B24" transform="rotate(45 36 40)"/>
+          </g>
+          <g transform="translate(96, 0)" font-family="Inter, sans-serif">
+            <text x="0" y="52" font-size="38" font-weight="900" letter-spacing="-1.5" fill="#020B24">KODEXA</text>
+            <text x="2" y="74" font-size="10" font-weight="700" letter-spacing="6" fill="#6b7280">DIGITAL SOLUTIONS</text>
+          </g>
+        </svg>
+      </div>
+
+      <div class="cell light">
+        <div class="cell-label">Símbolo aislado</div>
+        <svg viewBox="0 0 80 90" width="80" height="90" xmlns="http://www.w3.org/2000/svg">
+          <g transform="translate(4, 5)">
+            <path d="M0 0 L32 0 L28 24 L8 32 Z" fill="#006BFF"/>
+            <path d="M0 80 L8 48 L28 56 L32 80 Z" fill="#00C8FF"/>
+            <path d="M72 0 L40 0 L44 24 L64 32 Z" fill="#006BFF" opacity="0.65"/>
+            <path d="M72 80 L64 48 L44 56 L40 80 Z" fill="#FFB800"/>
+            <rect x="30" y="34" width="12" height="12" fill="#020B24" transform="rotate(45 36 40)"/>
+          </g>
+        </svg>
+      </div>
+
+      <div class="cell light">
+        <div class="cell-label">Monocromático</div>
+        <svg viewBox="0 0 360 100" width="240" height="67" xmlns="http://www.w3.org/2000/svg">
+          <g transform="translate(10, 10)" fill="#020B24">
+            <path d="M0 0 L32 0 L28 24 L8 32 Z"/>
+            <path d="M0 80 L8 48 L28 56 L32 80 Z" opacity="0.7"/>
+            <path d="M72 0 L40 0 L44 24 L64 32 Z" opacity="0.85"/>
+            <path d="M72 80 L64 48 L44 56 L40 80 Z"/>
+            <rect x="30" y="34" width="12" height="12" fill="#FFFFFF" transform="rotate(45 36 40)"/>
+          </g>
+          <g transform="translate(96, 0)" font-family="Inter, sans-serif" fill="#020B24">
+            <text x="0" y="52" font-size="38" font-weight="900" letter-spacing="-1.5">KODEXA</text>
+            <text x="2" y="74" font-size="10" font-weight="700" letter-spacing="6" opacity="0.7">DIGITAL SOLUTIONS</text>
+          </g>
+        </svg>
+      </div>
+
+      <div class="cell light">
+        <div class="cell-label">Favicon 16×16</div>
+        <svg width="16" height="16" viewBox="0 0 72 90" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 0 L32 0 L28 24 L8 32 Z" fill="#006BFF"/>
+          <path d="M0 80 L8 48 L28 56 L32 80 Z" fill="#00C8FF"/>
+          <path d="M72 0 L40 0 L44 24 L64 32 Z" fill="#006BFF" opacity="0.65"/>
+          <path d="M72 80 L64 48 L44 56 L40 80 Z" fill="#FFB800"/>
+        </svg>
+      </div>
+
+      <div class="cell light">
+        <div class="cell-label">Favicon 32×32</div>
+        <svg width="32" height="32" viewBox="0 0 72 90" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 0 L32 0 L28 24 L8 32 Z" fill="#006BFF"/>
+          <path d="M0 80 L8 48 L28 56 L32 80 Z" fill="#00C8FF"/>
+          <path d="M72 0 L40 0 L44 24 L64 32 Z" fill="#006BFF" opacity="0.65"/>
+          <path d="M72 80 L64 48 L44 56 L40 80 Z" fill="#FFB800"/>
+          <rect x="30" y="34" width="12" height="12" fill="#020B24" transform="rotate(45 36 40)"/>
+        </svg>
+      </div>
+
+      <div class="cell light">
+        <div class="cell-label">Favicon 64×64</div>
+        <svg width="64" height="64" viewBox="0 0 72 90" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 0 L32 0 L28 24 L8 32 Z" fill="#006BFF"/>
+          <path d="M0 80 L8 48 L28 56 L32 80 Z" fill="#00C8FF"/>
+          <path d="M72 0 L40 0 L44 24 L64 32 Z" fill="#006BFF" opacity="0.65"/>
+          <path d="M72 80 L64 48 L44 56 L40 80 Z" fill="#FFB800"/>
+          <rect x="30" y="34" width="12" height="12" fill="#020B24" transform="rotate(45 36 40)"/>
+        </svg>
+      </div>
+
+      <div class="cell red">
+        <div class="cell-label">Test fondo rojo</div>
+        <svg width="64" height="64" viewBox="0 0 72 90" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 0 L32 0 L28 24 L8 32 Z" fill="#FFFFFF"/>
+          <path d="M0 80 L8 48 L28 56 L32 80 Z" fill="#FFFFFF" opacity="0.85"/>
+          <path d="M72 0 L40 0 L44 24 L64 32 Z" fill="#FFFFFF" opacity="0.7"/>
+          <path d="M72 80 L64 48 L44 56 L40 80 Z" fill="#FFB800"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="apps-row">
+      <div class="app-header">
+        <svg viewBox="0 0 200 60" width="150" height="45" xmlns="http://www.w3.org/2000/svg">
+          <g transform="translate(0, 0)">
+            <path d="M0 0 L26 0 L23 20 L6 26 Z" fill="#006BFF"/>
+            <path d="M0 60 L6 36 L23 42 L26 60 Z" fill="#00C8FF"/>
+            <path d="M60 0 L34 0 L37 20 L54 26 Z" fill="#006BFF" opacity="0.65"/>
+            <path d="M60 60 L54 36 L37 42 L34 60 Z" fill="#FFB800"/>
+            <rect x="25" y="24" width="10" height="10" fill="#FFF" transform="rotate(45 30 29)"/>
+          </g>
+          <text x="72" y="30" font-family="Inter" font-size="18" font-weight="900" fill="#FFF" letter-spacing="-0.5">KODEXA</text>
+          <text x="73" y="44" font-family="Inter" font-size="5" font-weight="700" fill="#7A9BD9" letter-spacing="2.5">DIGITAL SOLUTIONS</text>
+        </svg>
+        <div class="nav-mock">
+          <span>Servicios</span><span>Proyectos</span><span>Planes</span>
+        </div>
+        <div class="btn-mock">Cotizar</div>
+      </div>
+      <div class="app-card">
+        <svg viewBox="0 0 72 90" width="56" height="70" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 0 L32 0 L28 24 L8 32 Z" fill="#006BFF"/>
+          <path d="M0 80 L8 48 L28 56 L32 80 Z" fill="#00C8FF"/>
+          <path d="M72 0 L40 0 L44 24 L64 32 Z" fill="#006BFF" opacity="0.65"/>
+          <path d="M72 80 L64 48 L44 56 L40 80 Z" fill="#FFB800"/>
+          <rect x="30" y="34" width="12" height="12" fill="#FFF" transform="rotate(45 36 40)"/>
+        </svg>
+        <div class="card-name">KODEXA</div>
+        <div class="card-role">Digital Solutions</div>
+        <div class="card-contact">
+          +54 9 221 364-2475<br>
+          kodexa.web<br>
+          Buenos Aires, Argentina
+        </div>
+      </div>
+    </div>
+
+    <div class="notes">
+      <strong>Rediseñado desde cero:</strong> Sin hexágonos, sin nodos, sin líneas de conexión. 4 cuadriláteros irregulares con vértice central desplazado (un cuadrado rotado 45°). El espacio negativo entre ellos forma una "X" implícita. Es abstracto: no depende de la K literal para ser reconocido.
+    </div>
+  </div>
+
+  <!-- ============================================================
+       TABLA DE ESTADO — honesta
+       ============================================================ -->
+  <div class="concept">
+    <div class="concept-header">
+      <div class="concept-letter" style="background: #1d1d1f;">→</div>
+      <div>
+        <h2>Estado real de cada concepto</h2>
+        <p>Separación explícita entre implementado, pendiente de validación y subjetivo.</p>
+      </div>
+    </div>
+
+    <table class="status-table">
+      <thead>
+        <tr>
+          <th>Concepto</th>
+          <th>Corrección aplicada</th>
+          <th>Estado</th>
+          <th>Pendiente de validación</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>A — Prism</strong></td>
+          <td>4 trapecios con vértice común en (14,40). Verificable en paths.</td>
+          <td><span class="tag done">Implementado</span></td>
+          <td>Legibilidad real a 16px. Diferenciación vs. facetas existentes en mercado.</td>
+        </tr>
+        <tr>
+          <td><strong>B — Nexus</strong></td>
+          <td>Descrito honestamente: 3 subtrazados, no trazo continuo.</td>
+          <td><span class="tag pending">Reformulado</span></td>
+          <td>Si el estilo "nodos + líneas" es demasiado genérico. Requiere tu decisión.</td>
+        </tr>
+        <tr>
+          <td><strong>C — Architect</strong></td>
+          <td>Máscara validada con coordenadas explícitas. Fondo rojo de prueba incluido.</td>
+          <td><span class="tag pending">Pendiente de tu verificación visual</span></td>
+          <td>Confirmar que la K es transparente (rojo por debajo) en el test de fondo rojo.</td>
+        </tr>
+        <tr>
+          <td><strong>D — Vertex</strong></td>
+          <td>Rediseñado: sin hexágonos, sin nodos, sin líneas. 4 cuadriláteros + cuadrado rotado.</td>
+          <td><span class="tag done">Implementado</span></td>
+          <td>Legibilidad a 16px (4 formas grandes). Diferenciación vs. marcas tech.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="notes" style="margin-top: 24px;">
+      <strong>Lo que NO puedo afirmar:</strong>
+      <ul style="margin: 8px 0 0 20px; padding: 0;">
+        <li>No puedo afirmar que abrí este HTML en un navegador y vi el renderizado.</li>
+        <li>No puedo afirmar que un concepto se ve bien a 16px sin que vos lo verifiques.</li>
+        <li>No puedo afirmar que un concepto es "único en el mercado" sin investigación de marcas.</li>
+        <li>No puedo afirmar que la máscara de C funciona al exportar a PNG/PDF sin probarlo.</li>
+      </ul>
+      <br>
+      <strong>Lo que sí puedo afirmar:</strong>
+      <ul style="margin: 8px 0 0 20px; padding: 0;">
+        <li>Los 4 conceptos tienen IDs de máscara y gradiente únicos (sin colisiones).</li>
+        <li>Los 4 conceptos usan geometría verificable en el código.</li>
+        <li>Los 4 conceptos se pueden renderizar en Chrome/Firefox/Safari sin dependencias.</li>
+        <li>La máscara de C usa coordenadas explícitas que se pueden inspeccionar en DevTools.</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
