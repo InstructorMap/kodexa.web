@@ -223,7 +223,7 @@
   }
 
   function bindInputs() {
-    $("[name='orgs']").forEach(el => el.addEventListener("change", () => {
+    $$("[name='orgs']").forEach(el => el.addEventListener("change", () => {
       if (el.checked) state.orgs = el.value;
       renderModules();
       renderSummary();
