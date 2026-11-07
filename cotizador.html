@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="es-AR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Iniciar proyecto — KODEXA</title><meta name="description" content="Configurá una referencia inicial para tu proyecto digital con KODEXA."><meta name="theme-color" content="#050d20"><link rel="icon" href="assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="styles.css"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet"></head>
+<body class="v4 quote-page"><a class="skip-link" href="#main">Saltar al contenido</a><header class="site-header"><div class="container header-inner"><a class="brand" href="index.html"><img src="assets/logo-white.svg" width="210" height="56" alt="KODEXA Digital Solutions"></a><a class="button button-small button-secondary header-action" href="index.html">← Volver al sitio</a></div></header>
+<main id="main" class="quote-main"><div class="container"><div class="quote-heading"><span class="eyebrow">KODEXA / NUEVO PROYECTO</span><h1>Empecemos por<br><em>darle forma a tu idea.</em></h1><p>Elegí una base, sumá funcionalidades y dejanos tus datos para continuar la conversación.</p></div>
+<div class="quote-layout"><section class="quote-config" aria-label="Configuración del proyecto"><div class="quote-step"><span>01</span><div><h2>¿Qué querés construir?</h2><p>Seleccioná el punto de partida más cercano a tu necesidad.</p></div></div><div class="quote-options" id="quote-bases">
+<button type="button" class="quote-option" data-base="landing"><span class="quote-option-check"></span><span><b>Landing Page Pro</b><small>Presencia digital y captación de consultas.</small></span><strong data-base-price="landing"></strong></button>
+<button type="button" class="quote-option" data-base="ecommerce"><span class="quote-option-check"></span><span><b>Tienda digital e-commerce</b><small>Catálogo, carrito y operación de ventas.</small></span><strong data-base-price="ecommerce"></strong></button>
+<button type="button" class="quote-option" data-base="gestion"><span class="quote-option-check"></span><span><b>Sistema de gestión web</b><small>Paneles, módulos y procesos a medida.</small></span><strong data-base-price="gestion"></strong></button></div>
+<div class="quote-step quote-step-next"><span>02</span><div><h2>¿Qué necesitás integrar?</h2><p>Podés agregar o quitar funcionalidades. Se validan según proveedor y alcance.</p></div></div><div class="quote-addons" id="quote-addons">
+<label class="quote-addon"><input type="checkbox" data-addon="mercadopago"><span><b>Integración Mercado Pago</b><small>Checkout y flujo de cobro sujeto a credenciales y aprobación.</small></span><strong data-addon-price="mercadopago"></strong></label>
+<label class="quote-addon"><input type="checkbox" data-addon="afip"><span><b>Integración fiscal ARCA</b><small>Evaluación de servicios y requisitos del organismo.</small></span><strong data-addon-price="afip"></strong></label>
+<label class="quote-addon"><input type="checkbox" data-addon="whatsapp"><span><b>WhatsApp y automatizaciones</b><small>Notificaciones y flujos de comunicación según alcance.</small></span><strong data-addon-price="whatsapp"></strong></label>
+</div></section>
+<aside class="quote-summary"><div class="quote-summary-top"><span>ESTIMACIÓN INICIAL</span><span class="quote-live"><i></i> ACTUALIZADA</span></div><div class="quote-summary-body"><div id="quote-lines" class="quote-lines"></div><div class="quote-total-label">Referencia estimada</div><div class="quote-total" id="quote-total">$0</div><div class="quote-currency">ARS · importe orientativo</div><div class="quote-note">La estimación no constituye una oferta contractual ni confirma disponibilidad, homologación o aprobación de servicios externos. El presupuesto final se define tras revisar el alcance.</div></div>
+<form id="quote-form" class="quote-form"><label for="quote-name">Nombre o empresa</label><input id="quote-name" name="name" type="text" maxlength="100" autocomplete="name" required placeholder="Cómo te llamás"><label for="quote-contact">WhatsApp o teléfono</label><input id="quote-contact" name="contact" type="tel" maxlength="40" autocomplete="tel" required placeholder="Tu número de contacto"><label for="quote-email">Email <span>(opcional)</span></label><input id="quote-email" name="email" type="email" maxlength="120" autocomplete="email" placeholder="tu@email.com"><label for="quote-details">¿Qué necesitás resolver? <span>(opcional)</span></label><textarea id="quote-details" name="details" rows="3" maxlength="600" placeholder="Contanos brevemente sobre tu proyecto..."></textarea><button class="button button-primary quote-submit" type="submit">Enviar solicitud por WhatsApp <span>↗</span></button><p class="quote-privacy">Al continuar, los datos se incorporan al mensaje de WhatsApp que vas a enviar. Esta web no los transmite a un servidor.</p></form></aside></div></div></main>
+<footer class="site-footer"><div class="container footer-bottom"><span>© <span id="current-year">2026</span> KODEXA Digital Solutions</span><span>Solicitud comercial · Sin registro de usuario</span></div></footer>
+<script src="app.js"></script><script>
+(function(){
+"use strict";
+const WA="5492213642475", api=window.KODEXA;
+if(!api){document.getElementById("quote-form").hidden=true;return;}
+const money=n=>api.formatARS(n)+" ARS";
+const state=()=>api.getState();
+const render=()=>{
+ const s=state(), total=api.total(s);
+ document.querySelectorAll("[data-base]").forEach(el=>{const active=el.dataset.base===s.base;el.classList.toggle("is-selected",active);el.setAttribute("aria-pressed",String(active));});
+ document.querySelectorAll("[data-addon]").forEach(el=>{el.checked=s.addons.includes(el.dataset.addon);});
+ document.querySelectorAll("[data-base-price]").forEach(el=>{const item=api.CATALOG.bases[el.dataset.basePrice];el.textContent=money(item.price);});
+ document.querySelectorAll("[data-addon-price]").forEach(el=>{const item=api.CATALOG.addons[el.dataset.addonPrice];el.textContent="+"+money(item.price);});
+ const lines=[];const base=api.CATALOG.bases[s.base];if(base)lines.push({label:base.label,price:base.price});s.addons.forEach(id=>{const item=api.CATALOG.addons[id];if(item)lines.push({label:item.label,price:item.price});});
+ const host=document.getElementById("quote-lines");host.replaceChildren();
+ lines.forEach(item=>{const row=document.createElement("div");row.className="quote-line";const label=document.createElement("span");label.textContent=item.label;const price=document.createElement("b");price.textContent=money(item.price);row.append(label,price);host.append(row);});
+ document.getElementById("quote-total").textContent=money(total);
+};
+document.querySelectorAll("#quote-bases [data-base]").forEach(el=>el.addEventListener("click",()=>{api.setBase(el.dataset.base);render();}));
+document.querySelectorAll("#quote-addons [data-addon]").forEach(el=>el.addEventListener("change",()=>{const s=state();const has=s.addons.includes(el.dataset.addon);if(el.checked!==has)api.toggleAddon(el.dataset.addon);render();}));
+document.getElementById("quote-form").addEventListener("submit",event=>{
+ event.preventDefault();const form=event.currentTarget;if(!form.reportValidity())return;
+ const data=new FormData(form),s=state(),total=api.total(s),base=api.CATALOG.bases[s.base];
+ const extras=s.addons.map(id=>api.CATALOG.addons[id]?.label).filter(Boolean);
+ const lines=["Hola KODEXA, quiero avanzar con una consulta de proyecto.","Referencia: "+s.ref,"Solución: "+(base?.label||s.base),"Adicionales: "+(extras.join(", ")||"Ninguno"),"Estimación orientativa: "+money(total),"Nombre/empresa: "+data.get("name"),"Contacto: "+data.get("contact"),"Email: "+(data.get("email")||"No informado"),"Detalle: "+(data.get("details")||"A conversar"),"Solicito revisar alcance y presupuesto final."];
+ window.open("https://wa.me/"+WA+"?text="+encodeURIComponent(lines.join("\n")),"_blank","noopener,noreferrer");
+});
+document.getElementById("current-year").textContent=String(new Date().getFullYear());render();
+})();
+</script></body></html>
