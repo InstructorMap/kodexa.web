@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://instructormap.github.io/kodexa.web/schemas/lead-record.schema.json",
+  "title": "KODEXA Lead Record",
+  "description": "Esquema preparado para un futuro CRM. La web estática actual no persiste ni transmite estos registros automáticamente; el formulario genera un mensaje de WhatsApp.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "lead_id", "created_at", "source_page", "source_detail", "project_type", "name", "phone", "description", "contact_channel", "status"],
+  "properties": {
+    "schema_version": {"type": "string", "const": "1.0"},
+    "lead_id": {"type": "string", "pattern": "^KDX-[0-9]{14}-[A-Z0-9]{5}$"},
+    "created_at": {"type": "string", "format": "date-time"},
+    "source_page": {"type": "string"},
+    "source_detail": {"type": "string", "maxLength": 50},
+    "utm": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "source": {"type": "string", "maxLength": 80},
+        "medium": {"type": "string", "maxLength": 80},
+        "campaign": {"type": "string", "maxLength": 100}
+      }
+    },
+    "project_type": {"type": "string", "enum": ["web", "ecommerce", "pwa", "saas", "integraciones", "otro"]},
+    "name": {"type": "string", "minLength": 2, "maxLength": 90},
+    "company": {"type": "string", "maxLength": 100},
+    "phone": {"type": "string", "minLength": 6, "maxLength": 35},
+    "email": {"type": "string", "format": "email", "maxLength": 120},
+    "timeline": {"type": "string"},
+    "budget_range": {"type": "string"},
+    "description": {"type": "string", "minLength": 3, "maxLength": 1200},
+    "contact_channel": {"type": "string", "enum": ["WhatsApp"]},
+    "status": {"type": "string", "enum": ["new", "contacted", "qualified", "proposal_sent", "won", "lost"]}
+  }
+}
