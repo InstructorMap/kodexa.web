@@ -1,500 +1,192 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KODEXA Digital Solutions — Soluciones tecnológicas profesionales</title>
-  <meta name="description" content="KODEXA Digital Solutions: páginas web, tiendas online, sistemas SaaS y plataformas digitales para hacer crecer tu negocio. Facturación ARCA/AFIP incluida.">
-  <meta name="keywords" content="desarrollo web, e-commerce, tiendas online, sistemas SaaS, plataformas digitales, ARCA, AFIP, facturación electrónica, Argentina">
-  <meta name="author" content="KODEXA Digital Solutions">
-  <meta property="og:title" content="KODEXA Digital Solutions">
-  <meta property="og:description" content="Soluciones tecnológicas profesionales. Páginas web, tiendas online y plataformas SaaS.">
-  <meta property="og:type" content="website">
-  <meta property="og:image" content="assets/logo.svg">
-  <meta name="theme-color" content="#020817">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>KODEXA — Ingeniería y soluciones digitales</title>
+  <meta name="description" content="Diseñamos y desarrollamos sitios web, e-commerce, aplicaciones PWA y plataformas SaaS para negocios y organizaciones.">
+  <meta name="theme-color" content="#020B24">
+  <link rel="canonical" href="https://instructormap.github.io/kodexa.web/">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="KODEXA — Ingeniería y soluciones digitales">
+  <meta property="og:description" content="Tecnología diseñada para resolver problemas reales de negocio.">
+  <meta property="og:image" content="assets/logo-icon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
-  <!-- ============ HEADER ============ -->
-  <header class="header" role="banner">
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+  <header class="site-header" id="top">
     <div class="container header-inner">
-      <a href="#inicio" class="logo" aria-label="KODEXA inicio">
-        <img src="assets/logo.svg" alt="KODEXA Digital Solutions" width="170" height="44">
+      <a class="brand" href="#inicio" aria-label="KODEXA, inicio">
+        <img src="assets/logo-white.svg" width="210" height="56" alt="KODEXA Digital Solutions">
       </a>
-      <nav class="nav" role="navigation" aria-label="Principal">
+      <button class="menu-toggle" type="button" aria-label="Abrir navegación" aria-expanded="false" aria-controls="primary-nav"><span></span><span></span></button>
+      <nav class="primary-nav" id="primary-nav" aria-label="Navegación principal">
         <a href="#inicio">Inicio</a>
-        <a href="#servicios">Servicios</a>
-        <a href="#asistente">Asistente</a>
-        <a href="#planes">Planes</a>
-        <a href="#proceso">Cómo trabajamos</a>
+        <a href="#soluciones">Soluciones</a>
+        <a href="#tecnologia">Tecnología</a>
+        <a href="#metodologia">Metodología</a>
         <a href="#contacto">Contacto</a>
       </nav>
-      <a href="#contacto" class="btn btn-primary header-cta">Solicitar presupuesto</a>
-      <button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false"><span></span></button>
+      <a class="button button-small button-primary header-action" href="cotizador-desktop.html">Cotizar proyecto <span aria-hidden="true">↗</span></a>
     </div>
   </header>
 
-  <!-- ============ HERO ============ -->
-  <section class="hero" id="inicio">
-    <div class="container">
-      <div class="hero-grid">
-        <div class="hero-content reveal">
-          <div class="hero-badge">
-            <span class="dot"></span>
-            <span>Disponibles para nuevos proyectos · 2025</span>
+  <main id="main">
+    <section class="hero section-shell" id="inicio">
+      <div class="container hero-layout">
+        <div class="hero-copy">
+          <div class="eyebrow"><span class="status-dot"></span> KODEXA DIGITAL SOLUTIONS <span class="eyebrow-divider">/</span> ARGENTINA</div>
+          <h1>No solo creamos webs.<br><em>Construimos tecnología.</em></h1>
+          <p class="hero-lead">Diseñamos y desarrollamos soluciones digitales para transformar ideas en negocios, plataformas y experiencias.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#soluciones">Explorar soluciones <span aria-hidden="true">↘</span></a>
+            <a class="button button-secondary" href="cotizador-desktop.html">Iniciar un proyecto <span aria-hidden="true">↗</span></a>
           </div>
-          <h1>
-            Soluciones digitales<br>
-            para <em>hacer crecer</em><br>
-            tu negocio.
-          </h1>
-          <p class="hero-lead">Tu negocio merece más que una red social. Merece crecer.</p>
-          <p class="hero-desc">Creamos páginas web, tiendas online y sistemas digitales para que tu negocio tenga presencia, venda y trabaje mejor.</p>
-          <div class="hero-cta">
-            <a href="#planes" class="btn btn-gold btn-lg">Ver promociones</a>
-            <a href="#contacto" class="btn btn-ghost btn-lg">Contanos tu proyecto</a>
-          </div>
-          <div class="hero-stats">
-            <div>
-              <div class="num" data-count="50" data-prefix="+">+50</div>
-              <div class="lbl">Proyectos entregados</div>
-            </div>
-            <div>
-              <div class="num" data-count="24" data-suffix="h">24h</div>
-              <div class="lbl">Respuesta promedio</div>
-            </div>
-            <div>
-              <div class="num" data-count="100" data-suffix="%">100%</div>
-              <div class="lbl">Clientes satisfechos</div>
-            </div>
+          <div class="hero-proof">
+            <span class="proof-line"></span>
+            <p>Ingeniería digital · Diseño de producto · Desarrollo a medida</p>
           </div>
         </div>
-
-        <div class="hero-visual reveal">
-          <div class="bento">
-            <div class="arca-badge">
-              <div class="icon">✓</div>
-              <div>
-                <div class="lbl">ARCA / AFIP</div>
-                <div class="val">Homologado</div>
+        <div class="hero-stage" aria-label="Representación visual de productos digitales">
+          <div class="stage-topline"><span>PRODUCT SYSTEMS</span><span>01 — 03</span></div>
+          <div class="stage-main">
+            <div class="stage-window dashboard-window">
+              <div class="window-bar"><i></i><i></i><i></i><span>workspace.kodexa</span></div>
+              <div class="dashboard-body">
+                <aside class="dash-sidebar"><b>K.</b><i></i><i></i><i></i><i></i></aside>
+                <div class="dash-content">
+                  <div class="dash-heading"><span>Overview</span><b>•••</b></div>
+                  <div class="dash-metrics"><div><small>Ingresos</small><strong>$ 2.48M</strong><em>+12.8%</em></div><div><small>Operaciones</small><strong>1,284</strong><em>+8.2%</em></div></div>
+                  <div class="chart-card"><div class="chart-title">Actividad mensual <span>Últimos 30 días</span></div><svg viewBox="0 0 430 125" role="img" aria-label="Gráfico de actividad ascendente"><defs><linearGradient id="area" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#00C8FF" stop-opacity=".28"/><stop offset="1" stop-color="#00C8FF" stop-opacity="0"/></linearGradient></defs><path d="M0 94 C35 88 43 65 77 72 S121 89 151 61 S196 69 222 43 S263 59 293 38 S334 48 362 22 S399 30 430 8 V125 H0Z" fill="url(#area)"/><path d="M0 94 C35 88 43 65 77 72 S121 89 151 61 S196 69 222 43 S263 59 293 38 S334 48 362 22 S399 30 430 8" fill="none" stroke="#00C8FF" stroke-width="2.5"/></svg></div>
+                </div>
               </div>
             </div>
-            <div class="bento-cell big dash">
-              <img src="assets/mock-dashboard.svg" alt="Dashboard SaaS en tiempo real" loading="eager" width="320" height="220">
+            <div class="stage-card store-card"><div class="store-mark">K / STORE</div><div class="store-product"><span></span><span></span><span></span></div><div class="store-lines"><b>Commerce</b><small>Catálogo · Checkout · Gestión</small></div></div>
+            <div class="stage-card code-card"><div class="code-head"><span>DEPLOY / STATUS</span><b>● READY</b></div><code><i>01</i> build completed<br><i>02</i> checks passed<br><i>03</i> release prepared</code></div>
+          </div>
+          <div class="stage-caption"><span>DISEÑO + INGENIERÍA</span><span>BUILT AROUND YOUR BUSINESS</span></div>
+        </div>
+      </div>
+      <div class="container hero-bottom"><span>01 / 05</span><span class="hero-bottom-line"></span><span>DESLIZÁ PARA EXPLORAR</span></div>
+    </section>
+
+    <section class="section-shell solutions-section" id="soluciones">
+      <div class="container">
+        <div class="section-heading">
+          <div><span class="eyebrow">01 — QUÉ HACEMOS</span><h2>Soluciones para<br><em>problemas reales.</em></h2></div>
+          <p>Desde una presencia digital sólida hasta plataformas que organizan operaciones completas. Elegimos la tecnología según el problema, no al revés.</p>
+        </div>
+        <div class="solutions-grid">
+          <a class="solution-card" href="soluciones.html#web"><span class="card-index">01 / WEB</span><div class="card-icon icon-browser"><i></i><i></i><i></i><b></b></div><h3>Web &amp; experiencias digitales</h3><p>Sitios institucionales y experiencias pensadas para comunicar, posicionar y convertir.</p><span class="card-link">Explorar solución <b>↗</b></span></a>
+          <a class="solution-card" href="soluciones.html#ecommerce"><span class="card-index">02 / COMMERCE</span><div class="card-icon icon-bag">▱</div><h3>Comercio electrónico</h3><p>Tiendas online, catálogo, pagos y herramientas para gestionar ventas.</p><span class="card-link">Explorar solución <b>↗</b></span></a>
+          <a class="solution-card" href="soluciones.html#pwa"><span class="card-index">03 / APPLICATIONS</span><div class="card-icon icon-mobile"><i></i></div><h3>Aplicaciones PWA</h3><p>Aplicaciones web instalables y adaptadas a los flujos de trabajo de cada equipo.</p><span class="card-link">Explorar solución <b>↗</b></span></a>
+          <a class="solution-card" href="soluciones.html#saas"><span class="card-index">04 / SAAS</span><div class="card-icon icon-grid"><i></i><i></i><i></i><i></i></div><h3>Plataformas SaaS</h3><p>Sistemas de gestión, paneles administrativos y productos digitales multiusuario.</p><span class="card-link">Explorar solución <b>↗</b></span></a>
+          <a class="solution-card solution-card-wide" href="soluciones.html#integraciones"><span class="card-index">05 / INTEGRATION</span><div class="card-icon icon-nodes"><i></i><i></i><i></i></div><h3>Integraciones &amp; automatización</h3><p>Conectamos herramientas, datos y procesos mediante APIs, servicios externos y automatizaciones.</p><span class="card-link">Explorar solución <b>↗</b></span></a>
+        </div>
+        <div class="section-footnote"><span class="footnote-mark">↗</span><span>¿No sabés qué necesitás? KODEXA Copiloto puede orientarte y ayudarte a definir el próximo paso.</span><button class="text-action" type="button" data-open-copilot>Abrir copiloto</button></div>
+      </div>
+    </section>
+
+    <section class="section-shell technology-section" id="tecnologia">
+      <div class="container">
+        <div class="section-heading">
+          <div><span class="eyebrow">02 — CÓMO LO CONSTRUIMOS</span><h2>Tecnología con<br><em>criterio de ingeniería.</em></h2></div>
+          <p>Seleccionamos herramientas maduras y mantenibles según el alcance, la seguridad, la operación y la evolución esperada de cada producto.</p>
+        </div>
+        <div class="technology-layout">
+          <div class="technology-copy">
+            <div class="tech-label">CAPACIDADES Y ECOSISTEMA</div>
+            <h3>La herramienta correcta para cada desafío.</h3>
+            <p>Trabajamos con tecnologías web, bases de datos, servicios de autenticación, pagos e integraciones. La arquitectura se define según las necesidades del proyecto.</p>
+            <div class="tech-tags"><span>JavaScript</span><span>React</span><span>Node.js</span><span>PostgreSQL</span><span>Supabase</span><span>APIs REST</span><span>GitHub</span><span>Mercado Pago</span></div>
+            <a class="inline-link" href="tecnologia.html">Conocer el enfoque tecnológico <b>↗</b></a>
+          </div>
+          <div class="product-preview">
+            <div class="preview-top"><span>PRODUCT PREVIEW</span><div><i></i><i></i><i></i></div></div>
+            <div class="preview-tabs" role="tablist" aria-label="Vistas de producto">
+              <button class="preview-tab is-active" type="button" role="tab" aria-selected="true" data-preview="dashboard">Dashboard</button>
+              <button class="preview-tab" type="button" role="tab" aria-selected="false" data-preview="commerce">E-commerce</button>
             </div>
-            <div class="bento-cell term">
-              <img src="assets/mock-terminal.svg" alt="Deploy automatizado" loading="lazy" width="320" height="220">
+            <div class="preview-content" data-preview-panel="dashboard">
+              <img src="assets/mock-dashboard.svg" alt="Vista conceptual de un panel de gestión" loading="lazy">
+              <div><b>Panel de gestión</b><span>Datos, usuarios y operaciones en un solo lugar.</span></div>
             </div>
-            <div class="bento-cell store">
-              <img src="assets/mock-store.svg" alt="Tienda e-commerce" loading="lazy" width="320" height="220">
+            <div class="preview-content" data-preview-panel="commerce" hidden>
+              <img src="assets/mock-store.svg" alt="Vista conceptual de una tienda online" loading="lazy">
+              <div><b>Experiencia de compra</b><span>Catálogo, carrito y proceso de pago integrado.</span></div>
             </div>
+            <div class="preview-bottom"><span>INTERFACES CONSTRUIDAS SEGÚN CADA PROYECTO</span><span>↗</span></div>
           </div>
         </div>
       </div>
+    </section>
+
+    <section class="section-shell methodology-section" id="metodologia">
+      <div class="container">
+        <div class="section-heading compact-heading">
+          <div><span class="eyebrow">03 — METODOLOGÍA</span><h2>Del desafío al<br><em>producto funcionando.</em></h2></div>
+          <p>Un proceso transparente, con alcance definido y decisiones compartidas en cada etapa.</p>
+        </div>
+        <div class="process-grid">
+          <article class="process-step"><span>01</span><div class="process-rule"></div><h3>Entender</h3><p>Objetivos, usuarios, procesos y alcance. Primero definimos qué problema resolver.</p></article>
+          <article class="process-step"><span>02</span><div class="process-rule"></div><h3>Diseñar</h3><p>Arquitectura, estructura y experiencia. Validamos el enfoque antes de construir.</p></article>
+          <article class="process-step"><span>03</span><div class="process-rule"></div><h3>Desarrollar</h3><p>Implementación incremental, revisiones y pruebas acordes al producto.</p></article>
+          <article class="process-step"><span>04</span><div class="process-rule"></div><h3>Implementar</h3><p>Entrega, puesta en marcha y acompañamiento según el acuerdo de trabajo.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-shell plans-section" id="planes">
+      <div class="container">
+        <div class="section-heading">
+          <div><span class="eyebrow">04 — INVERSIÓN</span><h2>Un punto de partida<br><em>para cada proyecto.</em></h2></div>
+          <p>Referencias iniciales para orientar la conversación. El presupuesto definitivo depende del alcance, las integraciones y los servicios externos.</p>
+        </div>
+        <div class="plans-grid">
+          <article class="plan-card"><div class="plan-top"><span>01 / PRESENCIA</span><span class="plan-dot"></span></div><h3>Landing Pro</h3><p>Una presencia digital clara y profesional para presentar tu propuesta.</p><div class="plan-price" data-catalog-price="landing">$140.000</div><small>Referencia inicial · ARS</small><ul><li>Landing responsive</li><li>Secciones comerciales</li><li>Formulario o contacto</li><li>SEO técnico inicial</li></ul><a class="button button-outline" href="cotizador-paso1.html">Cotizar landing <span>↗</span></a></article>
+          <article class="plan-card plan-featured"><div class="plan-top"><span>02 / COMERCIO</span><span class="featured-label">DESTACADO</span></div><h3>E-commerce</h3><p>Una tienda online con herramientas para administrar productos y ventas.</p><div class="plan-price" data-catalog-price="ecommerce">$220.000</div><small>Referencia inicial · ARS</small><ul><li>Catálogo y carrito</li><li>Panel de administración</li><li>Gestión de stock</li><li>Integración de pagos según alcance</li></ul><a class="button button-primary" href="cotizador-desktop.html">Cotizar e-commerce <span>↗</span></a></article>
+          <article class="plan-card"><div class="plan-top"><span>03 / OPERACIÓN</span><span class="plan-dot"></span></div><h3>Sistema Web</h3><p>Una plataforma a medida para ordenar procesos y centralizar información.</p><div class="plan-price" data-catalog-price="gestion">$380.000</div><small>Referencia inicial · ARS</small><ul><li>Panel y módulos a medida</li><li>Usuarios y permisos</li><li>Reportes según alcance</li><li>Integraciones opcionales</li></ul><a class="button button-outline" href="cotizador-desktop.html">Cotizar sistema <span>↗</span></a></article>
+        </div>
+        <p class="pricing-note">Los importes son referencias del catálogo actual y pueden variar. Dominio, hosting, servicios de terceros, mantenimiento e integraciones se presupuestan según el proyecto.</p>
+      </div>
+    </section>
+
+    <section class="contact-section section-shell" id="contacto">
+      <div class="container contact-layout">
+        <div><span class="eyebrow">05 — HABLEMOS</span><h2>Tu próximo proyecto<br>empieza con una <em>conversación.</em></h2><p>Contanos qué querés resolver. Podemos ayudarte a definir el alcance y el camino tecnológico adecuado.</p></div>
+        <div class="contact-actions"><a class="button button-primary" href="cotizador-desktop.html">Iniciar cotización <span>↗</span></a><a class="button button-secondary" href="https://wa.me/5492213642475?text=Hola%20KODEXA%2C%20quiero%20consultar%20por%20un%20proyecto." target="_blank" rel="noopener">Contactar por WhatsApp <span>↗</span></a><a class="contact-email" href="mailto:hola@kodexa.com">hola@kodexa.com</a><span class="contact-location">Buenos Aires · Argentina</span></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-main">
+      <div class="footer-brand"><img src="assets/logo-white.svg" width="190" height="52" alt="KODEXA Digital Solutions"><p>Ingeniería y soluciones digitales para negocios y organizaciones.</p></div>
+      <div><span class="footer-label">EXPLORAR</span><a href="#soluciones">Soluciones</a><a href="tecnologia.html">Tecnología</a><a href="#metodologia">Metodología</a></div>
+      <div><span class="footer-label">PROYECTOS</span><a href="#planes">Planes orientativos</a><a href="cotizador-desktop.html">Cotizador</a><button class="footer-chat" type="button" data-open-copilot>Hablar con Copiloto</button></div>
+      <div><span class="footer-label">CONTACTO</span><a href="https://wa.me/5492213642475" target="_blank" rel="noopener">WhatsApp</a><a href="mailto:hola@kodexa.com">hola@kodexa.com</a><span>Buenos Aires, Argentina</span></div>
     </div>
-  </section>
-
-  <!-- ============ LOGOS BAR ============ -->
-  <section class="logos-bar">
-    <div class="logos-bar-title">Stack tecnológico</div>
-    <div class="logos-track">
-      <span>Mercado Pago</span><span>ARCA / AFIP</span><span>WhatsApp API</span><span>Supabase</span><span>Next.js</span><span>React</span><span>Node.js</span><span>PostgreSQL</span>
-      <span>Mercado Pago</span><span>ARCA / AFIP</span><span>WhatsApp API</span><span>Supabase</span><span>Next.js</span><span>React</span><span>Node.js</span><span>PostgreSQL</span>
-    </div>
-  </section>
-
-  <!-- ============ CAPACIDADES ============ -->
-  <section class="section" id="servicios">
-    <div class="container">
-      <div class="text-center reveal" style="max-width: 720px; margin: 0 auto 80px;">
-        <span class="eyebrow">Capacidades</span>
-        <h2 class="section-title">No hacemos webs.<br>Construimos <em>plataformas.</em></h2>
-        <p class="section-lead mx-auto">Cada proyecto es una pieza de ingeniería digital diseñada para escalar con tu negocio.</p>
-      </div>
-
-      <!-- Capability 1: Web -->
-      <div class="capability reveal">
-        <div class="capability-content">
-          <div class="tag">01 — Web profesional</div>
-          <h3>Sitios que <em>venden</em> desde el primer segundo.</h3>
-          <p>Diseño editorial, performance de élite y SEO técnico. Cada página está pensada para convertir visitas en clientes reales.</p>
-          <ul>
-            <li>Diseño responsive mobile-first</li>
-            <li>Optimización Core Web Vitals</li>
-            <li>SEO técnico y semántico</li>
-            <li>Integración con analítica</li>
-          </ul>
-          <a href="#contacto" class="btn btn-ghost">Contanos tu idea →</a>
-        </div>
-        <div class="capability-visual">
-          <img src="assets/mock-store.svg" alt="Ejemplo de tienda online" loading="lazy" width="320" height="220">
-        </div>
-      </div>
-
-      <!-- Capability 2: SaaS -->
-      <div class="capability reverse reveal">
-        <div class="capability-content">
-          <div class="tag">02 — Plataformas SaaS</div>
-          <h3>Sistemas que <em>trabajan</em> por vos.</h3>
-          <p>Dashboards, intranets y plataformas B2B con datos en tiempo real, autenticación y reportes que alimentan decisiones.</p>
-          <ul>
-            <li>Paneles administrativos a medida</li>
-            <li>Reportes y métricas en vivo</li>
-            <li>Roles, permisos y multi-tenant</li>
-            <li>APIs documentadas</li>
-          </ul>
-          <a href="#contacto" class="btn btn-ghost">Ver demo →</a>
-        </div>
-        <div class="capability-visual">
-          <img src="assets/mock-dashboard.svg" alt="Dashboard SaaS" loading="lazy" width="320" height="220">
-        </div>
-      </div>
-
-      <!-- Capability 3: PWA -->
-      <div class="capability reveal">
-        <div class="capability-content">
-          <div class="tag">03 — Apps web / PWA</div>
-          <h3>Experiencias <em>nativas</em>, sin tiendas de apps.</h3>
-          <p>Aplicaciones web progresivas con notificaciones push, modo offline y performance indistinguible de una app nativa.</p>
-          <ul>
-            <li>Instalación sin App Store</li>
-            <li>Push notifications</li>
-            <li>Funcionamiento offline</li>
-            <li>Performance nativa</li>
-          </ul>
-          <a href="#contacto" class="btn btn-ghost">Explorar PWA →</a>
-        </div>
-        <div class="capability-visual">
-          <img src="assets/mock-pwa.svg" alt="Aplicación PWA" loading="lazy" width="320" height="220">
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ SHOWCASE (tabs) ============ -->
-  <section class="section" id="showcase">
-    <div class="container">
-      <div class="text-center reveal" style="max-width: 720px; margin: 0 auto 48px;">
-        <span class="eyebrow">Showcase interactivo</span>
-        <h2 class="section-title">Explorá lo que <em>construimos.</em></h2>
-      </div>
-
-      <div class="showcase reveal">
-        <div class="showcase-tabs" role="tablist">
-          <button class="showcase-tab active" data-tab="dashboard" role="tab" aria-selected="true">Dashboard</button>
-          <button class="showcase-tab" data-tab="store" role="tab" aria-selected="false">E-commerce</button>
-          <button class="showcase-tab" data-tab="pwa" role="tab" aria-selected="false">PWA</button>
-          <button class="showcase-tab" data-tab="api" role="tab" aria-selected="false">API</button>
-        </div>
-
-        <div class="showcase-panel" data-panel="dashboard">
-          <div class="showcase-info">
-            <h3>Dashboard SaaS en vivo</h3>
-            <p>Panel de control con métricas en tiempo real, gráficos interactivos y gestión de usuarios.</p>
-            <ul>
-              <li>Gráficos de ventas y tráfico</li>
-              <li>Filtros por fecha y segmento</li>
-              <li>Export a CSV / PDF</li>
-              <li>Roles y permisos granulares</li>
-            </ul>
-          </div>
-          <div class="showcase-visual">
-            <img src="assets/mock-dashboard.svg" alt="Dashboard SaaS" loading="lazy" width="320" height="220">
-          </div>
-        </div>
-
-        <div class="showcase-panel" data-panel="store" hidden>
-          <div class="showcase-info">
-            <h3>Tienda e-commerce completa</h3>
-            <p>Catálogo, carrito, checkout con Mercado Pago y facturación ARCA automatizada.</p>
-            <ul>
-              <li>Carrito persistente y checkout en 1 paso</li>
-              <li>Integración Mercado Pago Pro</li>
-              <li>Facturación automática ARCA/AFIP</li>
-              <li>Gestión de stock y alertas WhatsApp</li>
-            </ul>
-          </div>
-          <div class="showcase-visual">
-            <img src="assets/mock-store.svg" alt="Tienda online" loading="lazy" width="320" height="220">
-          </div>
-        </div>
-
-        <div class="showcase-panel" data-panel="pwa" hidden>
-          <div class="showcase-info">
-            <h3>Aplicación web progresiva</h3>
-            <p>Experiencia nativa con instalación directa, push notifications y modo offline.</p>
-            <ul>
-              <li>Instalación sin tiendas de apps</li>
-              <li>Notificaciones push reales</li>
-              <li>Funcionamiento sin conexión</li>
-              <li>Performance de app nativa</li>
-            </ul>
-          </div>
-          <div class="showcase-visual">
-            <img src="assets/mock-pwa.svg" alt="PWA app" loading="lazy" width="320" height="220">
-          </div>
-        </div>
-
-        <div class="showcase-panel" data-panel="api" hidden>
-          <div class="showcase-info">
-            <h3>Deploy automatizado</h3>
-            <p>CI/CD con tests, build y deploy automático. Cada push a main es una nueva versión en producción.</p>
-            <ul>
-              <li>Pipeline de CI/CD completo</li>
-              <li>Tests automatizados</li>
-              <li>Deploy en menos de 2 minutos</li>
-              <li>Rollback instantáneo</li>
-            </ul>
-          </div>
-          <div class="showcase-visual">
-            <img src="assets/mock-terminal.svg" alt="Terminal de deploy" loading="lazy" width="320" height="220">
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ ASISTENTE KODEXA (robot mascota) ============ -->
-  <section class="section assistant-section" id="asistente" aria-labelledby="asistente-title">
-    <div class="container">
-      <div class="assistant-grid">
-        <div class="assistant-visual reveal">
-          <div class="assistant-glow" aria-hidden="true"></div>
-          <img
-            src="assets/kodexa-assistant.svg"
-            alt="Asistente virtual KODEXA"
-            class="assistant-img"
-            width="400"
-            height="400"
-            loading="lazy"
-            decoding="async">
-        </div>
-        <div class="assistant-content reveal">
-          <span class="eyebrow">Asistente KODEXA</span>
-          <h2 class="section-title" id="asistente-title">
-            El copiloto de tu<br><em>negocio digital.</em>
-          </h2>
-          <p class="section-lead" style="margin-bottom: 28px;">
-            Nuestro asistente virtual te acompaña en el proceso: orientación técnica, seguimiento de tu proyecto y respuestas rápidas cuando las necesitás.
-          </p>
-          <ul class="assistant-features">
-            <li>
-              <span class="assistant-feature-icon" aria-hidden="true">01</span>
-              <div>
-                <strong>Orientación inicial</strong>
-                <p>Te guía para definir qué solución encaja con tu negocio.</p>
-              </div>
-            </li>
-            <li>
-              <span class="assistant-feature-icon" aria-hidden="true">02</span>
-              <div>
-                <strong>Seguimiento de proyecto</strong>
-                <p>Consultas sobre el estado de tu desarrollo y próximos pasos.</p>
-              </div>
-            </li>
-            <li>
-              <span class="assistant-feature-icon" aria-hidden="true">03</span>
-              <div>
-                <strong>Soporte técnico</strong>
-                <p>Derivación directa a nuestro equipo ante cualquier inconveniente.</p>
-              </div>
-            </li>
-          </ul>
-          <a href="#contacto" class="btn btn-primary btn-lg">Hablar con KODEXA →</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ PROCESO ============ -->
-  <section class="section" id="proceso">
-    <div class="container">
-      <div class="text-center reveal" style="max-width: 720px; margin: 0 auto 80px;">
-        <span class="eyebrow">Proceso</span>
-        <h2 class="section-title">Cómo <em>trabajamos.</em></h2>
-        <p class="section-lead mx-auto">Un proceso claro, sin sorpresas, con vos en cada etapa.</p>
-      </div>
-
-      <div class="timeline">
-        <div class="timeline-line" style="height: 0;"></div>
-
-        <div class="timeline-step reveal">
-          <div class="content">
-            <div class="num">FASE 01</div>
-            <h3>Escuchamos tu idea</h3>
-            <p>Nos contás qué necesitás y qué querés lograr. Definimos juntos el alcance real del proyecto.</p>
-          </div>
-          <div class="dot"></div>
-        </div>
-
-        <div class="timeline-step reveal">
-          <div class="content">
-            <div class="num">FASE 02</div>
-            <h3>Diseñamos tu solución</h3>
-            <p>Armamos la propuesta técnica y visual. Prototipamos la experiencia antes de escribir una línea de código.</p>
-          </div>
-          <div class="dot"></div>
-        </div>
-
-        <div class="timeline-step reveal">
-          <div class="content">
-            <div class="num">FASE 03</div>
-            <h3>Desarrollamos tu proyecto</h3>
-            <p>Construimos con sprints semanales, tests automatizados y demos para que veas el avance real.</p>
-          </div>
-          <div class="dot"></div>
-        </div>
-
-        <div class="timeline-step reveal">
-          <div class="content">
-            <div class="num">FASE 04</div>
-            <h3>Publicamos y acompañamos</h3>
-            <p>Lanzamos, monitoreamos y te acompañamos con soporte técnico continuo post-lanzamiento.</p>
-          </div>
-          <div class="dot"></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ PLANES ============ -->
-  <section class="section" id="planes">
-    <div class="container">
-      <div class="text-center reveal" style="max-width: 720px; margin: 0 auto 80px;">
-        <span class="eyebrow">Planes</span>
-        <h2 class="section-title">Elegí el plan para<br><em>tu proyecto.</em></h2>
-        <p class="section-lead mx-auto">Precios claros, sin letra chica. Cotizá tu proyecto en minutos.</p>
-      </div>
-
-      <div class="plans-grid">
-        <div class="plan reveal">
-          <div class="plan-name">Landing Pro</div>
-          <h3>Presencia de alto impacto</h3>
-          <p class="tagline">Presencia online de alto impacto</p>
-          <div class="price">$140.000</div>
-          <span class="price-note">ARS · pago único</span>
-          <ul>
-            <li>Landing page optimizada</li>
-            <li>Diseño responsive</li>
-            <li>Formulario de contacto</li>
-            <li>SEO básico</li>
-            <li>Hosting y dominio orientativos</li>
-          </ul>
-          <a href="cotizador-paso1.html" class="btn btn-ghost">Cotizar</a>
-        </div>
-
-        <div class="plan featured reveal">
-          <div class="plan-name">E-commerce</div>
-          <h3>Vendé online sin límites</h3>
-          <p class="tagline">La opción más elegida por negocios</p>
-          <div class="price">$220.000</div>
-          <span class="price-note">ARS · pago único</span>
-          <ul>
-            <li>Tienda completa con carrito</li>
-            <li>Panel administrador</li>
-            <li>Gestión de stock</li>
-            <li>Integración Mercado Pago</li>
-            <li>Alertas WhatsApp y carga Excel</li>
-          </ul>
-          <a href="cotizador-desktop.html" class="btn btn-gold">Cotizar ahora</a>
-        </div>
-
-        <div class="plan reveal">
-          <div class="plan-name">Sistema Web</div>
-          <h3>Digitalizá tu operación</h3>
-          <p class="tagline">Para empresas que escalan</p>
-          <div class="price">$380.000</div>
-          <span class="price-note">ARS · pago único</span>
-          <ul>
-            <li>Plataforma a medida</li>
-            <li>Panel B2B / intranet</li>
-            <li>Reportes en tiempo real</li>
-            <li>Facturación ARCA/AFIP</li>
-            <li>Soporte técnico incluido</li>
-          </ul>
-          <a href="cotizador-desktop.html" class="btn btn-ghost">Cotizar</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ CTA FINAL ============ -->
-  <section class="section" id="contacto">
-    <div class="container">
-      <div class="cta-final reveal">
-        <div>
-          <span class="eyebrow">Empecemos</span>
-          <h2>Transformá tus ideas<br>en <em>soluciones digitales.</em></h2>
-          <p>Tu próximo proyecto puede comenzar hoy. Contanos qué necesitás y te respondemos en menos de 24 horas.</p>
-        </div>
-        <div class="cta-actions">
-          <a href="https://wa.me/5491112345678?text=Hola%20KODEXA,%20quiero%20cotizar%20mi%20proyecto" target="_blank" rel="noopener" class="btn btn-primary btn-lg">Solicitá tu presupuesto</a>
-          <a href="#planes" class="btn btn-ghost btn-lg">Ver planes</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ FOOTER ============ -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <img src="assets/logo.svg" alt="KODEXA" width="170" height="44">
-          <p>Ecosistema digital completo. Páginas web, tiendas online y plataformas digitales para hacer crecer tu negocio.</p>
-          <div class="footer-socials">
-            <a href="https://wa.me/5491112345678" target="_blank" rel="noopener" aria-label="WhatsApp">
-              <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/></svg>
-            </a>
-            <a href="mailto:hola@kodexa.com" aria-label="Email">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg>
-            </a>
-          </div>
-        </div>
-        <div>
-          <h4>Servicios</h4>
-          <ul>
-            <li><a href="#servicios">Páginas web</a></li>
-            <li><a href="#servicios">Tiendas online</a></li>
-            <li><a href="#servicios">PWA y apps web</a></li>
-            <li><a href="#servicios">Plataformas SaaS</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4>Navegación</h4>
-          <ul>
-            <li><a href="#inicio">Inicio</a></li>
-            <li><a href="#asistente">Asistente</a></li>
-            <li><a href="#planes">Planes</a></li>
-            <li><a href="#proceso">Cómo trabajamos</a></li>
-            <li><a href="#contacto">Contacto</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4>Contacto</h4>
-          <ul>
-            <li><a href="https://wa.me/5491112345678" target="_blank" rel="noopener">WhatsApp</a></li>
-            <li><a href="mailto:hola@kodexa.com">hola@kodexa.com</a></li>
-            <li>Buenos Aires, Argentina</li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <span>© 2025 KODEXA Digital Solutions · Respaldo tecnológico: ASARI S.A.S.</span>
-        <span class="mono">v2.0 · build 2025</span>
-      </div>
-    </div>
+    <div class="container footer-bottom"><span>© <span id="current-year">2026</span> KODEXA Digital Solutions · Respaldo tecnológico: ASARI S.A.S.</span><span>V3.0</span></div>
   </footer>
 
-  <a href="https://wa.me/5491112345678?text=Hola%20KODEXA,%20quiero%20cotizar%20mi%20proyecto" target="_blank" rel="noopener" class="wa-float" aria-label="Contactar por WhatsApp">
-    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/></svg>
-  </a>
+  <div class="copilot-root" id="kodexa-copilot">
+    <button class="copilot-launcher" type="button" aria-label="Abrir KODEXA Copiloto" aria-expanded="false" aria-controls="copilot-panel" id="copilot-launcher"><img src="assets/copilot-icon.svg" alt=""><span class="launcher-pulse"></span></button>
+    <section class="copilot-panel" id="copilot-panel" role="dialog" aria-modal="false" aria-labelledby="copilot-title" aria-hidden="true">
+      <header class="copilot-header"><div class="copilot-avatar"><img src="assets/copilot-icon.svg" alt=""></div><div><strong id="copilot-title">KODEXA Copiloto</strong><span><i></i> Asistente de orientación</span></div><button type="button" class="copilot-close" id="copilot-close" aria-label="Cerrar asistente">×</button></header>
+      <div class="copilot-context">PUEDO AYUDARTE A EXPLORAR KODEXA</div>
+      <div class="copilot-messages" id="copilot-messages" aria-live="polite" aria-relevant="additions text"><div class="chat-message bot-message">¡Hola! Soy el copiloto de KODEXA. Puedo orientarte sobre soluciones, planes y cómo iniciar un proyecto. ¿Qué necesitás resolver?</div></div>
+      <div class="copilot-suggestions" id="copilot-suggestions"><button type="button" data-intent="quote">Quiero cotizar</button><button type="button" data-intent="services">Ver soluciones</button><button type="button" data-intent="plans">Consultar planes</button><button type="button" data-intent="contact">Hablar con una persona</button></div>
+      <form class="copilot-form" id="copilot-form"><label class="visually-hidden" for="copilot-input">Escribí tu consulta</label><input id="copilot-input" name="message" type="text" maxlength="400" placeholder="Escribí tu consulta..." autocomplete="off"><button type="submit" aria-label="Enviar mensaje">↑</button></form>
+      <div class="copilot-disclaimer">Asistente automático de orientación. No consulta proyectos ni reemplaza asesoramiento técnico.</div>
+    </section>
+  </div>
 
+  <script src="app.js" defer></script>
   <script src="script.js" defer></script>
 </body>
 </html>
