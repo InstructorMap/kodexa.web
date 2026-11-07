@@ -1,13 +1,12 @@
 (() => {
   "use strict";
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  // Header and mobile navigation
+  const WA_NUMBER = "5492213642475";
   const header = document.querySelector(".site-header");
   const menu = document.querySelector(".menu-toggle");
   const nav = document.querySelector(".primary-nav");
   const setHeader = () => header?.classList.toggle("is-scrolled", window.scrollY > 12);
-  window.addEventListener("scroll", setHeader, { passive: true });
+  window.addEventListener("scroll", setHeader, {passive:true});
   setHeader();
 
   if (menu && nav) {
@@ -24,47 +23,29 @@
     }));
   }
 
-  // Small, non-essential entrance motion
   if (!reduceMotion && "IntersectionObserver" in window) {
     const observer = new IntersectionObserver(entries => entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("is-visible");
-        observer.unobserve(entry.target);
-      }
-    }), { threshold: 0.12 });
-    document.querySelectorAll(".solution-card,.process-step,.plan-card,.detail-row,.technology-detail-grid article").forEach(el => observer.observe(el));
+      if (entry.isIntersecting) { entry.target.classList.add("is-visible"); observer.unobserve(entry.target); }
+    }), {threshold:.12});
+    document.querySelectorAll(".solution-card,.process-step,.plan-card,.detail-row,.technology-detail-grid article,.v4-solution-card,.v4-approach-grid article,.v4-process-grid article").forEach(el => observer.observe(el));
   } else {
-    document.querySelectorAll(".solution-card,.process-step,.plan-card,.detail-row,.technology-detail-grid article").forEach(el => el.classList.add("is-visible"));
+    document.querySelectorAll(".solution-card,.process-step,.plan-card,.detail-row,.technology-detail-grid article,.v4-solution-card,.v4-approach-grid article,.v4-process-grid article").forEach(el => el.classList.add("is-visible"));
   }
 
-  // Showcase tabs
-  const previewTabs = [...document.querySelectorAll(".preview-tab")];
-  const previewPanels = [...document.querySelectorAll("[data-preview-panel]")];
-  previewTabs.forEach(tab => tab.addEventListener("click", () => {
+  document.querySelectorAll(".preview-tab").forEach(tab => tab.addEventListener("click", () => {
     const key = tab.dataset.preview;
-    previewTabs.forEach(item => {
+    document.querySelectorAll(".preview-tab").forEach(item => {
       const active = item === tab;
       item.classList.toggle("is-active", active);
       item.setAttribute("aria-selected", String(active));
     });
-    previewPanels.forEach(panel => panel.hidden = panel.dataset.previewPanel !== key);
+    document.querySelectorAll("[data-preview-panel]").forEach(panel => panel.hidden = panel.dataset.previewPanel !== key);
   }));
-
-  // Prices are sourced from the existing cotizer catalog. app.js remains unchanged.
-  const catalog = window.KODEXA?.CATALOG?.bases;
-  if (catalog) {
-    document.querySelectorAll("[data-catalog-price]").forEach(el => {
-      const item = catalog[el.dataset.catalogPrice];
-      if (item && Number.isFinite(item.price)) {
-        el.textContent = "$" + item.price.toLocaleString("es-AR");
-      }
-    });
-  }
 
   const year = document.getElementById("current-year");
   if (year) year.textContent = String(new Date().getFullYear());
 
-  // KODEXA Copiloto — local guided assistant, no simulated AI or external API.
+  // KODEXA Copiloto: transparent, local guidance. No external AI or client-account access.
   const launcher = document.getElementById("copilot-launcher");
   const panel = document.getElementById("copilot-panel");
   const closeButton = document.getElementById("copilot-close");
@@ -73,140 +54,97 @@
   const input = document.getElementById("copilot-input");
   const suggestions = document.getElementById("copilot-suggestions");
   if (!launcher || !panel || !messages || !form || !input) return;
+  let opened = false, lastFocus = null;
 
-  const WA = "https://wa.me/5492213642475?text=";
-  const cotizer = "cotizador-desktop.html";
-  let opened = false;
-  let lastFocus = null;
-  let flow = "";
-
-  const addMessage = (text, who = "bot") => {
+  const addMessage = (value, who="bot") => {
     const node = document.createElement("div");
     node.className = "chat-message " + (who === "user" ? "user-message" : "bot-message");
-    node.textContent = text;
+    node.textContent = value;
     messages.appendChild(node);
     messages.scrollTop = messages.scrollHeight;
-    return node;
   };
-  const addActions = (items) => {
-    const wrap = document.createElement("div");
-    wrap.className = "chat-actions";
+  const addActions = items => {
+    const wrap = document.createElement("div"); wrap.className = "chat-actions";
     items.forEach(item => {
-      const a = document.createElement("a");
-      a.className = "chat-action";
-      a.textContent = item.label;
-      a.href = item.href;
-      if (item.external) { a.target = "_blank"; a.rel = "noopener"; }
+      const a = document.createElement("a"); a.className = "chat-action";
+      a.textContent = item.label; a.href = item.href;
+      if (item.external) { a.target="_blank"; a.rel="noopener noreferrer"; }
       wrap.appendChild(a);
     });
-    messages.appendChild(wrap);
-    messages.scrollTop = messages.scrollHeight;
-  };
-  const priceText = key => {
-    const item = window.KODEXA?.CATALOG?.bases?.[key];
-    return item && Number.isFinite(item.price) ? "$" + item.price.toLocaleString("es-AR") : "consultar en el cotizador";
+    messages.appendChild(wrap); messages.scrollTop = messages.scrollHeight;
   };
   const open = () => {
     if (opened) return;
-    opened = true;
-    lastFocus = document.activeElement;
-    panel.classList.add("is-open");
-    panel.setAttribute("aria-hidden", "false");
-    launcher.setAttribute("aria-expanded", "true");
-    launcher.hidden = true;
+    opened = true; lastFocus = document.activeElement;
+    panel.classList.add("is-open"); panel.setAttribute("aria-hidden","false");
+    launcher.setAttribute("aria-expanded","true"); launcher.hidden = true;
     window.setTimeout(() => input.focus(), reduceMotion ? 0 : 180);
   };
   const close = () => {
     if (!opened) return;
-    opened = false;
-    panel.classList.remove("is-open");
-    panel.setAttribute("aria-hidden", "true");
-    launcher.hidden = false;
-    launcher.setAttribute("aria-expanded", "false");
-    if (lastFocus && typeof lastFocus.focus === "function") lastFocus.focus();
-    else launcher.focus();
+    opened = false; panel.classList.remove("is-open"); panel.setAttribute("aria-hidden","true");
+    launcher.hidden = false; launcher.setAttribute("aria-expanded","false");
+    (lastFocus && typeof lastFocus.focus === "function" ? lastFocus : launcher).focus();
   };
-  launcher.addEventListener("click", open);
-  closeButton?.addEventListener("click", close);
-  document.querySelectorAll("[data-open-copilot]").forEach(btn => btn.addEventListener("click", open));
+  launcher.addEventListener("click",open); closeButton?.addEventListener("click",close);
+  document.querySelectorAll("[data-open-copilot]").forEach(btn => btn.addEventListener("click",open));
 
+  const normalize = value => value.toLocaleLowerCase("es-AR").normalize("NFD").replace(/[\u0300-\u036f]/g,"");
   const runIntent = raw => {
-    const text = raw.toLocaleLowerCase("es-AR").normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-    if (/^(hola|buenas|buen dia|buenas tardes|buenas noches|hey)\b/.test(text)) {
-      flow = "";
-      addMessage("¡Hola! Puedo ayudarte a conocer las soluciones, revisar las referencias de planes o iniciar una cotización. ¿Por dónde querés empezar?");
-      return;
+    const value = normalize(raw);
+    if (/^(hola|buenas|buen dia|buenas tardes|buenas noches|hey)\b/.test(value)) {
+      addMessage("¡Hola! Puedo ayudarte a explorar soluciones, orientar el alcance o iniciar una cotización. ¿Qué querés mejorar?");
+    } else if (/cotiz|presupuesto|precio|cuanto sale|cuanto cuesta|valor/.test(value)) {
+      addMessage("Podés configurar una referencia inicial de inversión. El importe es orientativo y el alcance final se confirma mediante una propuesta escrita.");
+      addActions([{label:"Abrir cotizador",href:"cotizador.html"}]);
+    } else if (/tienda|venta|ecommerce|e-commerce|catalogo|carrito/.test(value)) {
+      addMessage("Para vender online podemos diseñar un e-commerce con catálogo, carrito, checkout y herramientas de gestión. Las pasarelas y sus credenciales se validan según el proveedor.");
+      addActions([{label:"Ver comercio electrónico",href:"soluciones.html#ecommerce"},{label:"Cotizar tienda",href:"cotizador.html"}]);
+    } else if (/web|pagina|landing|sitio/.test(value)) {
+      addMessage("Podemos construir una web institucional o landing orientada a presentar tu propuesta, generar confianza y facilitar consultas.");
+      addActions([{label:"Ver soluciones web",href:"soluciones.html#web"},{label:"Cotizar proyecto",href:"cotizador.html"}]);
+    } else if (/saas|sistema|gestion|plataforma|usuarios|multi.?tenant/.test(value)) {
+      addMessage("Desarrollamos sistemas web y plataformas SaaS con módulos, roles y permisos según el alcance. La autenticación y el backend se diseñan como parte de la arquitectura; no están habilitados en este sitio comercial.");
+      addActions([{label:"Ver plataformas SaaS",href:"soluciones.html#saas"},{label:"Conversar sobre arquitectura",href:"https://wa.me/"+WA_NUMBER+"?text="+encodeURIComponent("Hola KODEXA, quiero conversar sobre una plataforma SaaS."),external:true}]);
+    } else if (/pwa|aplicacion|app|offline/.test(value)) {
+      addMessage("Una PWA permite ofrecer una experiencia web instalable. Las capacidades offline y notificaciones dependen de la arquitectura y compatibilidad de cada dispositivo.");
+      addActions([{label:"Ver aplicaciones PWA",href:"soluciones.html#pwa"}]);
+    } else if (/arca|afip|fiscal|factur/.test(value)) {
+      addMessage("Podemos evaluar integraciones fiscales. La facturación y el uso de servicios de ARCA dependen de requisitos, credenciales y autorizaciones; no afirmamos homologación ni habilitación sin verificarlas.");
+      addActions([{label:"Consultar integración",href:"https://wa.me/"+WA_NUMBER+"?text="+encodeURIComponent("Hola KODEXA, quiero evaluar una integración con servicios de ARCA."),external:true}]);
+    } else if (/tiempo|demora|plazo|cuando estaria/.test(value)) {
+      addMessage("Los plazos se estiman después de definir alcance, contenidos, integraciones y validaciones. Preferimos darte un plazo realista antes que prometer uno sin analizar el proyecto.");
+      addActions([{label:"Definir mi proyecto",href:"cotizador.html"}]);
+    } else if (/contact|humano|persona|asesor|whatsapp|hablar/.test(value)) {
+      addMessage("Claro. Podés contactar directamente al equipo de KODEXA.");
+      addActions([{label:"Abrir WhatsApp",href:"https://wa.me/"+WA_NUMBER+"?text="+encodeURIComponent("Hola KODEXA, quisiera conversar sobre un proyecto."),external:true}]);
+    } else if (/seguimiento|estado de mi proyecto|mi proyecto/.test(value)) {
+      addMessage("Este asistente todavía no accede a cuentas de clientes ni consulta estados de proyectos. Para una consulta concreta, te derivo al equipo.");
+      addActions([{label:"Consultar al equipo",href:"https://wa.me/"+WA_NUMBER+"?text="+encodeURIComponent("Hola KODEXA, quisiera consultar por el estado de mi proyecto."),external:true}]);
+    } else {
+      addMessage("Para orientarte con precisión, contame si buscás una web, una tienda online, una aplicación o un sistema de gestión. También podés hablar con el equipo.");
+      addActions([{label:"Ver soluciones",href:"soluciones.html"},{label:"Hablar con KODEXA",href:"https://wa.me/"+WA_NUMBER+"?text="+encodeURIComponent("Hola KODEXA, necesito asesoramiento sobre una solución digital."),external:true}]);
     }
-    if (/cotiz|presupuesto|precio|cuanto sale|cuanto cuesta|valor/.test(text)) {
-      flow = "quote";
-      addMessage("Podés iniciar una cotización desde el configurador. Allí seleccionás la base del proyecto y los adicionales disponibles. Los importes se muestran según el catálogo vigente.");
-      addActions([{label:"Abrir cotizador",href:cotizer}]);
-      return;
-    }
-    if (/planes|promocion|landing pro|e-commerce|sistema web/.test(text)) {
-      flow = "plans";
-      addMessage("Estas son las referencias actuales del catálogo: Landing Pro " + priceText("landing") + ", E-commerce " + priceText("ecommerce") + " y Sistema Web " + priceText("gestion") + ". Son importes orientativos en ARS; el presupuesto final depende del alcance y de los servicios externos.");
-      addActions([{label:"Ver planes",href:"index.html#planes"},{label:"Cotizar",href:cotizer}]);
-      return;
-    }
-    if (/servicio|solucion|que hacen|que ofrece|que desarrollan|web|tienda|pwa|saas|aplicacion|sistema/.test(text)) {
-      flow = "services";
-      addMessage("KODEXA desarrolla sitios web, comercio electrónico, aplicaciones PWA, plataformas SaaS e integraciones. La solución se define según el problema, los usuarios y el alcance.");
-      addActions([{label:"Ver todas las soluciones",href:"soluciones.html"},{label:"Iniciar cotización",href:cotizer}]);
-      return;
-    }
-    if (/tiempo|demora|tarda|plazo|cuando estaria/.test(text)) {
-      addMessage("Los plazos dependen del alcance, los contenidos, las integraciones y las validaciones necesarias. Para darte una estimación responsable, necesitamos revisar tu proyecto. Podés iniciar una consulta por WhatsApp.");
-      addActions([{label:"Consultar por WhatsApp",href:WA + encodeURIComponent("Hola KODEXA, quisiera consultar los plazos para mi proyecto."),external:true}]);
-      return;
-    }
-    if (/arca|afip|factur/.test(text)) {
-      addMessage("Podemos evaluar integraciones con servicios fiscales como parte de un proyecto. La disponibilidad depende de los requisitos técnicos, credenciales y condiciones del organismo. No afirmamos homologación ni facturación automática sin validar el caso concreto.");
-      addActions([{label:"Consultar integración",href:WA + encodeURIComponent("Hola KODEXA, quiero consultar por una integración fiscal."),external:true}]);
-      return;
-    }
-    if (/whatsapp|humano|persona|asesor|contact|hablar/.test(text)) {
-      addMessage("Claro. Podés comunicarte directamente con el equipo de KODEXA por WhatsApp.");
-      addActions([{label:"Abrir WhatsApp",href:WA + encodeURIComponent("Hola KODEXA, quisiera hablar con un asesor."),external:true}]);
-      return;
-    }
-    if (/seguimiento|estado de mi proyecto|mi proyecto/.test(text)) {
-      addMessage("Desde este asistente todavía no es posible consultar estados de proyectos ni acceder a cuentas de clientes. Para una consulta concreta, te derivo al equipo.");
-      addActions([{label:"Contactar al equipo",href:WA + encodeURIComponent("Hola KODEXA, quisiera consultar por el estado de mi proyecto."),external:true}]);
-      return;
-    }
-    addMessage("No tengo información suficiente para responder eso con seguridad. Puedo orientarte sobre servicios y cotizaciones, o derivarte a una persona del equipo.");
-    addActions([{label:"Ver soluciones",href:"soluciones.html"},{label:"WhatsApp",href:WA + encodeURIComponent("Hola KODEXA, necesito asesoramiento."),external:true}]);
   };
 
-  form.addEventListener("submit", event => {
-    event.preventDefault();
-    const value = input.value.trim();
-    if (!value) return;
-    addMessage(value, "user");
-    input.value = "";
-    runIntent(value);
+  form.addEventListener("submit",event=>{
+    event.preventDefault(); const value=input.value.trim(); if(!value)return;
+    addMessage(value,"user"); input.value=""; runIntent(value);
   });
-  suggestions?.addEventListener("click", event => {
-    const button = event.target.closest("button[data-intent]");
-    if (!button) return;
-    const intents = {quote:"Quiero cotizar",services:"Quiero ver las soluciones",plans:"Quiero consultar los planes",contact:"Quiero hablar con una persona"};
-    const value = intents[button.dataset.intent];
-    if (!value) return;
-    addMessage(value, "user");
-    runIntent(value);
-    suggestions.hidden = true;
+  suggestions?.addEventListener("click",event=>{
+    const button=event.target.closest("button[data-intent]"); if(!button)return;
+    const prompts={quote:"Quiero cotizar un proyecto",services:"Quiero ver las soluciones",business:"Tengo un negocio y quiero mejorarlo",contact:"Quiero hablar con una persona"};
+    const value=prompts[button.dataset.intent]; if(!value)return;
+    addMessage(value,"user"); runIntent(value); suggestions.hidden=true;
   });
-
-  document.addEventListener("keydown", event => {
-    if (!opened) return;
-    if (event.key === "Escape") { close(); return; }
-    if (event.key === "Tab") {
-      const focusable = [...panel.querySelectorAll('button:not([disabled]),a[href],input:not([disabled])')].filter(el => !el.hidden && el.getClientRects().length > 0);
-      if (!focusable.length) return;
-      const first = focusable[0], last = focusable[focusable.length - 1];
-      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
-      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+  document.addEventListener("keydown",event=>{
+    if(!opened)return;
+    if(event.key==="Escape"){close();return;}
+    if(event.key==="Tab"){
+      const focusable=[...panel.querySelectorAll('button:not([disabled]),a[href],input:not([disabled])')].filter(el=>!el.hidden&&el.getClientRects().length);
+      if(!focusable.length)return; const first=focusable[0],last=focusable[focusable.length-1];
+      if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus();}
+      else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus();}
     }
   });
 })();
