@@ -55,6 +55,14 @@
       contact_channel:"WhatsApp",
       status:"new"
     };
+    const phoneDigits = record.phone.replace(/\\D/g,"");
+    if (record.name.length < 2 || phoneDigits.length < 7 || record.description.length < 3) {
+      error.textContent = "Revisá el nombre, el teléfono y la descripción para poder preparar la consulta.";
+      if (record.name.length < 2) document.getElementById("lead-name").focus();
+      else if (phoneDigits.length < 7) document.getElementById("lead-phone").focus();
+      else document.getElementById("lead-details").focus();
+      return;
+    }
     const lines = [
       "NUEVA CONSULTA KODEXA",
       "Referencia: "+record.lead_id,
