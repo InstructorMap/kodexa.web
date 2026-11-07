@@ -106,6 +106,13 @@
     $("#quote-builder").scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
+  function syncPlatformInputs() {
+    $("[name='platform']").forEach(el => {
+      el.checked = state.platforms.includes(el.value);
+      el.disabled = el.value === "android" && (state.solution === "apk" || state.solution === "native");
+    });
+  }
+
   function renderSolutionCards() {
     const host = $("#solution-grid");
     host.replaceChildren();
@@ -133,7 +140,13 @@
         const price = document.createElement("strong"); price.textContent = item.mode === "from" ? "Desde " + money(item.min) : money(item.min) + " – " + money(item.max);
         const note = document.createElement("small"); note.className = "solution-card-note"; note.textContent = item.mode === "from" ? "Precio inicial orientativo" : "Rango inicial orientativo";
         btn.append(top, name, desc, price, note);
-        btn.addEventListener("click", () => { state.solution = id; renderSolutionCards(); renderSummary(); });
+        btn.addEventListener("click", () => {
+          state.solution = id;
+          state.platforms = id === "apk" ? ["web", "android"] : id === "native" ? ["android"] : ["web"];
+          renderSolutionCards();
+          syncPlatformInputs();
+          renderSummary();
+        });
         grid.append(btn);
       });
       group.append(grid); host.append(group);
@@ -182,7 +195,12 @@
     $$("[name='orgs']").forEach(el => el.addEventListener("change", () => { if (el.checked) state.orgs = el.value; renderSummary(); }));
     $$("[name='users']").forEach(el => el.addEventListener("change", () => { if (el.checked) state.users = el.value; renderSummary(); }));
     $$("[name='platform']").forEach(el => el.addEventListener("change", () => {
-      state.platforms = $$("[name='platform']:checked").map(x => x.value); renderSummary();
+      state.platforms = $("[name='platform']:checked").map(x => x.value);
+      if ((state.solution === "apk" || state.solution === "native") && !state.platforms.includes("android")) {
+        state.platforms.push("android");
+      }
+      syncPlatformInputs();
+      renderSummary();
     }));
     $$("[name='maintenance']").forEach(el => el.addEventListener("change", () => { if (el.checked) state.maintenance = el.value; renderSummary(); }));
     $$("[name='timeline']").forEach(el => el.addEventListener("change", () => { if (el.checked) state.timeline = el.value; }));
@@ -195,6 +213,10 @@
   function validateStage() {
     if (state.step === 1 && !CATALOG.solutions[state.solution]) return false;
     if (state.step === 2 && !state.platforms.length) { $("#platform-error").textContent = "Seleccioná al menos una plataforma."; return false; }
+    if (state.step === 2 && (state.solution === "apk" || state.solution === "native") && !state.platforms.includes("android")) {
+      $("#platform-error").textContent = "La solución Android requiere mantener seleccionada esa plataforma.";
+      return false;
+    }
     if (state.step === 4) {
       const form = $("#quote-client-form");
       if (!form.reportValidity()) return false;
@@ -251,6 +273,7 @@
   function init() {
     renderSolutionCards();
     renderModules();
+    syncPlatformInputs();
     bindInputs();
     bindNavigation();
     renderSummary();
