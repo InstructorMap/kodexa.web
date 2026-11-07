@@ -87,7 +87,13 @@
     return org * users;
   };
   const includedModuleIds = () => INCLUDED_BY_SOLUTION[state.solution] || [];
-  const billableModuleIds = () => state.modules.filter(id => !includedModuleIds().includes(id));
+  const requiredModuleIds = () => (
+    ["operations", "custom"].includes(state.solution) && state.orgs !== "single"
+      ? ["multitenant"]
+      : []
+  );
+  const billableModuleIds = () => [...new Set([...state.modules, ...requiredModuleIds()])]
+    .filter(id => !includedModuleIds().includes(id));
   const estimate = () => {
     const base = solution();
     const extras = billableModuleIds().map(id => CATALOG.modules[id]).filter(Boolean);
@@ -182,14 +188,15 @@
       Object.entries(CATALOG.modules).filter(([,item]) => item.group === groupName).forEach(([id,item]) => {
         const label = document.createElement("label"); label.className = "module-option";
         const included = includedModuleIds().includes(id);
-        const input = document.createElement("input"); input.type = "checkbox"; input.checked = included || state.modules.includes(id); input.disabled = included;
+        const required = requiredModuleIds().includes(id);
+        const input = document.createElement("input"); input.type = "checkbox"; input.checked = included || required || state.modules.includes(id); input.disabled = included || required;
         input.addEventListener("change", () => {
           state.modules = input.checked ? [...state.modules, id] : state.modules.filter(x => x !== id);
           renderSummary();
         });
         const content = document.createElement("span"); content.className = "module-copy";
         const name = document.createElement("b"); name.textContent = item.label;
-        const range = document.createElement("small"); range.textContent = included ? "Incluido en el alcance base · sin costo adicional" : money(item.min) + " – " + money(item.max);
+        const range = document.createElement("small"); range.textContent = included ? "Incluido en el alcance base · sin costo adicional" : required ? "Requerido por la arquitectura seleccionada · incluido en la estimación" : money(item.min) + " – " + money(item.max);
         content.append(name, range); label.append(input, content); grid.append(label);
       });
       section.append(grid); host.append(section);
@@ -216,7 +223,7 @@
   }
 
   function bindInputs() {
-    $$("[name='orgs']").forEach(el => el.addEventListener("change", () => { if (el.checked) state.orgs = el.value; renderSummary(); }));
+    $("[name='orgs']").forEach(el => el.addEventListener("change", () => { if (el.checked) state.orgs = el.value; renderModules(); renderSummary(); }));
     $$("[name='users']").forEach(el => el.addEventListener("change", () => { if (el.checked) state.users = el.value; renderSummary(); }));
     $$("[name='platform']").forEach(el => el.addEventListener("change", () => {
       state.platforms = $$("[name='platform']:checked").map(x => x.value);
