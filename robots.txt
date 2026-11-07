@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://instructormap.github.io/kodexa.web/sitemap.xml
