@@ -1,37 +1,28 @@
-# KODEXA V3 — paquete de rediseño
+# KODEXA V4 — Digital Engineering Studio
 
-Este paquete contiene la nueva landing, dos páginas secundarias, el sistema visual y KODEXA Copiloto.
+Sitio comercial estático de KODEXA Digital Solutions, preparado para GitHub Pages.
 
-## Archivos incluidos
-- `index.html`
-- `styles.css`
-- `script.js`
-- `soluciones.html`
-- `tecnologia.html`
-- `assets/` (logos Architect, robot/copiloto y visuales SVG)
+## Experiencia V4
+- Landing institucional responsive con identidad visual KODEXA.
+- Páginas de soluciones y enfoque tecnológico.
+- Cotizador unificado responsive basado en el catálogo de `app.js`.
+- KODEXA Copiloto local basado en reglas, con derivación a cotización y WhatsApp.
+- Metadatos SEO, Open Graph, `robots.txt` y `sitemap.xml`.
+- Accesibilidad base: enlace para saltar al contenido, navegación etiquetada, foco visible, estados ARIA y soporte para movimiento reducido.
 
-## Integración en el repositorio actual
-Copiar los archivos incluidos sobre el repositorio `InstructorMap/kodexa.web`, conservando los archivos existentes que no están en este paquete.
+## Arquitectura actual
+Esta versión continúa siendo frontend estático. El cotizador calcula en el navegador y abre WhatsApp con un mensaje que la persona revisa y envía. No hay autenticación, cuentas, backend, almacenamiento central, CRM ni conexión a Supabase.
 
-**No reemplazar ni modificar:**
-- `app.js`
-- `cotizador-desktop.html`
-- `cotizador-paso1.html`
-- `cotizador-paso2.html`
-- `cotizador-paso3-resumen.html`
+## Publicación
+El sitio está preparado para GitHub Pages desde la raíz de `main`:
+https://instructormap.github.io/kodexa.web/
 
-La landing carga el `app.js` actual para leer `window.KODEXA.CATALOG`; no lo modifica. Los importes mostrados se alimentan de ese catálogo.
+## Antes de operar comercialmente
+- Confirmar que el número de WhatsApp configurado corresponde al canal oficial.
+- Confirmar que `hola@kodexa.com` es una dirección operativa.
+- Revisar precios y alcance del catálogo en `app.js`.
+- Definir alcance, impuestos, vigencia y condiciones comerciales en cada propuesta.
+- Configurar dominio propio y analítica/consentimiento si se decide utilizarlos.
 
-## Rutas
-El sitio está pensado para publicarse en la raíz de GitHub Pages de `https://instructormap.github.io/kodexa.web/`. Los enlaces a las páginas secundarias y al cotizador son relativos.
-
-## KODEXA Copiloto
-Asistente local basado en reglas. No usa API externa ni se presenta como IA generativa. Puede orientar sobre soluciones, planes, cotización, contacto y consultas frecuentes. Las preguntas que no puede responder se derivan a WhatsApp.
-
-## Importante antes de publicar
-1. Abrir `index.html` mediante un servidor local (no solo `file://`) para probar rutas y scripts.
-2. Verificar cotizadores completos en escritorio y móvil.
-3. Confirmar que `hola@kodexa.com` es una dirección operativa.
-4. Confirmar importes y alcance comercial del catálogo antes de publicar.
-5. Revisar el logo a tamaños pequeños y favicon en los navegadores objetivo.
-6. No se ha hecho push, merge ni publicación en GitHub.
+## Evolución posterior
+La futura conexión con Supabase deberá implementarse como una etapa separada: autenticación, perfiles, organizaciones/tenants, roles, políticas RLS, persistencia de leads y gestión de proyectos. No se simulan esas capacidades en V4.
