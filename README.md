@@ -1,25 +1,39 @@
-# 🚀 KODEXA Digital Solutions — Ecosistema Digital Completo
+# KODEXA Digital Solutions — Identidad visual V1
 
-Plataforma institucional y cotizador interactivo paso a paso con cálculo en tiempo real, integración fiscal ARCA/AFIP 2025 y envío de presupuestos por WhatsApp.
+## Dirección aprobada para implementación
+Una única dirección visual: **Architect refinado**. El símbolo es un bloque estructural azul con una K calada mediante máscara SVG y un acento dorado superior. No se incluyen conceptos alternativos.
 
-- **Stack:** HTML5 Semántico + Tailwind CSS CDN + Plus Jakarta Sans + Vanilla JS
-- **Respaldo Institucional:** ASARI S.A.S.
-- **Estructura de Directorios:**
-  - `index.html`: Enrutador automático e inteligente (Desktop / Mobile) con fallback.
-  - `desktop/index.html`: Landing institucional de escritorio.
-  - `desktop/cotizador-desktop.html`: Cotizador interactivo split layout.
-  - `mobile/index.html`: Landing responsive para móviles con navegación fija.
-  - `mobile/cotizador-paso1.html`: Paso 1 (Tipo de proyecto y base técnica).
-  - `mobile/cotizador-paso2.html`: Paso 2 (Alcance, pasarelas y fiscalidad ARCA).
-  - `mobile/cotizador-paso3-resumen.html`: Paso 3 (Resumen #KDX-8492, CUIT y WhatsApp).
+## Archivos
+- `assets/logo-dark.svg`: logo horizontal para fondos claros.
+- `assets/logo-white.svg`: logo horizontal para fondos oscuros.
+- `assets/logo-mono.svg`: versión monocromática.
+- `assets/logo-icon.svg`: símbolo aislado.
+- `assets/favicon.svg`: favicon a color.
+- `assets/favicon-mono.svg`: favicon monocromático.
+- `kodexa-brand.css`: tokens de marca, tipografía, escala y componentes base.
 
-## ⚡ Puesta en marcha rápida
-```bash
-# Con Node:
-npx serve .
-# O con Python:
-python3 -m http.server 8080
-```
+## Paleta
+- Navy: `#020B24`
+- Electric Blue: `#006BFF`
+- Cyan: `#00C8FF`
+- Gold: `#FFB800`
+- White: `#FFFFFF`
 
-## 🌐 Despliegue en la nube
-Compatible de forma nativa con **Vercel**, **Netlify**, **GitHub Pages** o cualquier servidor web estático (Apache, Nginx).
+## Reglas de uso
+1. Usar `logo-dark.svg` sobre blanco o superficies claras.
+2. Usar `logo-white.svg` sobre navy o fondos oscuros.
+3. Usar `logo-icon.svg` / `favicon.svg` para avatar, app icon y favicon.
+4. El dorado es un acento, no un color de texto ni un color de grandes superficies.
+5. No estirar, inclinar, agregar sombras, contornos ni efectos glow al símbolo.
+6. Mantener zona de seguridad mínima equivalente al ancho del acento dorado.
+7. No usar el descriptor si el logo se reproduce a menos de 180 px de ancho.
+8. Para favicon de 16 px, probar en navegador real; si el calado se cierra, usar la variante simplificada monocromática.
+
+## Tipografía
+Inter. Pesos recomendados: 400 texto, 500 soporte, 600 navegación, 700 botones, 800 titulares y wordmark.
+
+## Nota técnica
+Los SVG usan máscara explícita `userSpaceOnUse` para que el recorte de la K sea transparente y no dependa del color del fondo. El wordmark usa texto SVG con fuentes de sistema; para impresión profesional o entrega a terceros, convertir el texto a curvas en un editor vectorial antes de producción.
+
+## Integración
+Copiar la carpeta `assets/` al proyecto y `kodexa-brand.css` a la hoja de estilos. No reemplazar cotizadores ni lógica JavaScript al incorporar la identidad.

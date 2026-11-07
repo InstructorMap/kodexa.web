@@ -1,0 +1,101 @@
+/* KODEXA DIGITAL SOLUTIONS — Visual Identity V1 */
+:root {
+  /* Core brand */
+  --kx-navy: #020B24;
+  --kx-blue: #006BFF;
+  --kx-cyan: #00C8FF;
+  --kx-gold: #FFB800;
+  --kx-white: #FFFFFF;
+
+  /* Neutrals */
+  --kx-ink: #0B1220;
+  --kx-slate-700: #334155;
+  --kx-slate-500: #64748B;
+  --kx-slate-300: #CBD5E1;
+  --kx-slate-100: #F1F5F9;
+  --kx-surface: #FFFFFF;
+  --kx-surface-dark: #06142F;
+
+  /* Gradients: accents only, never as a substitute for layout */
+  --kx-gradient-primary: linear-gradient(125deg, #006BFF 0%, #00C8FF 100%);
+  --kx-gradient-deep: linear-gradient(145deg, #020B24 0%, #071A3B 100%);
+
+  /* Typography */
+  --kx-font-sans: "Inter", "Segoe UI", Arial, sans-serif;
+  --kx-font-mono: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
+
+  /* Type scale */
+  --kx-text-xs: .75rem;
+  --kx-text-sm: .875rem;
+  --kx-text-base: 1rem;
+  --kx-text-lg: 1.125rem;
+  --kx-text-xl: 1.25rem;
+  --kx-heading-sm: clamp(1.5rem, 2vw, 2rem);
+  --kx-heading-md: clamp(2rem, 3.5vw, 3rem);
+  --kx-heading-xl: clamp(2.75rem, 6vw, 5.25rem);
+
+  /* Layout and shape */
+  --kx-radius-sm: 8px;
+  --kx-radius-md: 14px;
+  --kx-radius-lg: 22px;
+  --kx-radius-pill: 999px;
+  --kx-container: 1200px;
+  --kx-section-space: clamp(4rem, 8vw, 7rem);
+
+  /* Motion */
+  --kx-ease: cubic-bezier(.2, .75, .25, 1);
+  --kx-duration-fast: 160ms;
+  --kx-duration: 260ms;
+}
+
+/* Base application */
+body {
+  font-family: var(--kx-font-sans);
+  color: var(--kx-ink);
+  background: var(--kx-surface);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+.kx-container {
+  width: min(calc(100% - 2.5rem), var(--kx-container));
+  margin-inline: auto;
+}
+
+.kx-section {
+  padding-block: var(--kx-section-space);
+}
+
+.kx-button-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .6rem;
+  min-height: 48px;
+  padding: .8rem 1.25rem;
+  border: 1px solid var(--kx-blue);
+  border-radius: var(--kx-radius-sm);
+  background: var(--kx-blue);
+  color: var(--kx-white);
+  font: 700 var(--kx-text-sm)/1 var(--kx-font-sans);
+  text-decoration: none;
+  transition: transform var(--kx-duration-fast) var(--kx-ease),
+              background var(--kx-duration-fast) var(--kx-ease);
+}
+.kx-button-primary:hover {
+  background: #0058D6;
+  transform: translateY(-1px);
+}
+
+.kx-eyebrow {
+  color: var(--kx-blue);
+  font-size: var(--kx-text-xs);
+  font-weight: 800;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.kx-dark-section {
+  color: var(--kx-white);
+  background: var(--kx-gradient-deep);
+}
