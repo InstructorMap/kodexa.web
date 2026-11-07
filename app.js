@@ -223,7 +223,11 @@
   }
 
   function bindInputs() {
-    $("[name='orgs']").forEach(el => el.addEventListener("change", () => { if (el.checked) state.orgs = el.value; renderModules(); renderSummary(); }));
+    $("[name='orgs']").forEach(el => el.addEventListener("change", () => {
+      if (el.checked) state.orgs = el.value;
+      renderModules();
+      renderSummary();
+    }));
     $$("[name='users']").forEach(el => el.addEventListener("change", () => { if (el.checked) state.users = el.value; renderSummary(); }));
     $$("[name='platform']").forEach(el => el.addEventListener("change", () => {
       state.platforms = $$("[name='platform']:checked").map(x => x.value);
@@ -300,7 +304,10 @@
       event.preventDefault();
       if (!validateStage()) return;
       const url = "https://wa.me/" + WA + "?text=" + encodeURIComponent(buildMessage());
-      window.open(url, "_blank", "noopener,noreferrer");
+      const popup = window.open(url, "_blank", "noopener,noreferrer");
+      if (!popup) {
+        window.location.href = url;
+      }
     });
   }
 
