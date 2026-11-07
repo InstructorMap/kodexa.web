@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400" role="img" aria-label="Asistente virtual KODEXA">
+  <defs>
+    <radialGradient id="ka-halo" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00C8FF" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#00C8FF" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="ka-body" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a2749"/>
+      <stop offset="100%" stop-color="#020B24"/>
+    </linearGradient>
+    <linearGradient id="ka-visor" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00C8FF"/>
+      <stop offset="100%" stop-color="#006BFF"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Halo ambiental -->
+  <circle cx="200" cy="200" r="180" fill="url(#ka-halo)"/>
+
+  <!-- Órbitas decorativas -->
+  <ellipse cx="200" cy="200" rx="170" ry="60" fill="none" stroke="#006BFF" stroke-opacity="0.25" stroke-width="1" transform="rotate(-20 200 200)"/>
+  <ellipse cx="200" cy="200" rx="150" ry="50" fill="none" stroke="#FFB800" stroke-opacity="0.3" stroke-width="1" transform="rotate(25 200 200)"/>
+
+  <!-- Nodos orbitales -->
+  <circle cx="60" cy="180" r="3" fill="#00C8FF"/>
+  <circle cx="340" cy="230" r="3" fill="#FFB800"/>
+  <circle cx="120" cy="310" r="2.5" fill="#006BFF"/>
+
+  <!-- Sombra -->
+  <ellipse cx="200" cy="340" rx="80" ry="12" fill="#000" opacity="0.4"/>
+
+  <!-- Torso -->
+  <path d="M140 240 Q140 220 160 215 L240 215 Q260 220 260 240 L255 310 Q200 330 145 310 Z" fill="url(#ka-body)" stroke="#1e3a8a" stroke-width="1.5"/>
+
+  <!-- Panel pecho con K -->
+  <circle cx="200" cy="268" r="22" fill="#020B24" stroke="#006BFF" stroke-width="1.5"/>
+  <g stroke="#FFF" stroke-width="3" stroke-linecap="round" fill="none">
+    <path d="M192 258 L192 278"/><path d="M192 268 L204 258"/><path d="M192 268 L205 278"/>
+  </g>
+  <circle cx="207" cy="268" r="1.5" fill="#FFB800"/>
+
+  <!-- Luces pecho -->
+  <circle cx="172" cy="245" r="2.5" fill="#FFB800"/>
+  <circle cx="185" cy="245" r="2.5" fill="#00C8FF"/>
+  <circle cx="215" cy="245" r="2.5" fill="#00C8FF"/>
+  <circle cx="228" cy="245" r="2.5" fill="#FFB800"/>
+
+  <!-- Cabeza -->
+  <rect x="150" y="110" width="100" height="90" rx="22" fill="url(#ka-body)" stroke="#1e3a8a" stroke-width="2"/>
+
+  <!-- Visor -->
+  <rect x="162" y="140" width="76" height="38" rx="19" fill="#020B24" stroke="#006BFF" stroke-width="1.5"/>
+  <rect x="166" y="146" width="68" height="26" rx="13" fill="url(#ka-visor)" opacity="0.85"/>
+  <circle cx="184" cy="159" r="4" fill="#020B24"/>
+  <circle cx="216" cy="159" r="4" fill="#020B24"/>
+  <circle cx="185" cy="158" r="1.5" fill="#FFF"/>
+  <circle cx="217" cy="158" r="1.5" fill="#FFF"/>
+
+  <!-- Antena -->
+  <line x1="200" y1="110" x2="200" y2="90" stroke="#006BFF" stroke-width="2"/>
+  <circle cx="200" cy="86" r="5" fill="#FFB800"/>
+
+  <!-- Orejas -->
+  <rect x="142" y="145" width="10" height="22" rx="3" fill="#1e3a8a"/>
+  <rect x="248" y="145" width="10" height="22" rx="3" fill="#1e3a8a"/>
+
+  <!-- Brazos -->
+  <rect x="118" y="230" width="22" height="60" rx="10" fill="url(#ka-body)" stroke="#1e3a8a" stroke-width="1.5" transform="rotate(-15 129 260)"/>
+  <rect x="260" y="230" width="22" height="60" rx="10" fill="url(#ka-body)" stroke="#1e3a8a" stroke-width="1.5" transform="rotate(15 271 260)"/>
+  <circle cx="124" cy="292" r="9" fill="#00C8FF" opacity="0.8"/>
+  <circle cx="276" cy="292" r="9" fill="#00C8FF" opacity="0.8"/>
+</svg>
