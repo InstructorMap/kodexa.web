@@ -71,7 +71,7 @@ Los módulos se cobran únicamente cuando representan una ampliación real respe
 
 **Reglas de no duplicación:**
 - SaaS: autenticación, roles, multi-tenant y panel inicial están incluidos.
-- Sistema operativo: autenticación, roles y panel inicial están incluidos; multi-tenant se agrega si corresponde.
+- Sistema operativo: autenticación, roles y panel inicial están incluidos; al seleccionar más de una organización, el módulo multi-tenant se agrega automáticamente al cálculo.
 - E-commerce: administración básica de catálogo y pedidos está incluida; pasarela de pago, facturación y automatizaciones complejas se cotizan como ampliaciones.
 - PWA: instalabilidad no equivale a sincronización offline completa.
 - APK híbrida: Web + Android forma parte de la misma solución base.
@@ -81,7 +81,7 @@ Los módulos se cobran únicamente cuando representan una ampliación real respe
 
 El cotizador aplica factores solamente donde la variable representa esfuerzo técnico:
 
-- **Organizaciones:** se aplica a SaaS y sistemas operativos, con referencias de 1,00 / 1,08 / 1,18 / 1,32.
+- **Organizaciones:** se aplica a SaaS y sistemas operativos, con referencias de 1,00 / 1,08 / 1,18 / 1,32. En sistemas operativos o productos a definir, seleccionar más de una organización incorpora automáticamente el módulo multi-tenant; en SaaS ya está incluido en la base.
 - **Usuarios:** se aplica a aplicaciones y plataformas (PWA, híbrida, nativa, SaaS, sistemas y producto a definir), con referencias de 1,00 / 1,08 / 1,20 / 1,38.
 - Landing, institucional y e-commerce no reciben un recargo automático por cantidad de usuarios: el tráfico y el consumo se evalúan en infraestructura.
 - Las plataformas seleccionadas se informan en el pedido, pero no se multiplican por un porcentaje arbitrario.
