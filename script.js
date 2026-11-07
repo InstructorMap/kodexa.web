@@ -42,6 +42,18 @@
     document.querySelectorAll("[data-preview-panel]").forEach(panel => panel.hidden = panel.dataset.previewPanel !== key);
   }));
 
+  // Preserve campaign attribution while moving through internal lead CTAs.
+  const currentQuery = new URLSearchParams(window.location.search);
+  const utmKeys = ["utm_source","utm_medium","utm_campaign"];
+  document.querySelectorAll('a[href*="contacto.html"]').forEach(link => {
+    const target = new URL(link.href, window.location.href);
+    utmKeys.forEach(key => {
+      const value = currentQuery.get(key);
+      if (value && !target.searchParams.has(key)) target.searchParams.set(key, value);
+    });
+    link.href = target.pathname + target.search + target.hash;
+  });
+
   const year = document.getElementById("current-year");
   if (year) year.textContent = String(new Date().getFullYear());
 
