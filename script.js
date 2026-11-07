@@ -1,7 +1,6 @@
 (() => {
   "use strict";
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const WA_NUMBER = "5492213642475";
   const header = document.querySelector(".site-header");
   const menu = document.querySelector(".menu-toggle");
   const nav = document.querySelector(".primary-nav");
