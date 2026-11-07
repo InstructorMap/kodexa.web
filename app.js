@@ -47,6 +47,12 @@
     }
   };
 
+  const INCLUDED_BY_SOLUTION = {
+    ecommerce: ["auth", "admin"],
+    saas: ["auth", "roles", "multitenant", "admin"],
+    operations: ["auth", "roles", "admin"]
+  };
+
   const state = {
     step: 1,
     solution: "landing",
@@ -70,10 +76,12 @@
   const factor = () => {
     const org = { single: 1, small: 1.08, medium: 1.18, large: 1.32 }[state.orgs] || 1;
     const users = { up_to_50: 1, up_to_500: 1.08, up_to_5000: 1.2, above_5000: 1.38 }[state.users] || 1;
-    const platforms = Math.max(0, state.platforms.length - 1) * 0.08;
-    return org * users * (1 + platforms);
+    // Las plataformas se informan como alcance; no se aplica un recargo porcentual arbitrario.
+    // Android híbrida ya contempla Web + Android como un único producto.
+    return org * users;
   };
-  const billableModuleIds = () => state.modules.filter(id => !(state.solution === "saas" && id === "multitenant"));
+  const includedModuleIds = () => INCLUDED_BY_SOLUTION[state.solution] || [];
+  const billableModuleIds = () => state.modules.filter(id => !includedModuleIds().includes(id));
   const estimate = () => {
     const base = solution();
     const extras = billableModuleIds().map(id => CATALOG.modules[id]).filter(Boolean);
@@ -167,14 +175,15 @@
       const grid = document.createElement("div"); grid.className = "module-grid";
       Object.entries(CATALOG.modules).filter(([,item]) => item.group === groupName).forEach(([id,item]) => {
         const label = document.createElement("label"); label.className = "module-option";
-        const input = document.createElement("input"); input.type = "checkbox"; input.checked = state.modules.includes(id) && !(state.solution === "saas" && id === "multitenant"); input.disabled = state.solution === "saas" && id === "multitenant";
+        const included = includedModuleIds().includes(id);
+        const input = document.createElement("input"); input.type = "checkbox"; input.checked = included || state.modules.includes(id); input.disabled = included;
         input.addEventListener("change", () => {
           state.modules = input.checked ? [...state.modules, id] : state.modules.filter(x => x !== id);
           renderSummary();
         });
         const content = document.createElement("span"); content.className = "module-copy";
         const name = document.createElement("b"); name.textContent = item.label;
-        const range = document.createElement("small"); range.textContent = state.solution === "saas" && id === "multitenant" ? "Incluido en la arquitectura SaaS" : money(item.min) + " – " + money(item.max);
+        const range = document.createElement("small"); range.textContent = included ? "Incluido en el alcance base · sin costo adicional" : money(item.min) + " – " + money(item.max);
         content.append(name, range); label.append(input, content); grid.append(label);
       });
       section.append(grid); host.append(section);
@@ -184,12 +193,17 @@
   function renderSummary() {
     const e = estimate(), m = monthly(), base = solution();
     $("#summary-solution").textContent = base.label;
-    $("#summary-modules").textContent = billableModuleIds().length ? billableModuleIds().map(id => CATALOG.modules[id].label).join(" · ") : "Sin módulos adicionales";
+    const included = includedModuleIds().map(id => CATALOG.modules[id].label);
+    const extras = billableModuleIds().map(id => CATALOG.modules[id].label);
+    $("#summary-modules").textContent = [
+      included.length ? "Incluidos: " + included.join(", ") : "",
+      extras.length ? "Adicionales: " + extras.join(", ") : "Sin módulos adicionales"
+    ].filter(Boolean).join(" | ");
     $("#summary-range").textContent = e.from ? "Desde " + money(e.min) : money(e.min) + " – " + money(e.max);
     $("#summary-mode").textContent = e.from ? "Precio inicial" : "Rango de inversión orientativo";
     $("#summary-monthly").textContent = m ? money(m.min) + " – " + money(m.max) + " / mes" : "No seleccionado";
     $("#summary-ops").textContent = "Infraestructura y servicios externos: variables, se dimensionan aparte.";
-    $("#summary-factor").textContent = "Complejidad estimada ×" + e.factor.toFixed(2);
+    $("#summary-factor").textContent = "Ajuste por escala (organizaciones y usuarios): ×" + e.factor.toFixed(2) + ". Plataformas informadas sin recargo automático.";
     $("#summary-platforms").textContent = state.platforms.map(x => ({web:"Web",android:"Android",ios:"iOS"}[x])).join(" · ") || "A definir";
     $("#summary-orgs").textContent = ({single:"Una organización",small:"2 a 5 organizaciones",medium:"6 a 20 organizaciones",large:"Más de 20 organizaciones"})[state.orgs];
     $("#summary-users").textContent = ({up_to_50:"Hasta 50",up_to_500:"51 a 500",up_to_5000:"501 a 5.000",above_5000:"Más de 5.000"})[state.users];
@@ -239,9 +253,11 @@
       "",
       "SOLUCIÓN: " + solution().label,
       "PLATAFORMAS: " + state.platforms.join(", "),
+      "NOTA DE PLATAFORMAS: " + (state.platforms.includes("ios") ? "iOS requiere evaluación y cotización específica; no se aplica un recargo automático." : state.solution === "apk" ? "La base Web + Android está contemplada en la aplicación híbrida." : "Alcance de plataforma sujeto a validación técnica."),
       "ORGANIZACIONES: " + state.orgs,
       "USUARIOS: " + state.users,
-      "MÓDULOS: " + (billableModuleIds().map(id => CATALOG.modules[id].label).join("; ") || "No seleccionados"),
+      "FUNCIONES INCLUIDAS EN EL PRODUCTO BASE: " + (includedModuleIds().map(id => CATALOG.modules[id].label).join("; ") || "Según solución seleccionada"),
+      "MÓDULOS ADICIONALES: " + (billableModuleIds().map(id => CATALOG.modules[id].label).join("; ") || "No seleccionados"),
       "MANTENIMIENTO: " + CATALOG.maintenance[state.maintenance].label,
       "PLAZO: " + state.timeline,
       "INVERSIÓN INICIAL ESTIMADA: " + (e.from ? "Desde " + money(e.min) : money(e.min) + " a " + money(e.max)),
