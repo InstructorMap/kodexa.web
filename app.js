@@ -73,9 +73,10 @@
     const platforms = Math.max(0, state.platforms.length - 1) * 0.08;
     return org * users * (1 + platforms);
   };
+  const billableModuleIds = () => state.modules.filter(id => !(state.solution === "saas" && id === "multitenant"));
   const estimate = () => {
     const base = solution();
-    const extras = state.modules.map(id => CATALOG.modules[id]).filter(Boolean);
+    const extras = billableModuleIds().map(id => CATALOG.modules[id]).filter(Boolean);
     const addonMin = extras.reduce((sum, item) => sum + item.min, 0);
     const addonMax = extras.reduce((sum, item) => sum + item.max, 0);
     const f = factor();
@@ -146,6 +147,7 @@
           state.solution = id;
           state.platforms = id === "apk" ? ["web", "android"] : id === "native" ? ["android"] : ["web"];
           renderSolutionCards();
+          renderModules();
           syncPlatformInputs();
           renderSummary();
         });
@@ -165,14 +167,14 @@
       const grid = document.createElement("div"); grid.className = "module-grid";
       Object.entries(CATALOG.modules).filter(([,item]) => item.group === groupName).forEach(([id,item]) => {
         const label = document.createElement("label"); label.className = "module-option";
-        const input = document.createElement("input"); input.type = "checkbox"; input.checked = state.modules.includes(id);
+        const input = document.createElement("input"); input.type = "checkbox"; input.checked = state.modules.includes(id) && !(state.solution === "saas" && id === "multitenant"); input.disabled = state.solution === "saas" && id === "multitenant";
         input.addEventListener("change", () => {
           state.modules = input.checked ? [...state.modules, id] : state.modules.filter(x => x !== id);
           renderSummary();
         });
         const content = document.createElement("span"); content.className = "module-copy";
         const name = document.createElement("b"); name.textContent = item.label;
-        const range = document.createElement("small"); range.textContent = money(item.min) + " – " + money(item.max);
+        const range = document.createElement("small"); range.textContent = state.solution === "saas" && id === "multitenant" ? "Incluido en la arquitectura SaaS" : money(item.min) + " – " + money(item.max);
         content.append(name, range); label.append(input, content); grid.append(label);
       });
       section.append(grid); host.append(section);
@@ -182,7 +184,7 @@
   function renderSummary() {
     const e = estimate(), m = monthly(), base = solution();
     $("#summary-solution").textContent = base.label;
-    $("#summary-modules").textContent = state.modules.length ? state.modules.map(id => CATALOG.modules[id].label).join(" · ") : "Sin módulos adicionales";
+    $("#summary-modules").textContent = billableModuleIds().length ? billableModuleIds().map(id => CATALOG.modules[id].label).join(" · ") : "Sin módulos adicionales";
     $("#summary-range").textContent = e.from ? "Desde " + money(e.min) : money(e.min) + " – " + money(e.max);
     $("#summary-mode").textContent = e.from ? "Precio inicial" : "Rango de inversión orientativo";
     $("#summary-monthly").textContent = m ? money(m.min) + " – " + money(m.max) + " / mes" : "No seleccionado";
@@ -239,7 +241,7 @@
       "PLATAFORMAS: " + state.platforms.join(", "),
       "ORGANIZACIONES: " + state.orgs,
       "USUARIOS: " + state.users,
-      "MÓDULOS: " + (state.modules.map(id => CATALOG.modules[id].label).join("; ") || "No seleccionados"),
+      "MÓDULOS: " + (billableModuleIds().map(id => CATALOG.modules[id].label).join("; ") || "No seleccionados"),
       "MANTENIMIENTO: " + CATALOG.maintenance[state.maintenance].label,
       "PLAZO: " + state.timeline,
       "INVERSIÓN INICIAL ESTIMADA: " + (e.from ? "Desde " + money(e.min) : money(e.min) + " a " + money(e.max)),
