@@ -1,42 +1,71 @@
 <!DOCTYPE html>
-<html lang="es" class="scroll-smooth">
+<html lang="es" class="scroll-smooth dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>KODEXA Digital Solutions — E-commerce, Sistemas Web & Facturación ARCA</title>
   <meta name="description" content="KODEXA Digital Solutions: desarrollo de e-commerce, sistemas de gestión web y homologación fiscal ARCA/AFIP. Cotizá tu proyecto en minutos.">
-  <meta property="og:title" content="KODEXA Digital Solutions">
-  <meta property="og:description" content="E-commerce, sistemas web y facturación electrónica ARCA/AFIP. Cotizá tu proyecto en minutos.">
-  <meta property="og:type" content="website">
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode: 'class' };
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --bg: #f8f9ff;
+      --bg-2: #ffffff;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --card: #ffffff;
+      --accent: #2563eb;
+      --accent-2: #7c3aed;
+    }
+    .dark {
+      --bg: #05060a;
+      --bg-2: #0a0d16;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --border: #1e293b;
+      --card: #0f1420;
+      --accent: #3b82f6;
+      --accent-2: #8b5cf6;
+    }
+    html, body {
+      background: var(--bg);
+      color: var(--text);
+      transition: background 0.4s ease, color 0.4s ease;
+    }
     body { font-family: 'Plus Jakarta Sans', sans-serif; }
-    html { scroll-behavior: smooth; }
+    .font-mono { font-family: 'JetBrains Mono', monospace; }
 
-    /* Fondo con grid sutil */
+    /* Grid background adaptable */
     .grid-bg {
       background-image:
-        linear-gradient(rgba(59,130,246,0.06) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(59,130,246,0.06) 1px, transparent 1px);
+        linear-gradient(rgba(59,130,246,0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(59,130,246,0.08) 1px, transparent 1px);
       background-size: 40px 40px;
       mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%);
       -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%);
     }
+    .dark .grid-bg {
+      background-image:
+        linear-gradient(rgba(59,130,246,0.15) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(59,130,246,0.15) 1px, transparent 1px);
+    }
 
-    /* Glow blobs */
     .blob {
       position: absolute;
       border-radius: 9999px;
-      filter: blur(80px);
+      filter: blur(90px);
       opacity: 0.35;
       pointer-events: none;
       z-index: 0;
     }
+    .dark .blob { opacity: 0.25; }
 
-    /* Animaciones */
     @keyframes float {
       0%, 100% { transform: translateY(0px); }
       50% { transform: translateY(-12px); }
@@ -45,122 +74,207 @@
     .animate-float-slow { animation: float 8s ease-in-out infinite; }
 
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
+      from { opacity: 0; transform: translateY(24px); }
       to { opacity: 1; transform: translateY(0); }
     }
-    .fade-up { animation: fadeUp 0.8s ease-out both; }
+    .fade-up { animation: fadeUp 0.9s ease-out both; }
     .delay-1 { animation-delay: 0.1s; }
     .delay-2 { animation-delay: 0.2s; }
     .delay-3 { animation-delay: 0.3s; }
     .delay-4 { animation-delay: 0.4s; }
 
-    /* Gradiente de texto */
     .text-gradient {
-      background: linear-gradient(135deg, #2563eb 0%, #7c3aed 50%, #db2777 100%);
+      background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #ec4899 100%);
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
-    /* Marquee */
     @keyframes marquee {
       0% { transform: translateX(0); }
       100% { transform: translateX(-50%); }
     }
     .animate-marquee { animation: marquee 30s linear infinite; }
 
-    /* Card hover lift */
-    .lift { transition: transform 0.3s ease, box-shadow 0.3s ease; }
-    .lift:hover { transform: translateY(-6px); box-shadow: 0 20px 40px -12px rgba(37, 99, 235, 0.25); }
+    .lift { transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; }
+    .lift:hover { transform: translateY(-6px); }
 
-    /* Ticket 3D */
     .ticket-3d {
       transform: perspective(1200px) rotateY(-8deg) rotateX(4deg);
-      transition: transform 0.5s ease;
+      transition: transform 0.6s ease;
     }
     .ticket-3d:hover {
       transform: perspective(1200px) rotateY(-4deg) rotateX(2deg) translateY(-6px);
     }
 
-    /* Ring pulsante */
-    @keyframes pulse-ring {
-      0% { transform: scale(0.95); opacity: 1; }
-      100% { transform: scale(1.4); opacity: 0; }
+    /* Card border con gradiente (light/dark aware) */
+    .border-glow {
+      position: relative;
+      background: var(--card);
+      border-radius: 1.5rem;
     }
-    .pulse-ring::before {
+    .border-glow::before {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border-radius: 1.5rem;
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(59,130,246,0.5), rgba(139,92,246,0.5), rgba(236,72,153,0.3));
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+      opacity: 0.6;
+      transition: opacity 0.3s;
+    }
+    .border-glow:hover::before { opacity: 1; }
+
+    /* Scanline overlay para el hero */
+    .scanlines::after {
       content: '';
       position: absolute;
       inset: 0;
-      border-radius: 9999px;
-      background: rgba(34, 197, 94, 0.4);
-      animation: pulse-ring 2s ease-out infinite;
-      z-index: -1;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(59,130,246,0.03) 2px,
+        rgba(59,130,246,0.03) 4px
+      );
+      pointer-events: none;
+      z-index: 1;
     }
+
+    /* Cursor blink en terminal */
+    @keyframes blink { 50% { opacity: 0; } }
+    .cursor-blink::after {
+      content: '▊';
+      animation: blink 1s step-end infinite;
+      color: #22c55e;
+    }
+
+    /* Logo animación trazo */
+    @keyframes draw {
+      to { stroke-dashoffset: 0; }
+    }
+    .logo-k {
+      stroke-dasharray: 200;
+      stroke-dashoffset: 200;
+      animation: draw 2s ease forwards;
+    }
+    .logo-ring {
+      transform-origin: center;
+      animation: spin 8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Partículas canvas */
+    #particles { position: absolute; inset: 0; z-index: 0; opacity: 0.5; }
+    .dark #particles { opacity: 0.8; }
+
+    /* Toggle dark mode */
+    .theme-toggle { transition: transform 0.3s; }
+    .theme-toggle:hover { transform: rotate(20deg); }
+
+    /* Reveal on scroll */
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s, transform 0.8s; }
+    .reveal.in { opacity: 1; transform: translateY(0); }
   </style>
 </head>
-<body class="bg-[#f8f9ff] text-slate-800 antialiased overflow-x-hidden">
+<body class="antialiased overflow-x-hidden">
 
-  <!-- Header flotante glass -->
+  <!-- ============ HEADER ============ -->
   <header class="fixed top-0 left-0 right-0 z-50 px-4 pt-4">
     <div class="max-w-7xl mx-auto">
-      <div class="bg-white/80 backdrop-blur-xl border border-slate-200/60 rounded-2xl shadow-lg shadow-slate-900/5">
+      <div class="bg-[var(--card)]/80 backdrop-blur-xl border border-[var(--border)] rounded-2xl shadow-lg shadow-black/5 dark:shadow-black/40">
         <div class="px-4 md:px-6 h-16 flex items-center justify-between">
           <a href="index.html" class="flex items-center gap-3 group">
-            <!-- LOGO KODEXA -->
-            <div class="relative">
-              <div class="absolute inset-0 bg-gradient-to-br from-blue-600 to-violet-600 rounded-xl blur-md opacity-60 group-hover:opacity-100 transition"></div>
-              <div class="relative w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-violet-600 flex items-center justify-center text-white font-black text-xl shadow-lg shadow-blue-600/30 group-hover:scale-105 transition">
-                K
-              </div>
+            <!-- ============ LOGO ANIMADO SVG ============ -->
+            <div class="relative w-11 h-11">
+              <!-- Glow -->
+              <div class="absolute inset-0 bg-gradient-to-br from-blue-500 to-violet-600 rounded-xl blur-md opacity-60 group-hover:opacity-100 transition"></div>
+              <!-- SVG Logo -->
+              <svg viewBox="0 0 48 48" class="relative w-11 h-11 drop-shadow-lg" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#3b82f6"/>
+                    <stop offset="100%" stop-color="#8b5cf6"/>
+                  </linearGradient>
+                  <linearGradient id="logoGrad2" x1="0%" y1="100%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#ec4899"/>
+                    <stop offset="100%" stop-color="#3b82f6"/>
+                  </linearGradient>
+                </defs>
+                <!-- Fondo redondeado -->
+                <rect x="1" y="1" width="46" height="46" rx="12" fill="url(#logoGrad)"/>
+                <!-- Anillo orbital animado -->
+                <circle cx="24" cy="24" r="18" fill="none" stroke="white" stroke-opacity="0.25" stroke-width="1" class="logo-ring"/>
+                <!-- K dibujada con path -->
+                <g fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M16 13 L16 35" class="logo-k" style="animation-delay: 0.1s"/>
+                  <path d="M16 24 L30 13" class="logo-k" style="animation-delay: 0.4s"/>
+                  <path d="M16 24 L31 35" class="logo-k" style="animation-delay: 0.6s"/>
+                </g>
+                <!-- Punto brillante -->
+                <circle cx="36" cy="12" r="2.5" fill="white">
+                  <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>
+                </circle>
+              </svg>
             </div>
             <div>
-              <span class="text-lg font-extrabold tracking-tight text-slate-900 block leading-tight">KODEXA</span>
-              <span class="text-[9px] uppercase font-bold tracking-[0.2em] text-slate-400 block">Digital Solutions</span>
+              <span class="text-lg font-extrabold tracking-tight block leading-tight">KODEXA</span>
+              <span class="text-[9px] uppercase font-bold tracking-[0.2em] text-[var(--text-muted)] block">Digital Solutions</span>
             </div>
           </a>
-          <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-600">
-            <a href="#servicios" class="hover:text-blue-600 transition">Servicios</a>
-            <a href="#proyectos" class="hover:text-blue-600 transition">Proyectos</a>
-            <a href="#proceso" class="hover:text-blue-600 transition">Proceso</a>
-            <a href="#faq" class="hover:text-blue-600 transition">FAQ</a>
+
+          <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-[var(--text-muted)]">
+            <a href="#servicios" class="hover:text-[var(--accent)] transition">Servicios</a>
+            <a href="#proyectos" class="hover:text-[var(--accent)] transition">Proyectos</a>
+            <a href="#proceso" class="hover:text-[var(--accent)] transition">Proceso</a>
+            <a href="#faq" class="hover:text-[var(--accent)] transition">FAQ</a>
           </nav>
-          <a href="#cotizador" class="bg-slate-900 hover:bg-blue-600 text-white font-semibold text-sm px-5 py-2.5 rounded-xl transition shadow-lg shadow-slate-900/10">
-            Cotizar ahora →
-          </a>
+
+          <div class="flex items-center gap-2">
+            <!-- Toggle dark mode -->
+            <button id="themeToggle" aria-label="Cambiar tema" class="theme-toggle w-10 h-10 rounded-xl border border-[var(--border)] flex items-center justify-center hover:bg-[var(--bg)] transition">
+              <svg id="iconMoon" class="w-5 h-5 text-[var(--text)]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+              <svg id="iconSun" class="w-5 h-5 text-[var(--text)] hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path stroke-linecap="round" d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41m11.32-11.32l1.41-1.41"/></svg>
+            </button>
+            <a href="#cotizador" class="bg-gradient-to-r from-blue-600 to-violet-600 hover:from-blue-700 hover:to-violet-700 text-white font-semibold text-sm px-5 py-2.5 rounded-xl transition shadow-lg shadow-blue-600/20">
+              Cotizar →
+            </a>
+          </div>
         </div>
       </div>
     </div>
   </header>
 
-  <!-- HERO full screen -->
+  <!-- ============ HERO ============ -->
   <section class="relative min-h-screen flex items-center pt-28 pb-20 overflow-hidden">
-    <!-- Blobs de fondo -->
-    <div class="blob bg-blue-400 w-[500px] h-[500px] -top-40 -left-40"></div>
-    <div class="blob bg-violet-400 w-[400px] h-[400px] top-20 -right-20"></div>
-    <div class="blob bg-pink-300 w-[300px] h-[300px] bottom-0 left-1/3"></div>
-
-    <!-- Grid sutil -->
+    <canvas id="particles"></canvas>
+    <div class="blob bg-blue-500 w-[500px] h-[500px] -top-40 -left-40"></div>
+    <div class="blob bg-violet-500 w-[400px] h-[400px] top-20 -right-20"></div>
+    <div class="blob bg-pink-400 w-[300px] h-[300px] bottom-0 left-1/3"></div>
     <div class="absolute inset-0 grid-bg"></div>
 
     <div class="relative max-w-7xl mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-      <!-- Columna texto -->
       <div class="space-y-8 fade-up">
-        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-slate-200 shadow-sm">
+        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[var(--card)] border border-[var(--border)] shadow-sm">
           <span class="relative flex h-2 w-2">
             <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
             <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
           </span>
-          <span class="text-xs font-semibold text-slate-700">Disponibles para nuevos proyectos · 2025</span>
+          <span class="text-xs font-semibold">Disponibles para nuevos proyectos · 2025</span>
         </div>
 
-        <h1 class="text-5xl md:text-6xl lg:text-7xl font-extrabold text-slate-900 leading-[1.05] tracking-tight">
+        <h1 class="text-5xl md:text-6xl lg:text-7xl font-extrabold leading-[1.05] tracking-tight">
           Tu negocio<br>
           <span class="text-gradient">digital, listo</span><br>
           para vender.
         </h1>
 
-        <p class="text-slate-600 text-lg leading-relaxed max-w-lg">
-          Diseñamos, desarrollamos y homologamos tu tienda online o sistema de gestión con <strong class="text-slate-900">facturación electrónica ARCA</strong> incluida. Cotizá en minutos, sin vueltas.
+        <p class="text-[var(--text-muted)] text-lg leading-relaxed max-w-lg">
+          Diseñamos, desarrollamos y homologamos tu tienda online o sistema de gestión con <strong class="text-[var(--text)]">facturación electrónica ARCA</strong> incluida. Cotizá en minutos, sin vueltas.
         </p>
 
         <div class="flex flex-col sm:flex-row gap-3 pt-2">
@@ -168,243 +282,262 @@
             Cotizar mi proyecto
             <span class="group-hover:translate-x-1 transition">→</span>
           </a>
-          <a href="#proyectos" class="bg-white/80 backdrop-blur border border-slate-200 hover:border-slate-300 text-slate-700 font-semibold text-base px-8 py-4 rounded-2xl text-center transition">
+          <a href="#proyectos" class="bg-[var(--card)] border border-[var(--border)] hover:border-[var(--accent)] font-semibold text-base px-8 py-4 rounded-2xl text-center transition">
             Ver proyectos
           </a>
         </div>
 
-        <!-- Métricas -->
-        <div class="grid grid-cols-3 gap-6 pt-6 border-t border-slate-200/60">
+        <div class="grid grid-cols-3 gap-6 pt-6 border-t border-[var(--border)]">
           <div>
-            <div class="text-3xl font-extrabold text-slate-900">+50</div>
-            <div class="text-xs text-slate-500 font-medium mt-1">Proyectos entregados</div>
+            <div class="text-3xl font-extrabold">+50</div>
+            <div class="text-xs text-[var(--text-muted)] font-medium mt-1">Proyectos entregados</div>
           </div>
           <div>
-            <div class="text-3xl font-extrabold text-slate-900">98%</div>
-            <div class="text-xs text-slate-500 font-medium mt-1">Satisfacción</div>
+            <div class="text-3xl font-extrabold">98%</div>
+            <div class="text-xs text-[var(--text-muted)] font-medium mt-1">Satisfacción</div>
           </div>
           <div>
-            <div class="text-3xl font-extrabold text-slate-900">24h</div>
-            <div class="text-xs text-slate-500 font-medium mt-1">Respuesta promedio</div>
+            <div class="text-3xl font-extrabold">24h</div>
+            <div class="text-xs text-[var(--text-muted)] font-medium mt-1">Respuesta promedio</div>
           </div>
         </div>
       </div>
 
-      <!-- Columna visual: ticket 3D -->
+      <!-- Terminal + Ticket -->
       <div class="relative fade-up delay-2">
-        <!-- Glow detrás del ticket -->
         <div class="absolute inset-0 bg-gradient-to-tr from-blue-500/30 to-violet-500/30 rounded-3xl blur-3xl scale-90"></div>
 
-        <!-- Badge flotante top -->
-        <div class="absolute -top-4 -right-2 md:-right-6 z-20 animate-float bg-white border border-slate-200 rounded-2xl px-4 py-3 shadow-xl">
+        <!-- Terminal futurista -->
+        <div class="relative bg-[#0a0d16] border border-slate-800 rounded-2xl shadow-2xl overflow-hidden mb-6 scanlines">
+          <div class="flex items-center gap-2 px-4 py-2.5 bg-[#0f1420] border-b border-slate-800">
+            <span class="w-3 h-3 rounded-full bg-red-500"></span>
+            <span class="w-3 h-3 rounded-full bg-yellow-500"></span>
+            <span class="w-3 h-3 rounded-full bg-green-500"></span>
+            <span class="ml-3 font-mono text-[10px] text-slate-500">~/kodexa/deploy.sh</span>
+          </div>
+          <div class="p-4 font-mono text-[11px] leading-relaxed text-slate-300">
+            <div><span class="text-emerald-400">$</span> kodexa init --project="<span class="text-blue-400">ecommerce</span>"</div>
+            <div class="text-slate-500">▸ Analizando requerimientos...</div>
+            <div class="text-slate-500">▸ Base de datos: <span class="text-violet-400">postgresql</span> ✓</div>
+            <div class="text-slate-500">▸ Pasarela: <span class="text-blue-400">mercadopago</span> ✓</div>
+            <div class="text-slate-500">▸ Fiscal: <span class="text-emerald-400">arca/afip</span> ✓</div>
+            <div class="text-emerald-400">✓ Build completado en <span class="text-white">1.42s</span></div>
+            <div class="cursor-blink text-slate-400">kodexa <span class="text-emerald-400">ready</span></div>
+          </div>
+        </div>
+
+        <!-- Badges flotantes -->
+        <div class="absolute -top-4 -right-2 md:-right-6 z-20 animate-float bg-[var(--card)] border border-[var(--border)] rounded-2xl px-4 py-3 shadow-xl">
           <div class="flex items-center gap-2">
-            <div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-green-600 text-sm">✓</div>
+            <div class="w-8 h-8 rounded-full bg-green-100 dark:bg-green-900/40 flex items-center justify-center text-green-600 dark:text-green-400 text-sm">✓</div>
             <div>
-              <div class="text-[10px] font-bold text-slate-400 uppercase">ARCA/AFIP</div>
-              <div class="text-xs font-bold text-slate-900">Homologado</div>
+              <div class="text-[10px] font-bold text-[var(--text-muted)] uppercase">ARCA/AFIP</div>
+              <div class="text-xs font-bold">Homologado</div>
             </div>
           </div>
         </div>
 
-        <!-- Badge flotante bottom -->
-        <div class="absolute -bottom-4 -left-2 md:-left-6 z-20 animate-float-slow bg-white border border-slate-200 rounded-2xl px-4 py-3 shadow-xl">
-          <div class="flex items-center gap-2">
-            <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 text-sm">⚡</div>
-            <div>
-              <div class="text-[10px] font-bold text-slate-400 uppercase">Entrega</div>
-              <div class="text-xs font-bold text-slate-900">15-30 días</div>
-            </div>
+        <!-- Ticket -->
+        <div class="ticket-3d relative bg-[var(--card)] border border-[var(--border)] rounded-3xl p-7 shadow-2xl">
+          <div class="flex items-center justify-between pb-4 border-b border-[var(--border)]">
+            <span class="font-bold text-[var(--text-muted)] uppercase tracking-wider text-[10px]">TICKET DEMO</span>
+            <span class="font-extrabold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/40 px-2.5 py-1 rounded-lg text-xs font-mono">#KDX-DEMO</span>
           </div>
-        </div>
-
-        <!-- Ticket principal -->
-        <div class="ticket-3d relative bg-white border border-slate-200 rounded-3xl p-7 shadow-2xl shadow-slate-900/10">
-          <div class="flex items-center justify-between pb-4 border-b border-slate-100">
-            <span class="font-bold text-slate-400 uppercase tracking-wider text-[10px]">TICKET DEMO</span>
-            <span class="font-extrabold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-lg text-xs">#KDX-DEMO</span>
-          </div>
-
           <div class="my-5">
-            <span class="text-xs text-slate-500 font-medium">Inversión ejemplo:</span>
-            <div class="text-4xl font-extrabold text-slate-900 mt-1 tracking-tight">$350.000 <span class="text-sm text-slate-400 font-semibold">ARS</span></div>
+            <span class="text-xs text-[var(--text-muted)] font-medium">Inversión ejemplo:</span>
+            <div class="text-4xl font-extrabold mt-1 tracking-tight">$350.000 <span class="text-sm text-[var(--text-muted)] font-semibold">ARS</span></div>
           </div>
-
           <div class="space-y-2.5 text-sm">
-            <div class="flex justify-between py-2 border-b border-slate-100">
-              <span class="text-slate-600">Tienda E-commerce</span>
-              <span class="font-bold text-slate-900">$220.000</span>
+            <div class="flex justify-between py-2 border-b border-[var(--border)]">
+              <span class="text-[var(--text-muted)]">Tienda E-commerce</span>
+              <span class="font-bold">$220.000</span>
             </div>
-            <div class="flex justify-between py-2 border-b border-slate-100">
-              <span class="text-slate-600">Mercado Pago Pro</span>
-              <span class="font-bold text-slate-900">$35.000</span>
+            <div class="flex justify-between py-2 border-b border-[var(--border)]">
+              <span class="text-[var(--text-muted)]">Mercado Pago Pro</span>
+              <span class="font-bold">$35.000</span>
             </div>
-            <div class="flex justify-between py-2 border-b border-slate-100">
-              <span class="text-slate-600">Facturación ARCA</span>
-              <span class="font-bold text-slate-900">$42.000</span>
+            <div class="flex justify-between py-2 border-b border-[var(--border)]">
+              <span class="text-[var(--text-muted)]">Facturación ARCA</span>
+              <span class="font-bold">$42.000</span>
             </div>
             <div class="flex justify-between py-2">
-              <span class="text-slate-600">Alertas WhatsApp</span>
-              <span class="font-bold text-slate-900">$33.000</span>
+              <span class="text-[var(--text-muted)]">Alertas WhatsApp</span>
+              <span class="font-bold">$33.000</span>
             </div>
           </div>
-
-          <div class="mt-5 bg-gradient-to-r from-blue-50 to-violet-50 border border-blue-100 p-4 rounded-2xl">
-            <div class="text-[10px] font-bold text-blue-600 uppercase mb-1">Esquema 50/50</div>
-            <div class="text-xs text-blue-900 font-semibold">$175.000 anticipo · $175.000 contra entrega</div>
+          <div class="mt-5 bg-gradient-to-r from-blue-50 to-violet-50 dark:from-blue-900/30 dark:to-violet-900/30 border border-blue-100 dark:border-blue-800/40 p-4 rounded-2xl">
+            <div class="text-[10px] font-bold text-blue-600 dark:text-blue-400 uppercase mb-1">Esquema 50/50</div>
+            <div class="text-xs text-blue-900 dark:text-blue-200 font-semibold">$175.000 anticipo · $175.000 contra entrega</div>
           </div>
         </div>
-      </div>
-    </div>
-
-    <!-- Scroll indicator -->
-    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2 text-slate-400">
-      <span class="text-[10px] font-bold uppercase tracking-widest">Scroll</span>
-      <div class="w-5 h-8 border-2 border-slate-300 rounded-full flex justify-center pt-1.5">
-        <div class="w-1 h-2 bg-slate-400 rounded-full animate-bounce"></div>
       </div>
     </div>
   </section>
 
-  <!-- Marquee de tecnologías -->
-  <section class="py-8 border-y border-slate-200 bg-white overflow-hidden">
+  <!-- ============ MARQUEE ============ -->
+  <section class="py-8 border-y border-[var(--border)] bg-[var(--bg-2)] overflow-hidden">
     <div class="flex items-center gap-2 mb-4 justify-center">
-      <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">Tecnologías que dominamos</span>
+      <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--text-muted)]">Tecnologías que dominamos</span>
     </div>
     <div class="relative overflow-hidden">
       <div class="flex animate-marquee whitespace-nowrap">
-        <div class="flex items-center gap-12 px-6 text-slate-400 font-extrabold text-xl">
-          <span>Mercado Pago</span>
-          <span>ARCA / AFIP</span>
-          <span>WhatsApp API</span>
-          <span>Tailwind CSS</span>
-          <span>Supabase</span>
-          <span>Next.js</span>
-          <span>React</span>
-          <span>Node.js</span>
+        <div class="flex items-center gap-12 px-6 text-[var(--text-muted)] font-extrabold text-xl opacity-60">
+          <span>Mercado Pago</span><span>ARCA / AFIP</span><span>WhatsApp API</span><span>Tailwind CSS</span><span>Supabase</span><span>Next.js</span><span>React</span><span>Node.js</span>
         </div>
-        <div class="flex items-center gap-12 px-6 text-slate-400 font-extrabold text-xl" aria-hidden="true">
-          <span>Mercado Pago</span>
-          <span>ARCA / AFIP</span>
-          <span>WhatsApp API</span>
-          <span>Tailwind CSS</span>
-          <span>Supabase</span>
-          <span>Next.js</span>
-          <span>React</span>
-          <span>Node.js</span>
+        <div class="flex items-center gap-12 px-6 text-[var(--text-muted)] font-extrabold text-xl opacity-60" aria-hidden="true">
+          <span>Mercado Pago</span><span>ARCA / AFIP</span><span>WhatsApp API</span><span>Tailwind CSS</span><span>Supabase</span><span>Next.js</span><span>React</span><span>Node.js</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Servicios -->
+  <!-- ============ SERVICIOS ============ -->
   <section id="servicios" class="py-24 relative">
     <div class="max-w-7xl mx-auto px-6">
-      <div class="text-center max-w-2xl mx-auto mb-16">
-        <span class="inline-flex px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-xs font-bold mb-4">SERVICIOS</span>
-        <h2 class="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight">
+      <div class="text-center max-w-2xl mx-auto mb-16 reveal">
+        <span class="inline-flex px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 text-xs font-bold mb-4">SERVICIOS</span>
+        <h2 class="text-4xl md:text-5xl font-extrabold tracking-tight">
           Todo lo que tu negocio<br>necesita para <span class="text-gradient">digitalizarse</span>
         </h2>
-        <p class="text-slate-500 mt-4 text-base">Desde la tienda online hasta la factura electrónica, en un solo lugar.</p>
+        <p class="text-[var(--text-muted)] mt-4 text-base">Desde la tienda online hasta la factura electrónica, en un solo lugar.</p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="lift bg-white border border-slate-200 rounded-3xl p-8 group">
+        <div class="border-glow lift p-8 group reveal">
           <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-500 to-blue-700 text-white flex items-center justify-center text-2xl mb-6 shadow-lg shadow-blue-600/25 group-hover:scale-110 transition">
-            🛒
+            <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
           </div>
-          <h3 class="font-extrabold text-xl text-slate-900">Tienda Digital E-commerce</h3>
-          <p class="text-sm text-slate-600 mt-3 leading-relaxed">Carro de compras, gestión de stock, panel administrador y cobros online integrados.</p>
-          <div class="mt-6 pt-6 border-t border-slate-100 flex items-center justify-between">
-            <span class="text-sm font-extrabold text-blue-600">Desde $220.000</span>
-            <span class="text-slate-400 group-hover:text-blue-600 group-hover:translate-x-1 transition">→</span>
+          <h3 class="font-extrabold text-xl">Tienda Digital E-commerce</h3>
+          <p class="text-sm text-[var(--text-muted)] mt-3 leading-relaxed">Carro de compras, gestión de stock, panel administrador y cobros online integrados.</p>
+          <div class="mt-6 pt-6 border-t border-[var(--border)] flex items-center justify-between">
+            <span class="text-sm font-extrabold text-blue-600 dark:text-blue-400">Desde $220.000</span>
+            <span class="text-[var(--text-muted)] group-hover:text-blue-600 group-hover:translate-x-1 transition">→</span>
           </div>
         </div>
 
-        <div class="lift bg-white border border-slate-200 rounded-3xl p-8 group">
+        <div class="border-glow lift p-8 group reveal">
           <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-violet-500 to-violet-700 text-white flex items-center justify-center text-2xl mb-6 shadow-lg shadow-violet-600/25 group-hover:scale-110 transition">
-            ⚙️
+            <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
           </div>
-          <h3 class="font-extrabold text-xl text-slate-900">Sistema de Gestión Web</h3>
-          <p class="text-sm text-slate-600 mt-3 leading-relaxed">Intranet, paneles B2B, control de operaciones y reportes en tiempo real.</p>
-          <div class="mt-6 pt-6 border-t border-slate-100 flex items-center justify-between">
-            <span class="text-sm font-extrabold text-violet-600">Desde $380.000</span>
-            <span class="text-slate-400 group-hover:text-violet-600 group-hover:translate-x-1 transition">→</span>
+          <h3 class="font-extrabold text-xl">Sistema de Gestión Web</h3>
+          <p class="text-sm text-[var(--text-muted)] mt-3 leading-relaxed">Intranet, paneles B2B, control de operaciones y reportes en tiempo real.</p>
+          <div class="mt-6 pt-6 border-t border-[var(--border)] flex items-center justify-between">
+            <span class="text-sm font-extrabold text-violet-600 dark:text-violet-400">Desde $380.000</span>
+            <span class="text-[var(--text-muted)] group-hover:text-violet-600 group-hover:translate-x-1 transition">→</span>
           </div>
         </div>
 
-        <div class="lift bg-white border border-slate-200 rounded-3xl p-8 group">
+        <div class="border-glow lift p-8 group reveal">
           <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500 to-emerald-700 text-white flex items-center justify-center text-2xl mb-6 shadow-lg shadow-emerald-600/25 group-hover:scale-110 transition">
-            🧾
+            <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
           </div>
-          <h3 class="font-extrabold text-xl text-slate-900">Facturación ARCA / AFIP</h3>
-          <p class="text-sm text-slate-600 mt-3 leading-relaxed">WebServices homologados: facturas A, B y C con CAE oficial, automáticas.</p>
-          <div class="mt-6 pt-6 border-t border-slate-100 flex items-center justify-between">
-            <span class="text-sm font-extrabold text-emerald-600">Desde $42.000</span>
-            <span class="text-slate-400 group-hover:text-emerald-600 group-hover:translate-x-1 transition">→</span>
+          <h3 class="font-extrabold text-xl">Facturación ARCA / AFIP</h3>
+          <p class="text-sm text-[var(--text-muted)] mt-3 leading-relaxed">WebServices homologados: facturas A, B y C con CAE oficial, automáticas.</p>
+          <div class="mt-6 pt-6 border-t border-[var(--border)] flex items-center justify-between">
+            <span class="text-sm font-extrabold text-emerald-600 dark:text-emerald-400">Desde $42.000</span>
+            <span class="text-[var(--text-muted)] group-hover:text-emerald-600 group-hover:translate-x-1 transition">→</span>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Proyectos -->
-  <section id="proyectos" class="py-24 bg-white border-y border-slate-200 relative overflow-hidden">
-    <div class="blob bg-blue-300 w-[400px] h-[400px] -top-20 -right-20 opacity-20"></div>
+  <!-- ============ PROYECTOS con arte SVG futurista ============ -->
+  <section id="proyectos" class="py-24 bg-[var(--bg-2)] border-y border-[var(--border)] relative overflow-hidden">
+    <div class="blob bg-blue-500 w-[400px] h-[400px] -top-20 -right-20 opacity-20"></div>
     <div class="max-w-7xl mx-auto px-6 relative">
-      <div class="text-center max-w-2xl mx-auto mb-16">
-        <span class="inline-flex px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-xs font-bold mb-4">PROYECTOS</span>
-        <h2 class="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight">Casos reales, resultados medibles</h2>
-        <p class="text-slate-500 mt-4 text-base">Una muestra de lo que construimos para nuestros clientes.</p>
+      <div class="text-center max-w-2xl mx-auto mb-16 reveal">
+        <span class="inline-flex px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 text-xs font-bold mb-4">PROYECTOS</span>
+        <h2 class="text-4xl md:text-5xl font-extrabold tracking-tight">Casos reales, resultados medibles</h2>
+        <p class="text-[var(--text-muted)] mt-4 text-base">Una muestra de lo que construimos para nuestros clientes.</p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <!-- Proyecto 1 -->
-        <article class="lift bg-[#f8f9ff] border border-slate-200 rounded-3xl overflow-hidden group">
-          <div class="h-48 bg-gradient-to-br from-blue-500 to-blue-800 relative overflow-hidden">
-            <div class="absolute inset-0 grid-bg opacity-40"></div>
-            <div class="absolute inset-0 flex items-center justify-center text-white text-5xl font-black group-hover:scale-110 transition">BD</div>
+
+        <!-- Proyecto 1: e-commerce wireframe -->
+        <article class="border-glow overflow-hidden group reveal">
+          <div class="h-52 relative overflow-hidden bg-gradient-to-br from-blue-600 to-blue-900">
+            <div class="absolute inset-0 grid-bg opacity-30"></div>
+            <!-- SVG wireframe e-commerce -->
+            <svg viewBox="0 0 300 200" class="absolute inset-0 w-full h-full opacity-90" xmlns="http://www.w3.org/2000/svg">
+              <rect x="30" y="30" width="240" height="30" rx="4" fill="white" fill-opacity="0.15"/>
+              <rect x="30" y="70" width="70" height="70" rx="4" fill="white" fill-opacity="0.2"/>
+              <rect x="115" y="70" width="70" height="70" rx="4" fill="white" fill-opacity="0.2"/>
+              <rect x="200" y="70" width="70" height="70" rx="4" fill="white" fill-opacity="0.2"/>
+              <rect x="30" y="150" width="100" height="20" rx="4" fill="white" fill-opacity="0.15"/>
+              <circle cx="260" cy="160" r="12" fill="#22c55e"/>
+              <text x="260" y="164" text-anchor="middle" font-size="10" fill="white" font-family="monospace">$</text>
+            </svg>
+            <div class="absolute top-4 left-4 px-2 py-1 bg-black/40 backdrop-blur rounded text-[10px] font-mono text-white">wireframe.v1</div>
           </div>
           <div class="p-6">
-            <span class="text-[10px] uppercase font-bold text-blue-600 tracking-wider">E-commerce</span>
-            <h3 class="font-extrabold text-lg text-slate-900 mt-1">Bazar Deco SRL</h3>
-            <p class="text-sm text-slate-500 mt-2 leading-relaxed">Tienda online con Mercado Pago, facturación ARCA y alertas WhatsApp. +180% ventas en 6 meses.</p>
-            <div class="flex gap-2 mt-4 text-[10px] font-bold text-slate-500">
-              <span class="bg-white border border-slate-200 px-2.5 py-1 rounded-lg">E-commerce</span>
-              <span class="bg-white border border-slate-200 px-2.5 py-1 rounded-lg">ARCA</span>
+            <span class="text-[10px] uppercase font-bold text-blue-600 dark:text-blue-400 tracking-wider">E-commerce</span>
+            <h3 class="font-extrabold text-lg mt-1">Bazar Deco SRL</h3>
+            <p class="text-sm text-[var(--text-muted)] mt-2 leading-relaxed">Tienda online con Mercado Pago, facturación ARCA y alertas WhatsApp. +180% ventas en 6 meses.</p>
+            <div class="flex gap-2 mt-4 text-[10px] font-bold text-[var(--text-muted)]">
+              <span class="bg-[var(--bg)] border border-[var(--border)] px-2.5 py-1 rounded-lg font-mono">ecommerce</span>
+              <span class="bg-[var(--bg)] border border-[var(--border)] px-2.5 py-1 rounded-lg font-mono">arca</span>
             </div>
           </div>
         </article>
 
-        <!-- Proyecto 2 -->
-        <article class="lift bg-[#f8f9ff] border border-slate-200 rounded-3xl overflow-hidden group">
-          <div class="h-48 bg-gradient-to-br from-emerald-500 to-emerald-800 relative overflow-hidden">
-            <div class="absolute inset-0 grid-bg opacity-40"></div>
-            <div class="absolute inset-0 flex items-center justify-center text-white text-5xl font-black group-hover:scale-110 transition">LG</div>
+        <!-- Proyecto 2: dashboard de código -->
+        <article class="border-glow overflow-hidden group reveal">
+          <div class="h-52 relative overflow-hidden bg-gradient-to-br from-emerald-600 to-emerald-900">
+            <div class="absolute inset-0 grid-bg opacity-30"></div>
+            <svg viewBox="0 0 300 200" class="absolute inset-0 w-full h-full opacity-90" xmlns="http://www.w3.org/2000/svg">
+              <!-- Bar chart -->
+              <rect x="40" y="120" width="20" height="50" rx="3" fill="white" fill-opacity="0.4"/>
+              <rect x="70" y="100" width="20" height="70" rx="3" fill="white" fill-opacity="0.5"/>
+              <rect x="100" y="80" width="20" height="90" rx="3" fill="white" fill-opacity="0.6"/>
+              <rect x="130" y="90" width="20" height="80" rx="3" fill="white" fill-opacity="0.5"/>
+              <rect x="160" y="60" width="20" height="110" rx="3" fill="white" fill-opacity="0.7"/>
+              <rect x="190" y="70" width="20" height="100" rx="3" fill="white" fill-opacity="0.6"/>
+              <rect x="220" y="40" width="20" height="130" rx="3" fill="white" fill-opacity="0.85"/>
+              <!-- Line -->
+              <polyline points="50,110 80,90 110,70 140,75 170,50 200,55 230,30" fill="none" stroke="#4ade80" stroke-width="2"/>
+            </svg>
+            <div class="absolute top-4 left-4 px-2 py-1 bg-black/40 backdrop-blur rounded text-[10px] font-mono text-white">analytics.dashboard</div>
           </div>
           <div class="p-6">
-            <span class="text-[10px] uppercase font-bold text-emerald-600 tracking-wider">Sistema Web</span>
-            <h3 class="font-extrabold text-lg text-slate-900 mt-1">Logística Global SA</h3>
-            <p class="text-sm text-slate-500 mt-2 leading-relaxed">Panel B2B de seguimiento de envíos con intranet operativa y reportes en tiempo real.</p>
-            <div class="flex gap-2 mt-4 text-[10px] font-bold text-slate-500">
-              <span class="bg-white border border-slate-200 px-2.5 py-1 rounded-lg">Intranet</span>
-              <span class="bg-white border border-slate-200 px-2.5 py-1 rounded-lg">B2B</span>
+            <span class="text-[10px] uppercase font-bold text-emerald-600 dark:text-emerald-400 tracking-wider">Sistema Web</span>
+            <h3 class="font-extrabold text-lg mt-1">Logística Global SA</h3>
+            <p class="text-sm text-[var(--text-muted)] mt-2 leading-relaxed">Panel B2B de seguimiento de envíos con intranet operativa y reportes en tiempo real.</p>
+            <div class="flex gap-2 mt-4 text-[10px] font-bold text-[var(--text-muted)]">
+              <span class="bg-[var(--bg)] border border-[var(--border)] px-2.5 py-1 rounded-lg font-mono">intranet</span>
+              <span class="bg-[var(--bg)] border border-[var(--border)] px-2.5 py-1 rounded-lg font-mono">b2b</span>
             </div>
           </div>
         </article>
 
-        <!-- Proyecto 3 -->
-        <article class="lift bg-[#f8f9ff] border border-slate-200 rounded-3xl overflow-hidden group">
-          <div class="h-48 bg-gradient-to-br from-violet-500 to-violet-800 relative overflow-hidden">
-            <div class="absolute inset-0 grid-bg opacity-40"></div>
-            <div class="absolute inset-0 flex items-center justify-center text-white text-5xl font-black group-hover:scale-110 transition">MP</div>
+        <!-- Proyecto 3: código matrix -->
+        <article class="border-glow overflow-hidden group reveal">
+          <div class="h-52 relative overflow-hidden bg-gradient-to-br from-violet-600 to-violet-900">
+            <div class="absolute inset-0 grid-bg opacity-30"></div>
+            <svg viewBox="0 0 300 200" class="absolute inset-0 w-full h-full opacity-90" xmlns="http://www.w3.org/2000/svg">
+              <!-- Código matrix -->
+              <g font-family="monospace" font-size="9" fill="white" fill-opacity="0.7">
+                <text x="20" y="30">const launch = () =&gt; {</text>
+                <text x="20" y="48" fill-opacity="0.5">  deploy(project);</text>
+                <text x="20" y="66" fill-opacity="0.8">  if (ready) {</text>
+                <text x="20" y="84" fill-opacity="0.5">    return success;</text>
+                <text x="20" y="102" fill-opacity="0.7">  }</text>
+                <text x="20" y="120" fill-opacity="0.4">};</text>
+                <text x="20" y="150" fill="#22c55e">✓ tests passed</text>
+                <text x="20" y="168" fill-opacity="0.6">▸ 42 routes · 0 errors</text>
+              </g>
+              <!-- Vignette -->
+              <rect x="0" y="0" width="300" height="200" fill="url(#vignette3)"/>
+            </svg>
+            <div class="absolute top-4 left-4 px-2 py-1 bg-black/40 backdrop-blur rounded text-[10px] font-mono text-white">src/launch.ts</div>
           </div>
           <div class="p-6">
-            <span class="text-[10px] uppercase font-bold text-violet-600 tracking-wider">Landing Pro</span>
-            <h3 class="font-extrabold text-lg text-slate-900 mt-1">Marketing Pro</h3>
-            <p class="text-sm text-slate-500 mt-2 leading-relaxed">Landing de alta conversión con captación de leads y A/B testing continuo.</p>
-            <div class="flex gap-2 mt-4 text-[10px] font-bold text-slate-500">
-              <span class="bg-white border border-slate-200 px-2.5 py-1 rounded-lg">Landing</span>
-              <span class="bg-white border border-slate-200 px-2.5 py-1 rounded-lg">Leads</span>
+            <span class="text-[10px] uppercase font-bold text-violet-600 dark:text-violet-400 tracking-wider">Landing Pro</span>
+            <h3 class="font-extrabold text-lg mt-1">Marketing Pro</h3>
+            <p class="text-sm text-[var(--text-muted)] mt-2 leading-relaxed">Landing de alta conversión con captación de leads y A/B testing continuo.</p>
+            <div class="flex gap-2 mt-4 text-[10px] font-bold text-[var(--text-muted)]">
+              <span class="bg-[var(--bg)] border border-[var(--border)] px-2.5 py-1 rounded-lg font-mono">landing</span>
+              <span class="bg-[var(--bg)] border border-[var(--border)] px-2.5 py-1 rounded-lg font-mono">leads</span>
             </div>
           </div>
         </article>
@@ -412,144 +545,118 @@
     </div>
   </section>
 
-  <!-- Proceso -->
+  <!-- ============ PROCESO ============ -->
   <section id="proceso" class="py-24">
     <div class="max-w-7xl mx-auto px-6">
-      <div class="text-center max-w-2xl mx-auto mb-16">
-        <span class="inline-flex px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-xs font-bold mb-4">PROCESO</span>
-        <h2 class="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight">Así trabajamos</h2>
-        <p class="text-slate-500 mt-4 text-base">Tres pasos simples, sin sorpresas.</p>
+      <div class="text-center max-w-2xl mx-auto mb-16 reveal">
+        <span class="inline-flex px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 text-xs font-bold mb-4">PROCESO</span>
+        <h2 class="text-4xl md:text-5xl font-extrabold tracking-tight">Así trabajamos</h2>
+        <p class="text-[var(--text-muted)] mt-4 text-base">Tres pasos simples, sin sorpresas.</p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
-        <!-- Línea conectora (desktop) -->
-        <div class="hidden md:block absolute top-10 left-[16%] right-[16%] h-0.5 bg-gradient-to-r from-blue-200 via-blue-400 to-blue-200"></div>
+        <div class="hidden md:block absolute top-10 left-[16%] right-[16%] h-0.5 bg-gradient-to-r from-blue-200 via-blue-500 to-violet-500 dark:from-blue-900 dark:via-blue-500 dark:to-violet-500"></div>
 
-        <div class="relative text-center">
-          <div class="w-20 h-20 rounded-3xl bg-gradient-to-br from-blue-500 to-blue-700 text-white flex items-center justify-center text-2xl font-black mx-auto mb-6 shadow-xl shadow-blue-600/30 relative z-10">1</div>
-          <h3 class="font-extrabold text-xl text-slate-900">Cotizás</h3>
-          <p class="text-sm text-slate-600 mt-2 max-w-xs mx-auto">Elegís la base de tu proyecto y los addons. Ves el total en tiempo real.</p>
+        <div class="relative text-center reveal">
+          <div class="w-20 h-20 rounded-3xl bg-gradient-to-br from-blue-500 to-blue-700 text-white flex items-center justify-center text-2xl font-black mx-auto mb-6 shadow-xl shadow-blue-600/30 relative z-10 font-mono">01</div>
+          <h3 class="font-extrabold text-xl">Cotizás</h3>
+          <p class="text-sm text-[var(--text-muted)] mt-2 max-w-xs mx-auto">Elegís la base de tu proyecto y los addons. Ves el total en tiempo real.</p>
         </div>
-        <div class="relative text-center">
-          <div class="w-20 h-20 rounded-3xl bg-gradient-to-br from-violet-500 to-violet-700 text-white flex items-center justify-center text-2xl font-black mx-auto mb-6 shadow-xl shadow-violet-600/30 relative z-10">2</div>
-          <h3 class="font-extrabold text-xl text-slate-900">Aprobás</h3>
-          <p class="text-sm text-slate-600 mt-2 max-w-xs mx-auto">Recibís el ticket oficial por WhatsApp y coordinamos el anticipo 50/50.</p>
+        <div class="relative text-center reveal">
+          <div class="w-20 h-20 rounded-3xl bg-gradient-to-br from-violet-500 to-violet-700 text-white flex items-center justify-center text-2xl font-black mx-auto mb-6 shadow-xl shadow-violet-600/30 relative z-10 font-mono">02</div>
+          <h3 class="font-extrabold text-xl">Aprobás</h3>
+          <p class="text-sm text-[var(--text-muted)] mt-2 max-w-xs mx-auto">Recibís el ticket oficial por WhatsApp y coordinamos el anticipo 50/50.</p>
         </div>
-        <div class="relative text-center">
-          <div class="w-20 h-20 rounded-3xl bg-gradient-to-br from-emerald-500 to-emerald-700 text-white flex items-center justify-center text-2xl font-black mx-auto mb-6 shadow-xl shadow-emerald-600/30 relative z-10">3</div>
-          <h3 class="font-extrabold text-xl text-slate-900">Lanzamos</h3>
-          <p class="text-sm text-slate-600 mt-2 max-w-xs mx-auto">Desarrollamos, homologamos y entregamos con soporte técnico incluido.</p>
+        <div class="relative text-center reveal">
+          <div class="w-20 h-20 rounded-3xl bg-gradient-to-br from-emerald-500 to-emerald-700 text-white flex items-center justify-center text-2xl font-black mx-auto mb-6 shadow-xl shadow-emerald-600/30 relative z-10 font-mono">03</div>
+          <h3 class="font-extrabold text-xl">Lanzamos</h3>
+          <p class="text-sm text-[var(--text-muted)] mt-2 max-w-xs mx-auto">Desarrollamos, homologamos y entregamos con soporte técnico incluido.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Testimonios -->
-  <section class="py-24 bg-white border-y border-slate-200">
+  <!-- ============ TESTIMONIOS ============ -->
+  <section class="py-24 bg-[var(--bg-2)] border-y border-[var(--border)]">
     <div class="max-w-7xl mx-auto px-6">
-      <div class="text-center max-w-2xl mx-auto mb-16">
-        <span class="inline-flex px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-xs font-bold mb-4">TESTIMONIOS</span>
-        <h2 class="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight">Lo que dicen nuestros clientes</h2>
+      <div class="text-center max-w-2xl mx-auto mb-16 reveal">
+        <span class="inline-flex px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 text-xs font-bold mb-4">TESTIMONIOS</span>
+        <h2 class="text-4xl md:text-5xl font-extrabold tracking-tight">Lo que dicen nuestros clientes</h2>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="bg-[#f8f9ff] border border-slate-200 rounded-3xl p-8">
+        <div class="border-glow p-8 reveal">
           <div class="flex gap-1 text-yellow-500 mb-4">★★★★★</div>
-          <p class="text-slate-700 leading-relaxed">"Pasamos de vender por Instagram a tener una tienda online con facturación automática. El proceso fue rapidísimo."</p>
-          <div class="flex items-center gap-3 mt-6 pt-6 border-t border-slate-200">
+          <p class="text-[var(--text)] leading-relaxed">"Pasamos de vender por Instagram a tener una tienda online con facturación automática. El proceso fue rapidísimo."</p>
+          <div class="flex items-center gap-3 mt-6 pt-6 border-t border-[var(--border)]">
             <div class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-blue-700 text-white flex items-center justify-center font-bold text-sm">MG</div>
-            <div>
-              <div class="font-bold text-sm text-slate-900">Matías Gómez</div>
-              <div class="text-xs text-slate-500">Bazar Deco SRL</div>
-            </div>
+            <div><div class="font-bold text-sm">Matías Gómez</div><div class="text-xs text-[var(--text-muted)]">Bazar Deco SRL</div></div>
           </div>
         </div>
-        <div class="bg-[#f8f9ff] border border-slate-200 rounded-3xl p-8">
+        <div class="border-glow p-8 reveal">
           <div class="flex gap-1 text-yellow-500 mb-4">★★★★★</div>
-          <p class="text-slate-700 leading-relaxed">"El panel de gestión nos ahorró horas de trabajo manual. Reportes en tiempo real y cero errores de stock."</p>
-          <div class="flex items-center gap-3 mt-6 pt-6 border-t border-slate-200">
+          <p class="text-[var(--text)] leading-relaxed">"El panel de gestión nos ahorró horas de trabajo manual. Reportes en tiempo real y cero errores de stock."</p>
+          <div class="flex items-center gap-3 mt-6 pt-6 border-t border-[var(--border)]">
             <div class="w-10 h-10 rounded-full bg-gradient-to-br from-emerald-500 to-emerald-700 text-white flex items-center justify-center font-bold text-sm">LR</div>
-            <div>
-              <div class="font-bold text-sm text-slate-900">Laura Ruiz</div>
-              <div class="text-xs text-slate-500">Logística Global SA</div>
-            </div>
+            <div><div class="font-bold text-sm">Laura Ruiz</div><div class="text-xs text-[var(--text-muted)]">Logística Global SA</div></div>
           </div>
         </div>
-        <div class="bg-[#f8f9ff] border border-slate-200 rounded-3xl p-8">
+        <div class="border-glow p-8 reveal">
           <div class="flex gap-1 text-yellow-500 mb-4">★★★★★</div>
-          <p class="text-slate-700 leading-relaxed">"La homologación con AFIP fue transparente. No tuvimos que preocuparnos por nada técnico."</p>
-          <div class="flex items-center gap-3 mt-6 pt-6 border-t border-slate-200">
+          <p class="text-[var(--text)] leading-relaxed">"La homologación con AFIP fue transparente. No tuvimos que preocuparnos por nada técnico."</p>
+          <div class="flex items-center gap-3 mt-6 pt-6 border-t border-[var(--border)]">
             <div class="w-10 h-10 rounded-full bg-gradient-to-br from-violet-500 to-violet-700 text-white flex items-center justify-center font-bold text-sm">CP</div>
-            <div>
-              <div class="font-bold text-sm text-slate-900">Carlos Pérez</div>
-              <div class="text-xs text-slate-500">Marketing Pro</div>
-            </div>
+            <div><div class="font-bold text-sm">Carlos Pérez</div><div class="text-xs text-[var(--text-muted)]">Marketing Pro</div></div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- FAQ -->
+  <!-- ============ FAQ ============ -->
   <section id="faq" class="py-24">
     <div class="max-w-3xl mx-auto px-6">
-      <div class="text-center mb-16">
-        <span class="inline-flex px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-xs font-bold mb-4">FAQ</span>
-        <h2 class="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight">Preguntas frecuentes</h2>
+      <div class="text-center mb-16 reveal">
+        <span class="inline-flex px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 text-xs font-bold mb-4">FAQ</span>
+        <h2 class="text-4xl md:text-5xl font-extrabold tracking-tight">Preguntas frecuentes</h2>
       </div>
 
       <div class="space-y-3">
-        <details class="group bg-white border border-slate-200 rounded-2xl p-5 cursor-pointer hover:border-blue-300 transition">
-          <summary class="flex items-center justify-between font-bold text-slate-900 list-none">
-            <span>¿Cuánto tarda un proyecto?</span>
-            <span class="text-blue-600 group-open:rotate-45 transition text-xl">+</span>
-          </summary>
-          <p class="text-sm text-slate-600 mt-3 leading-relaxed">Depende del alcance. Una landing puede estar en 7-10 días, una tienda e-commerce en 15-20 días y un sistema de gestión en 30-45 días.</p>
+        <details class="group border-glow p-5 cursor-pointer reveal">
+          <summary class="flex items-center justify-between font-bold list-none"><span>¿Cuánto tarda un proyecto?</span><span class="text-blue-600 dark:text-blue-400 group-open:rotate-45 transition text-xl">+</span></summary>
+          <p class="text-sm text-[var(--text-muted)] mt-3 leading-relaxed">Depende del alcance. Una landing puede estar en 7-10 días, una tienda e-commerce en 15-20 días y un sistema de gestión en 30-45 días.</p>
         </details>
-        <details class="group bg-white border border-slate-200 rounded-2xl p-5 cursor-pointer hover:border-blue-300 transition">
-          <summary class="flex items-center justify-between font-bold text-slate-900 list-none">
-            <span>¿Cómo funciona el esquema 50/50?</span>
-            <span class="text-blue-600 group-open:rotate-45 transition text-xl">+</span>
-          </summary>
-          <p class="text-sm text-slate-600 mt-3 leading-relaxed">Pagás el 50% al inicio del proyecto para reservar el cupo y comenzar el desarrollo, y el 50% restante contra entrega técnica y homologación final.</p>
+        <details class="group border-glow p-5 cursor-pointer reveal">
+          <summary class="flex items-center justify-between font-bold list-none"><span>¿Cómo funciona el esquema 50/50?</span><span class="text-blue-600 dark:text-blue-400 group-open:rotate-45 transition text-xl">+</span></summary>
+          <p class="text-sm text-[var(--text-muted)] mt-3 leading-relaxed">Pagás el 50% al inicio del proyecto para reservar el cupo y comenzar el desarrollo, y el 50% restante contra entrega técnica y homologación final.</p>
         </details>
-        <details class="group bg-white border border-slate-200 rounded-2xl p-5 cursor-pointer hover:border-blue-300 transition">
-          <summary class="flex items-center justify-between font-bold text-slate-900 list-none">
-            <span>¿La facturación ARCA está incluida?</span>
-            <span class="text-blue-600 group-open:rotate-45 transition text-xl">+</span>
-          </summary>
-          <p class="text-sm text-slate-600 mt-3 leading-relaxed">Sí, es un addon opcional que podés seleccionar en el cotizador. Incluye homologación completa con AFIP/ARCA y emisión automática de facturas A, B y C.</p>
+        <details class="group border-glow p-5 cursor-pointer reveal">
+          <summary class="flex items-center justify-between font-bold list-none"><span>¿La facturación ARCA está incluida?</span><span class="text-blue-600 dark:text-blue-400 group-open:rotate-45 transition text-xl">+</span></summary>
+          <p class="text-sm text-[var(--text-muted)] mt-3 leading-relaxed">Sí, es un addon opcional que podés seleccionar en el cotizador. Incluye homologación completa con AFIP/ARCA y emisión automática de facturas A, B y C.</p>
         </details>
-        <details class="group bg-white border border-slate-200 rounded-2xl p-5 cursor-pointer hover:border-blue-300 transition">
-          <summary class="flex items-center justify-between font-bold text-slate-900 list-none">
-            <span>¿Qué pasa después de la entrega?</span>
-            <span class="text-blue-600 group-open:rotate-45 transition text-xl">+</span>
-          </summary>
-          <p class="text-sm text-slate-600 mt-3 leading-relaxed">Incluimos 30 días de soporte técnico sin cargo. Después podés contratar un plan de mantenimiento mensual opcional.</p>
+        <details class="group border-glow p-5 cursor-pointer reveal">
+          <summary class="flex items-center justify-between font-bold list-none"><span>¿Qué pasa después de la entrega?</span><span class="text-blue-600 dark:text-blue-400 group-open:rotate-45 transition text-xl">+</span></summary>
+          <p class="text-sm text-[var(--text-muted)] mt-3 leading-relaxed">Incluimos 30 días de soporte técnico sin cargo. Después podés contratar un plan de mantenimiento mensual opcional.</p>
         </details>
-        <details class="group bg-white border border-slate-200 rounded-2xl p-5 cursor-pointer hover:border-blue-300 transition">
-          <summary class="flex items-center justify-between font-bold text-slate-900 list-none">
-            <span>¿Trabajan con clientes de todo el país?</span>
-            <span class="text-blue-600 group-open:rotate-45 transition text-xl">+</span>
-          </summary>
-          <p class="text-sm text-slate-600 mt-3 leading-relaxed">Sí, trabajamos 100% remoto con clientes de toda Argentina y LATAM. Las reuniones son por videollamada y la comunicación es por WhatsApp.</p>
+        <details class="group border-glow p-5 cursor-pointer reveal">
+          <summary class="flex items-center justify-between font-bold list-none"><span>¿Trabajan con clientes de todo el país?</span><span class="text-blue-600 dark:text-blue-400 group-open:rotate-45 transition text-xl">+</span></summary>
+          <p class="text-sm text-[var(--text-muted)] mt-3 leading-relaxed">Sí, trabajamos 100% remoto con clientes de toda Argentina y LATAM. Las reuniones son por videollamada y la comunicación es por WhatsApp.</p>
         </details>
       </div>
     </div>
   </section>
 
-  <!-- CTA final -->
+  <!-- ============ CTA FINAL ============ -->
   <section id="cotizador" class="py-24 relative overflow-hidden">
-    <div class="blob bg-blue-400 w-[500px] h-[500px] -top-40 left-1/2 -translate-x-1/2 opacity-30"></div>
+    <div class="blob bg-blue-500 w-[500px] h-[500px] -top-40 left-1/2 -translate-x-1/2 opacity-30"></div>
     <div class="max-w-5xl mx-auto px-6 relative">
       <div class="bg-gradient-to-br from-slate-900 via-blue-900 to-violet-900 rounded-[2.5rem] p-10 md:p-16 text-center text-white shadow-2xl relative overflow-hidden">
         <div class="absolute inset-0 grid-bg opacity-20"></div>
+        <div class="absolute inset-0 scanlines"></div>
         <div class="relative">
-          <span class="inline-flex px-3 py-1 rounded-full bg-white/10 border border-white/20 text-xs font-bold mb-6">EMPECEMOS HOY</span>
+          <span class="inline-flex px-3 py-1 rounded-full bg-white/10 border border-white/20 text-xs font-bold mb-6 font-mono">// EMPECEMOS HOY</span>
           <h2 class="text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">¿Listo para cotizar<br>tu proyecto?</h2>
-          <p class="text-blue-100 mt-4 text-base max-w-xl mx-auto leading-relaxed">
-            Elegí tu experiencia. El cotizador es 100% interactivo: ves el total en vivo, validás tu CUIT y generás un ticket único para enviar por WhatsApp.
-          </p>
+          <p class="text-blue-100 mt-4 text-base max-w-xl mx-auto leading-relaxed">Elegí tu experiencia. El cotizador es 100% interactivo: ves el total en vivo, validás tu CUIT y generás un ticket único para enviar por WhatsApp.</p>
           <div class="flex flex-col sm:flex-row gap-3 justify-center mt-10">
             <a href="cotizador-desktop.html" class="bg-white text-slate-900 hover:bg-blue-50 font-bold text-base px-8 py-4 rounded-2xl shadow-xl transition flex items-center justify-center gap-2">
               💻 Cotizador Desktop
@@ -558,23 +665,20 @@
               📱 Cotizador Mobile
             </a>
           </div>
-          <p class="text-xs text-blue-200 mt-5">Ambos cotizadores comparten el mismo estado y la misma ref única.</p>
+          <p class="text-xs text-blue-200 mt-5 font-mono">// Ambos cotizadores comparten el mismo estado y la misma ref única.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer id="contacto" class="bg-slate-900 text-slate-300 py-16">
+  <!-- ============ FOOTER ============ -->
+  <footer id="contacto" class="bg-slate-950 text-slate-300 py-16 border-t border-slate-800">
     <div class="max-w-7xl mx-auto px-6">
       <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
         <div class="md:col-span-2">
           <div class="flex items-center gap-3 mb-4">
             <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-violet-600 flex items-center justify-center text-white font-black text-xl">K</div>
-            <div>
-              <span class="text-lg font-extrabold text-white block leading-tight">KODEXA</span>
-              <span class="text-[10px] uppercase font-bold tracking-[0.2em] text-slate-400 block">Digital Solutions</span>
-            </div>
+            <div><span class="text-lg font-extrabold text-white block leading-tight">KODEXA</span><span class="text-[10px] uppercase font-bold tracking-[0.2em] text-slate-500 block">Digital Solutions</span></div>
           </div>
           <p class="text-sm text-slate-400 leading-relaxed max-w-md">Ecosistema digital completo. E-commerce, sistemas web y facturación electrónica ARCA. Respaldo tecnológico: ASARI S.A.S.</p>
         </div>
@@ -596,11 +700,95 @@
           </ul>
         </div>
       </div>
-      <div class="mt-12 pt-8 border-t border-slate-800 text-center text-xs text-slate-500">
-        © 2025 KODEXA Digital Solutions • Respaldo tecnológico: ASARI S.A.S.
+      <div class="mt-12 pt-8 border-t border-slate-800 text-center text-xs text-slate-500 font-mono">
+        © 2025 KODEXA Digital Solutions · ASARI S.A.S.
       </div>
     </div>
   </footer>
 
+  <script>
+    // ========== Dark mode ==========
+    const root = document.documentElement;
+    const stored = localStorage.getItem('kodexa-theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const isDark = stored ? stored === 'dark' : prefersDark;
+    root.classList.toggle('dark', isDark);
+    updateThemeIcons(isDark);
+
+    document.getElementById('themeToggle').addEventListener('click', () => {
+      const nowDark = !root.classList.contains('dark');
+      root.classList.toggle('dark', nowDark);
+      localStorage.setItem('kodexa-theme', nowDark ? 'dark' : 'light');
+      updateThemeIcons(nowDark);
+    });
+
+    function updateThemeIcons(dark) {
+      document.getElementById('iconMoon').classList.toggle('hidden', dark);
+      document.getElementById('iconSun').classList.toggle('hidden', !dark);
+    }
+
+    // ========== Partículas canvas ==========
+    const canvas = document.getElementById('particles');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    function resize() {
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    for (let i = 0; i < 40; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 0.3,
+        vy: (Math.random() - 0.5) * 0.3,
+        r: Math.random() * 1.5 + 0.5
+      });
+    }
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const isDarkMode = document.documentElement.classList.contains('dark');
+      const color = isDarkMode ? '139,92,246' : '59,130,246';
+
+      particles.forEach(p => {
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${color},0.6)`;
+        ctx.fill();
+      });
+
+      // Líneas conectoras
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx*dx + dy*dy);
+          if (dist < 120) {
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.strokeStyle = `rgba(${color},${0.15 * (1 - dist/120)})`;
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(animateParticles);
+    }
+    animateParticles();
+
+    // ========== Reveal on scroll ==========
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
 </body>
 </html>
