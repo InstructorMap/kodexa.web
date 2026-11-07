@@ -1,26 +1,26 @@
-/* ============================================
-   KODEXA — Script principal
-   ============================================ */
-
+/* ============================================================
+   KODEXA V2 — Script
+   ============================================================ */
 (function () {
   'use strict';
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* ---------- 1. Header scroll ---------- */
   const header = document.querySelector('.header');
   const onScroll = () => {
-    header.classList.toggle('scrolled', window.scrollY > 30);
+    if (header) header.classList.toggle('scrolled', window.scrollY > 30);
     updateActiveNav();
   };
   window.addEventListener('scroll', onScroll, { passive: true });
 
   /* ---------- 2. Nav activa ---------- */
-  const sections = ['inicio', 'servicios', 'planes', 'proceso', 'contacto']
-    .map(id => document.getElementById(id))
-    .filter(Boolean);
+  const sectionIds = ['inicio', 'servicios', 'planes', 'proceso', 'contacto'];
+  const sections = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
   const navLinks = document.querySelectorAll('.nav a[href^="#"]');
 
   function updateActiveNav() {
-    const y = window.scrollY + 120;
+    const y = window.scrollY + 140;
     let current = sections[0]?.id;
     sections.forEach(s => { if (s.offsetTop <= y) current = s.id; });
     navLinks.forEach(a => {
@@ -41,134 +41,92 @@
       a.addEventListener('click', () => {
         nav.classList.remove('mobile-open');
         menuToggle.classList.remove('open');
+        menuToggle.setAttribute('aria-expanded', 'false');
       });
     });
   }
 
   /* ---------- 4. Reveal on scroll ---------- */
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('in');
-        io.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  } else {
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
+  }
 
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  /* ---------- 5. Counter animado en stats ---------- */
+  const counters = document.querySelectorAll('.hero-stats .num[data-count]');
+  if (counters.length && !reduceMotion) {
+    const counterIO = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        const el = e.target;
+        const target = parseInt(el.dataset.count, 10);
+        const suffix = el.dataset.suffix || '';
+        const prefix = el.dataset.prefix || '';
+        const duration = 1400;
+        const start = performance.now();
 
-  /* ---------- 5. Hover glow en cards (mouse tracking) ---------- */
-  document.querySelectorAll('.service-card').forEach(card => {
-    card.addEventListener('mousemove', (e) => {
-      const r = card.getBoundingClientRect();
-      card.style.setProperty('--mx', `${e.clientX - r.left}px`);
-      card.style.setProperty('--my', `${e.clientY - r.top}px`);
+        const step = (now) => {
+          const p = Math.min((now - start) / duration, 1);
+          const eased = 1 - Math.pow(1 - p, 3);
+          const val = Math.round(target * eased);
+          el.textContent = prefix + val + suffix;
+          if (p < 1) requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+        counterIO.unobserve(el);
+      });
+    }, { threshold: 0.5 });
+    counters.forEach(c => counterIO.observe(c));
+  }
+
+  /* ---------- 6. Timeline line progress ---------- */
+  const timeline = document.querySelector('.timeline');
+  const timelineLine = document.querySelector('.timeline-line');
+  if (timeline && timelineLine && !reduceMotion) {
+    const updateTimeline = () => {
+      const rect = timeline.getBoundingClientRect();
+      const vh = window.innerHeight;
+      const total = timeline.offsetHeight - 40;
+      const scrolled = Math.max(0, Math.min(total, vh - rect.top - 100));
+      timelineLine.style.height = scrolled + 'px';
+    };
+    window.addEventListener('scroll', updateTimeline, { passive: true });
+    updateTimeline();
+  }
+
+  /* ---------- 7. Showcase tabs ---------- */
+  const tabs = document.querySelectorAll('.showcase-tab');
+  const panels = document.querySelectorAll('.showcase-panel');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const target = tab.dataset.tab;
+      tabs.forEach(t => t.classList.toggle('active', t === tab));
+      panels.forEach(p => {
+        const match = p.dataset.panel === target;
+        p.hidden = !match;
+        if (match && !reduceMotion) {
+          p.animate(
+            [
+              { opacity: 0, transform: 'translateY(12px)' },
+              { opacity: 1, transform: 'translateY(0)' }
+            ],
+            { duration: 400, easing: 'cubic-bezier(0.4, 0, 0.2, 1)' }
+          );
+        }
+      });
     });
   });
 
-  /* ---------- 6. Partículas del hero ---------- */
-  const canvas = document.getElementById('heroParticles');
-  if (canvas) {
-    const ctx = canvas.getContext('2d');
-    let w, h, particles = [], rafId;
-
-    const resize = () => {
-      const rect = canvas.getBoundingClientRect();
-      w = canvas.width = rect.width * window.devicePixelRatio;
-      h = canvas.height = rect.height * window.devicePixelRatio;
-      ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
-    };
-
-    const init = () => {
-      resize();
-      const count = Math.min(50, Math.floor((w * h) / 40000));
-      particles = Array.from({ length: count }, () => ({
-        x: Math.random() * (w / window.devicePixelRatio),
-        y: Math.random() * (h / window.devicePixelRatio),
-        vx: (Math.random() - 0.5) * 0.4,
-        vy: (Math.random() - 0.5) * 0.4,
-        r: Math.random() * 1.6 + 0.4,
-        color: Math.random() > 0.7 ? '#FFB800' : '#00C8FF'
-      }));
-    };
-
-    const draw = () => {
-      const W = w / window.devicePixelRatio;
-      const H = h / window.devicePixelRatio;
-      ctx.clearRect(0, 0, W, H);
-
-      particles.forEach(p => {
-        p.x += p.vx;
-        p.y += p.vy;
-        if (p.x < 0 || p.x > W) p.vx *= -1;
-        if (p.y < 0 || p.y > H) p.vy *= -1;
-
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = p.color;
-        ctx.globalAlpha = 0.7;
-        ctx.fill();
-      });
-
-      // Líneas conectoras
-      ctx.globalAlpha = 1;
-      for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-          const dx = particles[i].x - particles[j].x;
-          const dy = particles[i].y - particles[j].y;
-          const d = Math.hypot(dx, dy);
-          if (d < 130) {
-            ctx.beginPath();
-            ctx.moveTo(particles[i].x, particles[i].y);
-            ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = `rgba(0, 200, 255, ${0.12 * (1 - d / 130)})`;
-            ctx.lineWidth = 0.6;
-            ctx.stroke();
-          }
-        }
-      }
-      rafId = requestAnimationFrame(draw);
-    };
-
-    init();
-    draw();
-
-    let resizeTimer;
-    window.addEventListener('resize', () => {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(() => {
-        cancelAnimationFrame(rafId);
-        init();
-        draw();
-      }, 200);
-    });
-
-    // Pausar cuando no se ve
-    document.addEventListener('visibilitychange', () => {
-      if (document.hidden) cancelAnimationFrame(rafId);
-      else draw();
-    });
-  }
-
-  /* ---------- 7. Parallax moderado en hero ---------- */
-  const heroVisual = document.querySelector('.hero-visual');
-  if (heroVisual && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    let ticking = false;
-    window.addEventListener('scroll', () => {
-      if (!ticking) {
-        requestAnimationFrame(() => {
-          const y = window.scrollY;
-          if (y < window.innerHeight) {
-            heroVisual.style.transform = `translateY(${y * 0.15}px)`;
-          }
-          ticking = false;
-        });
-        ticking = true;
-      }
-    }, { passive: true });
-  }
-
-  /* ---------- 8. Smooth anchor (fallback) ---------- */
+  /* ---------- 8. Smooth anchors (fallback) ---------- */
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', (e) => {
       const id = a.getAttribute('href');
@@ -176,10 +134,27 @@
         const el = document.querySelector(id);
         if (el) {
           e.preventDefault();
-          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          el.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
         }
       }
     });
   });
+
+  /* ---------- 9. Parallax moderado en bento ---------- */
+  const bento = document.querySelector('.bento');
+  if (bento && !reduceMotion && window.matchMedia('(min-width: 1024px)').matches) {
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (ticking) return;
+      requestAnimationFrame(() => {
+        const y = window.scrollY;
+        if (y < window.innerHeight) {
+          bento.style.transform = `translateY(${y * 0.08}px)`;
+        }
+        ticking = false;
+      });
+      ticking = true;
+    }, { passive: true });
+  }
 
 })();
