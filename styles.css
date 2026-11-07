@@ -1113,3 +1113,143 @@ h1, h2, h3, h4 {
   .logos-track { animation: none !important; }
   .arca-badge { animation: none !important; }
 }
+/* ============================================================
+   KODEXA — Asistente (robot mascota)
+   Anexo V2.1 · No modifica reglas existentes
+   ============================================================ */
+
+.assistant-section {
+  position: relative;
+  overflow: hidden;
+}
+
+.assistant-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.assistant-visual {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 420px;
+}
+
+.assistant-glow {
+  position: absolute;
+  inset: -40px;
+  background: radial-gradient(circle at center, rgba(0, 107, 255, 0.18), transparent 65%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.assistant-img {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 420px;
+  height: auto;
+  display: block;
+  animation: assistantFloat 7s ease-in-out infinite;
+  filter: drop-shadow(0 20px 40px rgba(0, 107, 255, 0.25));
+}
+
+@keyframes assistantFloat {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-10px); }
+}
+
+.assistant-content {
+  max-width: 540px;
+}
+
+.assistant-features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.assistant-features li {
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+}
+
+.assistant-feature-icon {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: rgba(0, 107, 255, 0.12);
+  border: 1px solid rgba(0, 107, 255, 0.35);
+  color: #00C8FF;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.assistant-features strong {
+  display: block;
+  font-size: 15px;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin-bottom: 4px;
+}
+
+.assistant-features p {
+  font-size: 13px;
+  color: #94A3B8;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .assistant-grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+    text-align: center;
+  }
+  .assistant-visual {
+    min-height: 340px;
+    order: 1;
+  }
+  .assistant-content {
+    order: 2;
+    margin: 0 auto;
+    text-align: left;
+  }
+  .assistant-features li {
+    text-align: left;
+  }
+}
+
+@media (max-width: 480px) {
+  .assistant-visual {
+    min-height: 280px;
+  }
+  .assistant-img {
+    max-width: 300px;
+  }
+  .assistant-feature-icon {
+    width: 34px;
+    height: 34px;
+    font-size: 11px;
+  }
+}
+
+/* Accesibilidad: respetar prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .assistant-img {
+    animation: none !important;
+  }
+}
