@@ -81,7 +81,7 @@
     const f = factor();
     const min = Math.round((base.min + addonMin) * f / 10000) * 10000;
     const max = Math.round((base.max + addonMax) * f / 10000) * 10000;
-    return { min, max, from: base.mode === "from" && extras.length === 0 && f === 1, factor: f };
+    return { min, max, from: base.mode === "from" && extras.length === 0, factor: f };
   };
   const monthly = () => {
     const e = estimate();
