@@ -1,26 +1,270 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KODEXA Digital Solutions</title>
+  <title>KODEXA Digital Solutions — E-commerce, Sistemas Web & Facturación ARCA</title>
+  <meta name="description" content="KODEXA Digital Solutions: desarrollo de e-commerce, sistemas de gestión web y homologación fiscal ARCA/AFIP. Cotizá tu proyecto en minutos.">
+  <meta property="og:title" content="KODEXA Digital Solutions">
+  <meta property="og:description" content="E-commerce, sistemas web y facturación electrónica ARCA/AFIP. Cotizá tu proyecto en minutos.">
+  <meta property="og:type" content="website">
   <script src="https://cdn.tailwindcss.com"></script>
-  <style>body { font-family: system-ui, sans-serif; }</style>
-  <script>
-    const isMobile = window.innerWidth < 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    // Redirigimos a archivos que SÍ existen en la raíz (evita 404 de mobile/ y desktop/)
-    window.location.replace(isMobile ? "cotizador-paso1.html" : "cotizador-desktop.html");
-  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>body { font-family: 'Plus Jakarta Sans', sans-serif; }</style>
 </head>
-<body class="bg-[#f8f9ff] min-h-screen flex items-center justify-center p-6">
-  <div class="bg-white border border-slate-200 rounded-3xl p-8 max-w-md w-full text-center shadow-xl space-y-6">
-    <div class="w-14 h-14 rounded-2xl bg-blue-600 text-white font-black text-2xl mx-auto flex items-center justify-center">K</div>
-    <h1 class="text-2xl font-extrabold text-slate-900">KODEXA Digital Solutions</h1>
-    <p class="text-xs text-slate-600">Redirigiendo... si no ocurre, elegí:</p>
-    <div class="space-y-3">
-      <a href="cotizador-desktop.html" class="block w-full py-3 px-4 bg-blue-600 text-white text-xs font-bold rounded-xl">💻 Versión Desktop</a>
-      <a href="cotizador-paso1.html" class="block w-full py-3 px-4 bg-slate-100 text-slate-700 text-xs font-bold rounded-xl">📱 Versión Mobile</a>
+<body class="bg-[#f8f9ff] text-slate-800">
+
+  <!-- Header -->
+  <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white font-black text-xl shadow-md">K</div>
+        <div>
+          <span class="text-xl font-extrabold tracking-tight text-slate-900 block leading-tight">KODEXA</span>
+          <span class="text-[10px] uppercase font-bold tracking-widest text-slate-400 block">Digital Solutions</span>
+        </div>
+      </a>
+      <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-600">
+        <a href="#servicios" class="hover:text-blue-600 transition">Servicios</a>
+        <a href="#proyectos" class="hover:text-blue-600 transition">Proyectos</a>
+        <a href="#proceso" class="hover:text-blue-600 transition">Proceso</a>
+        <a href="#contacto" class="hover:text-blue-600 transition">Contacto</a>
+      </nav>
+      <a href="#cotizador" class="hidden md:inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm px-5 py-2.5 rounded-full transition shadow-md shadow-blue-600/20">
+        Cotizar ahora
+      </a>
     </div>
-  </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="max-w-7xl mx-auto px-6 pt-16 pb-20 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+    <div class="space-y-6">
+      <span class="inline-flex px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-xs font-bold">E-commerce · Sistemas Web · ARCA/AFIP</span>
+      <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 leading-tight tracking-tight">
+        Tu negocio digital,<br>
+        <span class="text-blue-600">listo para vender.</span>
+      </h1>
+      <p class="text-slate-600 text-base md:text-lg leading-relaxed max-w-lg">
+        Diseñamos, desarrollamos y homologamos tu tienda online o sistema de gestión con facturación electrónica ARCA incluida. Cotizá en minutos, sin vueltas.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-3 pt-2">
+        <a href="#cotizador" class="bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm px-6 py-3.5 rounded-xl shadow-lg shadow-blue-600/25 text-center transition">
+          Cotizar mi proyecto →
+        </a>
+        <a href="#proyectos" class="bg-white border border-slate-200 hover:border-slate-300 text-slate-700 font-semibold text-sm px-6 py-3.5 rounded-xl text-center transition">
+          Ver proyectos
+        </a>
+      </div>
+      <div class="flex items-center gap-6 pt-4 text-xs text-slate-500">
+        <div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-green-500"></span> +50 proyectos entregados</div>
+        <div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-blue-500"></span> Respaldo ASARI S.A.S.</div>
+      </div>
+    </div>
+    <div class="relative">
+      <div class="absolute -inset-4 bg-gradient-to-tr from-blue-200/40 to-transparent rounded-3xl blur-2xl"></div>
+      <div class="relative bg-white border border-slate-200 rounded-3xl p-6 shadow-2xl">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100 text-xs">
+          <span class="font-bold text-slate-400 uppercase tracking-wider text-[10px]">TICKET DEMO</span>
+          <span class="font-extrabold text-blue-600 bg-blue-50 px-2 py-0.5 rounded">#KDX-DEMO</span>
+        </div>
+        <div class="my-4">
+          <span class="text-xs text-slate-500 font-medium">Inversión ejemplo:</span>
+          <div class="text-3xl font-extrabold text-blue-600 mt-1">$350.000 <span class="text-xs text-slate-400">ARS</span></div>
+        </div>
+        <div class="space-y-2 text-xs">
+          <div class="flex justify-between py-1 border-b border-slate-100">
+            <span class="text-slate-600">Tienda Digital E-commerce</span>
+            <span class="font-bold text-slate-800">$220.000</span>
+          </div>
+          <div class="flex justify-between py-1 border-b border-slate-100">
+            <span class="text-slate-600">Mercado Pago Pro</span>
+            <span class="font-bold text-slate-800">$35.000</span>
+          </div>
+          <div class="flex justify-between py-1 border-b border-slate-100">
+            <span class="text-slate-600">Facturación ARCA/AFIP</span>
+            <span class="font-bold text-slate-800">$42.000</span>
+          </div>
+          <div class="flex justify-between py-1">
+            <span class="text-slate-600">Alertas WhatsApp</span>
+            <span class="font-bold text-slate-800">$33.000</span>
+          </div>
+        </div>
+        <div class="mt-4 bg-blue-50 p-3 rounded-xl text-[11px] text-blue-900">
+          <strong>Esquema 50/50:</strong> $175.000 anticipo · $175.000 contra entrega.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Servicios -->
+  <section id="servicios" class="bg-white border-y border-slate-200 py-20">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span class="inline-flex px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-xs font-bold mb-3">SERVICIOS</span>
+        <h2 class="text-3xl font-extrabold text-slate-900">Todo lo que tu negocio necesita para digitalizarse</h2>
+        <p class="text-slate-500 mt-3 text-sm">Desde la tienda online hasta la factura electrónica, en un solo lugar.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Card 1 -->
+        <div class="bg-[#f8f9ff] border border-slate-200 rounded-2xl p-6 hover:border-blue-300 hover:shadow-lg transition">
+          <div class="w-12 h-12 rounded-xl bg-blue-600 text-white flex items-center justify-center text-xl mb-4">🛒</div>
+          <h3 class="font-bold text-lg text-slate-900">Tienda Digital E-commerce</h3>
+          <p class="text-sm text-slate-600 mt-2 leading-relaxed">Carro de compras, gestión de stock, panel administrador y cobros online integrados.</p>
+          <div class="mt-4 text-sm font-extrabold text-blue-600">Desde $220.000 ARS</div>
+        </div>
+        <!-- Card 2 -->
+        <div class="bg-[#f8f9ff] border border-slate-200 rounded-2xl p-6 hover:border-blue-300 hover:shadow-lg transition">
+          <div class="w-12 h-12 rounded-xl bg-blue-600 text-white flex items-center justify-center text-xl mb-4">⚙️</div>
+          <h3 class="font-bold text-lg text-slate-900">Sistema de Gestión Web</h3>
+          <p class="text-sm text-slate-600 mt-2 leading-relaxed">Intranet, paneles B2B, control de operaciones y reportes en tiempo real.</p>
+          <div class="mt-4 text-sm font-extrabold text-blue-600">Desde $380.000 ARS</div>
+        </div>
+        <!-- Card 3 -->
+        <div class="bg-[#f8f9ff] border border-slate-200 rounded-2xl p-6 hover:border-blue-300 hover:shadow-lg transition">
+          <div class="w-12 h-12 rounded-xl bg-blue-600 text-white flex items-center justify-center text-xl mb-4">🧾</div>
+          <h3 class="font-bold text-lg text-slate-900">Facturación ARCA / AFIP</h3>
+          <p class="text-sm text-slate-600 mt-2 leading-relaxed">WebServices homologados: facturas A, B y C con CAE oficial, automáticas.</p>
+          <div class="mt-4 text-sm font-extrabold text-blue-600">Desde $42.000 ARS</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Proyectos / Portfolio -->
+  <section id="proyectos" class="py-20">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span class="inline-flex px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-xs font-bold mb-3">PROYECTOS</span>
+        <h2 class="text-3xl font-extrabold text-slate-900">Casos reales, resultados medibles</h2>
+        <p class="text-slate-500 mt-3 text-sm">Una muestra de lo que construimos para nuestros clientes.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Proyecto 1 -->
+        <article class="bg-white border border-slate-200 rounded-2xl overflow-hidden hover:shadow-xl transition group">
+          <div class="h-40 bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center text-white text-4xl font-black group-hover:scale-105 transition">BD</div>
+          <div class="p-5">
+            <span class="text-[10px] uppercase font-bold text-blue-600 tracking-wider">E-commerce</span>
+            <h3 class="font-bold text-slate-900 mt-1">Bazar Deco SRL</h3>
+            <p class="text-xs text-slate-500 mt-1 leading-relaxed">Tienda online con Mercado Pago, facturación ARCA y alertas WhatsApp. +180% ventas en 6 meses.</p>
+            <div class="flex gap-2 mt-3 text-[10px] font-bold text-slate-500">
+              <span class="bg-slate-100 px-2 py-0.5 rounded">E-commerce</span>
+              <span class="bg-slate-100 px-2 py-0.5 rounded">ARCA</span>
+            </div>
+          </div>
+        </article>
+        <!-- Proyecto 2 -->
+        <article class="bg-white border border-slate-200 rounded-2xl overflow-hidden hover:shadow-xl transition group">
+          <div class="h-40 bg-gradient-to-br from-emerald-500 to-emerald-700 flex items-center justify-center text-white text-4xl font-black group-hover:scale-105 transition">LG</div>
+          <div class="p-5">
+            <span class="text-[10px] uppercase font-bold text-emerald-600 tracking-wider">Sistema Web</span>
+            <h3 class="font-bold text-slate-900 mt-1">Logística Global SA</h3>
+            <p class="text-xs text-slate-500 mt-1 leading-relaxed">Panel B2B de seguimiento de envíos con intranet operativa y reportes en tiempo real.</p>
+            <div class="flex gap-2 mt-3 text-[10px] font-bold text-slate-500">
+              <span class="bg-slate-100 px-2 py-0.5 rounded">Intranet</span>
+              <span class="bg-slate-100 px-2 py-0.5 rounded">B2B</span>
+            </div>
+          </div>
+        </article>
+        <!-- Proyecto 3 -->
+        <article class="bg-white border border-slate-200 rounded-2xl overflow-hidden hover:shadow-xl transition group">
+          <div class="h-40 bg-gradient-to-br from-violet-500 to-violet-700 flex items-center justify-center text-white text-4xl font-black group-hover:scale-105 transition">MP</div>
+          <div class="p-5">
+            <span class="text-[10px] uppercase font-bold text-violet-600 tracking-wider">Landing Pro</span>
+            <h3 class="font-bold text-slate-900 mt-1">Marketing Pro</h3>
+            <p class="text-xs text-slate-500 mt-1 leading-relaxed">Landing de alta conversión con captación de leads y A/B testing continuo.</p>
+            <div class="flex gap-2 mt-3 text-[10px] font-bold text-slate-500">
+              <span class="bg-slate-100 px-2 py-0.5 rounded">Landing</span>
+              <span class="bg-slate-100 px-2 py-0.5 rounded">Leads</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Proceso -->
+  <section id="proceso" class="bg-white border-y border-slate-200 py-20">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span class="inline-flex px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-xs font-bold mb-3">PROCESO</span>
+        <h2 class="text-3xl font-extrabold text-slate-900">Así trabajamos</h2>
+        <p class="text-slate-500 mt-3 text-sm">Tres pasos simples, sin sorpresas.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="text-center p-6">
+          <div class="w-14 h-14 rounded-full bg-blue-600 text-white flex items-center justify-center text-xl font-black mx-auto mb-4">1</div>
+          <h3 class="font-bold text-slate-900">Cotizás</h3>
+          <p class="text-sm text-slate-600 mt-2">Elegís la base de tu proyecto y los addons. Ves el total en tiempo real.</p>
+        </div>
+        <div class="text-center p-6">
+          <div class="w-14 h-14 rounded-full bg-blue-600 text-white flex items-center justify-center text-xl font-black mx-auto mb-4">2</div>
+          <h3 class="font-bold text-slate-900">Aprobás</h3>
+          <p class="text-sm text-slate-600 mt-2">Recibís el ticket oficial por WhatsApp y coordinamos el anticipo 50/50.</p>
+        </div>
+        <div class="text-center p-6">
+          <div class="w-14 h-14 rounded-full bg-blue-600 text-white flex items-center justify-center text-xl font-black mx-auto mb-4">3</div>
+          <h3 class="font-bold text-slate-900">Lanzamos</h3>
+          <p class="text-sm text-slate-600 mt-2">Desarrollamos, homologamos y entregamos con soporte técnico incluido.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA / Cotizador entry -->
+  <section id="cotizador" class="py-20">
+    <div class="max-w-4xl mx-auto px-6">
+      <div class="bg-gradient-to-br from-blue-600 to-blue-800 rounded-3xl p-8 md:p-12 text-center text-white shadow-2xl">
+        <h2 class="text-3xl md:text-4xl font-extrabold">¿Listo para cotizar tu proyecto?</h2>
+        <p class="text-blue-100 mt-3 text-sm md:text-base max-w-xl mx-auto">
+          Elegí tu experiencia. El cotizador es 100% interactivo: ves el total en vivo, validás tu CUIT y generás un ticket único para enviar por WhatsApp.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-3 justify-center mt-8">
+          <a href="cotizador-desktop.html" class="bg-white text-blue-700 hover:bg-blue-50 font-bold text-sm px-6 py-3.5 rounded-xl shadow-lg transition">
+            💻 Cotizador Desktop
+          </a>
+          <a href="cotizador-paso1.html" class="bg-blue-500/30 border border-white/30 hover:bg-blue-500/50 text-white font-bold text-sm px-6 py-3.5 rounded-xl transition">
+            📱 Cotizador Mobile
+          </a>
+        </div>
+        <p class="text-xs text-blue-200 mt-4">Ambos cotizadores comparten el mismo estado y la misma ref única.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contacto / Footer -->
+  <footer id="contacto" class="bg-white border-t border-slate-200 py-12">
+    <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div>
+        <div class="flex items-center gap-3 mb-3">
+          <div class="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white font-black text-xl">K</div>
+          <div>
+            <span class="text-lg font-extrabold text-slate-900 block leading-tight">KODEXA</span>
+            <span class="text-[10px] uppercase font-bold tracking-widest text-slate-400 block">Digital Solutions</span>
+          </div>
+        </div>
+        <p class="text-xs text-slate-500 leading-relaxed">Ecosistema digital completo. Respaldo tecnológico: ASARI S.A.S.</p>
+      </div>
+      <div>
+        <h4 class="font-bold text-sm text-slate-900 mb-3">Contacto</h4>
+        <ul class="space-y-2 text-xs text-slate-600">
+          <li><a href="https://wa.me/5491112345678" target="_blank" class="hover:text-blue-600">WhatsApp: +54 9 11 1234-5678</a></li>
+          <li><a href="mailto:hola@kodexa.com" class="hover:text-blue-600">hola@kodexa.com</a></li>
+          <li>Buenos Aires, Argentina</li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-bold text-sm text-slate-900 mb-3">Navegación</h4>
+        <ul class="space-y-2 text-xs text-slate-600">
+          <li><a href="#servicios" class="hover:text-blue-600">Servicios</a></li>
+          <li><a href="#proyectos" class="hover:text-blue-600">Proyectos</a></li>
+          <li><a href="#cotizador" class="hover:text-blue-600">Cotizador</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="max-w-7xl mx-auto px-6 mt-10 pt-6 border-t border-slate-100 text-center text-xs text-slate-400">
+      © 2025 KODEXA Digital Solutions • Respaldo tecnológico: ASARI S.A.S.
+    </div>
+  </footer>
+
 </body>
 </html>
