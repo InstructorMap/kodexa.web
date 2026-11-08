@@ -1,1 +1,36 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 150" role="img" aria-labelledby="t d"><title id="t">YUNA — 優奈</title><desc id="d">YUNA Technology Company. Firma japonesa con rama de cerezo.</desc><defs><linearGradient id="ink" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f4c5cf"/><stop offset=".55" stop-color="#df6c87"/><stop offset="1" stop-color="#9e2948"/></linearGradient></defs><g transform="translate(8 8)" fill="none" stroke="url(#ink)" stroke-linecap="round" stroke-linejoin="round"><path d="M12 118C52 91 54 55 102 12M40 94Q18 65 11 44M58 72Q91 72 112 48M78 47Q57 28 54 9" stroke-width="3"/><path d="M11 44q-13-12-7-19 8-7 15 5 7-12 15-5 6 9-10 19-7 7-13 0zM112 48q-11-12-5-19 8-7 15 5 7-12 15-5 6 9-10 19-7 7-15 0zM54 9Q43-3 50-10q8-7 15 5 7-12 15-5 6 9-10 19-7 7-16 0z" fill="#eaa4b5" stroke="none"/><path d="M29 107l-9 11m44-58 13-9" stroke="#f5d8de" stroke-width="2"/></g><text x="168" y="84" fill="#fff8f5" font-family="Arial,sans-serif" font-size="70" font-weight="700" letter-spacing="12">YUNA</text><text x="174" y="112" fill="#e9a9b8" font-family="serif" font-size="24" letter-spacing="7">優 奈</text><path d="M175 124h290" stroke="url(#ink)" stroke-width="2"/><text x="176" y="143" fill="#bca9ad" font-family="Arial,sans-serif" font-size="10" letter-spacing="4">TECHNOLOGY COMPANY</text></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 176" role="img" aria-labelledby="title desc">
+  <title id="title">YUNA — 優奈</title>
+  <desc id="desc">Identidad de YUNA Technology Company: flor de cerezo geométrica dentro de un ensō abierto y firma tipográfica japonesa contemporánea.</desc>
+  <defs>
+    <linearGradient id="sakura" x1="12" y1="12" x2="136" y2="142" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F8DCE2"/><stop offset=".42" stop-color="#E99AAF"/><stop offset="1" stop-color="#B94D70"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="18" y1="12" x2="132" y2="140" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F3D9A0"/><stop offset=".52" stop-color="#C99A62"/><stop offset="1" stop-color="#8C6548"/>
+    </linearGradient>
+    <linearGradient id="type" x1="190" y1="30" x2="565" y2="112" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFF9F5"/><stop offset="1" stop-color="#E9D9D7"/>
+    </linearGradient>
+  </defs>
+  <g transform="translate(8 4)">
+    <path d="M113 25C139 47 145 83 126 111C106 143 65 153 34 132C4 112 -3 71 17 39C30 18 52 7 75 7" fill="none" stroke="url(#gold)" stroke-width="3.2" stroke-linecap="round"/>
+    <path d="M74 9C94 11 108 20 119 34" fill="none" stroke="#F4D9A5" stroke-width="1.2" stroke-linecap="round" opacity=".75"/>
+    <g transform="translate(72 78)">
+      <path d="M0 1C-7-7-13-19-8-27C-3-35 8-31 11-20C17-30 29-29 31-19C33-9 19-1 7 4C5 13-2 13-5 7Z" fill="url(#sakura)" transform="translate(0 -1)"/>
+      <path d="M1 0C-10-5-24-7-29 1C-34 10-25 18-13 16C-23 24-18 35-8 34C2 33 7 18 8 7C17 4 17-3 10-6Z" fill="url(#sakura)" transform="rotate(-72)"/>
+      <path d="M1 0C-10-5-24-7-29 1C-34 10-25 18-13 16C-23 24-18 35-8 34C2 33 7 18 8 7C17 4 17-3 10-6Z" fill="url(#sakura)" transform="rotate(72)"/>
+      <path d="M1 0C-10-5-24-7-29 1C-34 10-25 18-13 16C-23 24-18 35-8 34C2 33 7 18 8 7C17 4 17-3 10-6Z" fill="url(#sakura)" transform="rotate(144)"/>
+      <path d="M1 0C-10-5-24-7-29 1C-34 10-25 18-13 16C-23 24-18 35-8 34C2 33 7 18 8 7C17 4 17-3 10-6Z" fill="url(#sakura)" transform="rotate(216)"/>
+      <circle r="5.2" fill="#F8E7C7"/>
+      <circle r="2" fill="#A96B55"/>
+    </g>
+    <path d="M72 84C62 99 48 110 30 117" fill="none" stroke="url(#gold)" stroke-width="1.8" stroke-linecap="round"/>
+    <path d="M33 115l-7 8m14-12-2 10" stroke="#E9A2B3" stroke-width="1.5" stroke-linecap="round"/>
+  </g>
+  <g>
+    <text x="178" y="91" fill="url(#type)" font-family="'Avenir Next', 'Helvetica Neue', Arial, sans-serif" font-size="76" font-weight="500" letter-spacing="17">YUNA</text>
+    <path d="M184 111H572" stroke="url(#gold)" stroke-width="1.2" opacity=".9"/>
+    <text x="185" y="143" fill="#E7A0B2" font-family="'Noto Serif JP', 'Yu Mincho', 'Hiragino Mincho ProN', serif" font-size="23" letter-spacing="12">優 奈</text>
+    <text x="583" y="139" fill="#B9A9A8" font-family="Arial, sans-serif" font-size="9" letter-spacing="2.6" text-anchor="end">TECHNOLOGY COMPANY</text>
+  </g>
+</svg>
