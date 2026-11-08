@@ -1,6 +1,6 @@
-# KODEXA V5 — Digital Engineering Studio
+# YUNA V5 — Technology Company
 
-Sitio comercial estático de KODEXA Digital Solutions, preparado para GitHub Pages.
+Sitio comercial estático de YUNA Digital Solutions, preparado para GitHub Pages.
 
 ## Identidad y experiencia V5
 - Sistema visual global compartido entre inicio, soluciones, tecnología y cotizador.
