@@ -1,1 +1,18 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><defs><linearGradient id="p" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f4c5cf"/><stop offset=".55" stop-color="#df6c87"/><stop offset="1" stop-color="#9e2948"/></linearGradient></defs><rect width="128" height="128" rx="26" fill="#08090d"/><path d="M22 105C43 82 43 45 82 17M35 83Q18 60 16 43M53 61Q80 62 103 38" fill="none" stroke="url(#p)" stroke-width="4" stroke-linecap="round"/><g fill="#eaa4b5"><path d="M16 43q-12-12-5-19 8-7 15 5 7-12 15-5 6 9-10 19-7 7-15 0z"/><path d="M103 38q-12-12-5-19 8-7 15 5 7-12 15-5 6 9-10 19-7 7-15 0z"/></g><text x="64" y="113" fill="#fff8f5" font-family="serif" font-size="28" text-anchor="middle">優奈</text></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" role="img" aria-labelledby="title">
+  <title id="title">YUNA — símbolo sakura</title>
+  <defs>
+    <linearGradient id="ring" x1="20" y1="12" x2="140" y2="148" gradientUnits="userSpaceOnUse"><stop stop-color="#F3D9A0"/><stop offset=".55" stop-color="#C99A62"/><stop offset="1" stop-color="#8C6548"/></linearGradient>
+    <linearGradient id="petal" x1="45" y1="34" x2="115" y2="118" gradientUnits="userSpaceOnUse"><stop stop-color="#F8DCE2"/><stop offset=".48" stop-color="#E99AAF"/><stop offset="1" stop-color="#B94D70"/></linearGradient>
+  </defs>
+  <rect x="2" y="2" width="156" height="156" rx="38" fill="#09090D"/>
+  <path d="M116 31C140 53 145 91 124 119C102 148 61 151 34 128C8 106 9 65 31 37C43 22 61 15 79 15" fill="none" stroke="url(#ring)" stroke-width="3.5" stroke-linecap="round"/>
+  <g transform="translate(80 78)" fill="url(#petal)">
+    <path d="M0 3C-10-8-13-27-4-33C5-39 14-28 13-15C24-27 39-22 37-10C35 2 18 9 7 10C5 22-4 23-8 13Z"/>
+    <path d="M0 3C-10-8-13-27-4-33C5-39 14-28 13-15C24-27 39-22 37-10C35 2 18 9 7 10C5 22-4 23-8 13Z" transform="rotate(72)"/>
+    <path d="M0 3C-10-8-13-27-4-33C5-39 14-28 13-15C24-27 39-22 37-10C35 2 18 9 7 10C5 22-4 23-8 13Z" transform="rotate(144)"/>
+    <path d="M0 3C-10-8-13-27-4-33C5-39 14-28 13-15C24-27 39-22 37-10C35 2 18 9 7 10C5 22-4 23-8 13Z" transform="rotate(216)"/>
+    <path d="M0 3C-10-8-13-27-4-33C5-39 14-28 13-15C24-27 39-22 37-10C35 2 18 9 7 10C5 22-4 23-8 13Z" transform="rotate(288)"/>
+    <circle r="6" fill="#F5E7CB"/><circle r="2.2" fill="#A96B55"/>
+  </g>
+  <path d="M80 87L80 108" stroke="#D6A06C" stroke-width="1.5" stroke-linecap="round"/>
+</svg>
