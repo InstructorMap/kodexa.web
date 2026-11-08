@@ -1,0 +1,37 @@
+/* YUNA — Japanese-inspired technology identity */
+:root{
+ --kdx-navy:#08090d;--kdx-navy-2:#101117;--kdx-navy-3:#191a22;
+ --kdx-blue:#d94b69;--kdx-blue-hover:#bd3655;--kdx-cyan:#f1a9b9;--kdx-gold:#d7b7a1;
+ --kdx-white:#fffaf7;--kdx-ink:#f7f0ed;--kdx-muted:#c1b3b1;--kdx-dim:#8f8384;
+ --kdx-line:rgba(239,190,199,.16);--kdx-line-strong:rgba(239,153,174,.38);
+ --v5-bg:#08090d;--v5-panel:#15151b;--v5-blue:#d94b69;--v5-cyan:#f1a9b9;
+}
+body.v5,body.v5:before{background-color:#08090d}
+body.v5:before{background-image:radial-gradient(ellipse 55% 38% at 78% 0%,rgba(190,45,76,.15),transparent 72%),radial-gradient(ellipse 38% 34% at 0% 58%,rgba(239,169,185,.07),transparent 75%),linear-gradient(180deg,#08090d 0%,#111016 52%,#08090d 100%)}
+body.v5 .site-header{background:rgba(8,9,13,.88);border-bottom-color:rgba(239,190,199,.15)}
+body.v5 .button-primary{background:linear-gradient(110deg,#a92d4a,#e45c79);border-color:rgba(255,190,205,.28);box-shadow:0 9px 32px rgba(190,45,76,.2)}
+body.v5 .button-primary:hover{background:linear-gradient(110deg,#c13c5b,#f17b95)}
+body.v5 .button-secondary{border-color:rgba(239,190,199,.24);background:rgba(255,255,255,.025)}
+body.v5 .eyebrow,body.v5 .v4-kicker{color:#e6a6b5}
+body.v5 .v4-hero{background:radial-gradient(ellipse 48% 56% at 76% 45%,rgba(164,35,67,.2),transparent 72%),radial-gradient(ellipse 30% 45% at 55% 100%,rgba(239,169,185,.07),transparent 70%),linear-gradient(135deg,#08090d 0%,#19131a 56%,#08090d 100%)}
+body.v5 .v4-hero-grid{opacity:.2;background-image:linear-gradient(rgba(238,183,194,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(238,183,194,.08) 1px,transparent 1px)}
+body.v5 .v4-hero h1 em,body.v5 .v4-intro em,body.v5 .v4-cta h2 em,body.v5 .subpage-hero h1 em,body.v5 .quote-heading h1 em{color:#f0a9bb;text-shadow:0 0 34px rgba(220,90,125,.2)}
+body.v5 .v4-visual{border-color:rgba(239,169,185,.24);background:linear-gradient(145deg,rgba(36,23,31,.88),rgba(11,10,15,.94));box-shadow:0 35px 110px rgba(0,0,0,.48),0 0 70px rgba(190,45,76,.1)}
+body.v5 .v4-console,body.v5 .v4-float{border-color:rgba(239,169,185,.25);background:linear-gradient(145deg,#21151c,#100e14)}
+body.v5 .v4-console-top{background:#281923}
+body.v5 .v4-intro{background:linear-gradient(90deg,rgba(29,17,24,.94),rgba(17,14,20,.8));border-color:var(--v5-line)}
+body.v5 .v4-solution-card,body.v5 .v4-approach-grid article,body.v5 .v4-stack,body.v5 .technology-detail-grid article,body.v5 .detail-row{background:linear-gradient(145deg,rgba(31,22,29,.82),rgba(13,12,17,.92));border-color:var(--v5-line)}
+body.v5 .v4-solution-card:hover,body.v5 .v4-approach-grid article:hover{border-color:rgba(239,153,174,.48)}
+body.v5 .v4-card-symbol{color:#f0a9bb;border-color:rgba(239,153,174,.3);background:linear-gradient(145deg,rgba(190,45,76,.16),rgba(239,169,185,.08))}
+body.v5 .v4-stack-tags span,body.v5 .tech-tags span{border-color:rgba(239,190,199,.2);background:rgba(40,24,33,.55);color:#e8d6d7}
+body.v5 .v4-cta{background:radial-gradient(ellipse 55% 100% at 85% 50%,rgba(164,35,67,.2),transparent 72%),linear-gradient(110deg,#160e15,#21131c);border-color:var(--v5-line)}
+body.v5 .site-footer{background:#060609;border-top-color:var(--v5-line)}
+body.v5 .subpage-hero{background:radial-gradient(ellipse 55% 75% at 78% 28%,rgba(164,35,67,.2),transparent 72%),linear-gradient(135deg,#09090e,#1d141b 58%,#08090d)}
+body.v5 .subpage-hero:after{border-color:rgba(239,169,185,.14);box-shadow:0 0 0 55px rgba(239,169,185,.02),0 0 0 110px rgba(239,169,185,.012)}
+body.v5 .quote-config,body.v5 .quote-summary{border-color:rgba(239,190,199,.2)}
+/* Sakura: quiet ornamental signature, never competing with content */
+body.v5 .v4-hero{overflow:hidden}
+body.v5 .v4-hero:after{content:"";position:absolute;z-index:0;pointer-events:none;right:-65px;top:5%;width:360px;height:470px;opacity:.18;background-repeat:no-repeat;background-size:contain;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 360 470'%3E%3Cg fill='none' stroke='%23e8a0b2' stroke-width='2' opacity='.9'%3E%3Cpath d='M355 5C280 80 300 150 220 210S105 315 15 460'/%3E%3Cpath d='M302 82q-65-20-95-70M268 134q-65-10-96-53M209 205q-66-3-100-53M143 280q-57 8-91-35M91 354q-49 17-75-12'/%3E%3C/g%3E%3Cg fill='%23e8a0b2' opacity='.9'%3E%3Cpath d='M207 6q-12-19-2-6 17-18 13 4 21-6 7 8 12 18-10 12-10 24-12-4-21 8-14-13-25-5-3-16 10-13 1-21 14-8z'/%3E%3Cpath d='M169 74q-12-19-2-6 17-18 13 4 21-6 7 8 12 18-10 12-10 24-12-4-21 8-14-13-25-5-3-16 10-13 1-21 14-8z'/%3E%3Cpath d='M105 190q-12-19-2-6 17-18 13 4 21-6 7 8 12 18-10 12-10 24-12-4-21 8-14-13-25-5-3-16 10-13 1-21 14-8z'/%3E%3Cpath d='M54 304q-12-19-2-6 17-18 13 4 21-6 7 8 12 18-10 12-10 24-12-4-21 8-14-13-25-5-3-16 10-13 1-21 14-8z'/%3E%3C/g%3E%3C/svg%3E")}
+body.v5 .v4-hero-inner,body.v5 .v4-hero-bottom{position:relative;z-index:1}
+body.v5 .v4-proof i,body.v5 .identity-visual-bottom i{background:#efa9b9;box-shadow:0 0 12px #d94b69}
+@media(max-width:760px){body.v5 .v4-hero:after{right:-160px;opacity:.11}}

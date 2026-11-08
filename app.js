@@ -1,4 +1,4 @@
-/* KODEXA — Cotizador inteligente v2
+/* YUNA — Cotizador inteligente v2
  * Motor de estimación local. Sin backend, sin Supabase y sin persistencia de datos personales.
  */
 (() => {
@@ -265,7 +265,7 @@
   function buildMessage() {
     const e = estimate(), m = monthly();
     const lines = [
-      "SOLICITUD DE PROYECTO — KODEXA",
+      "SOLICITUD DE PROYECTO — YUNA",
       "Referencia: KDX-" + new Date().toISOString().replace(/[-:TZ.]/g, "").slice(0, 12) + "-" + Math.random().toString(36).slice(2, 6).toUpperCase(),
       "",
       "SOLUCIÓN: " + solution().label,
