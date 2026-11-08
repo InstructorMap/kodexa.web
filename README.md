@@ -1,31 +1,26 @@
-# YUNA V5 — Technology Company
+# YUNA — Technology Company
 
-Sitio comercial estático de YUNA Digital Solutions, preparado para GitHub Pages.
+Sitio comercial estático de YUNA, empresa de tecnología enfocada en productos digitales, plataformas SaaS e ingeniería de soluciones.
 
-## Identidad y experiencia V5
-- Sistema visual global compartido entre inicio, soluciones, tecnología y cotizador.
-- Dirección dark-cinematic: navy profundo, iluminación azul/cian, geometría técnica y superficies translúcidas.
-- Logotipo horizontal e isotipo V5 dedicados; favicon alineado con la marca.
-- Composición responsive para escritorio, tablet y móvil.
-- Navegación, tarjetas, formularios y estados interactivos con una misma identidad.
-- Cotizador modular V2: web, e-commerce, PWA, Android híbrido/nativo, SaaS multi-tenant, sistemas operativos e integraciones.
-- Estimaciones híbridas: precios iniciales para soluciones simples y rangos para productos complejos.
-- Módulos técnicos configurables: autenticación, roles, pagos, QR, GPS, WebRTC Push-to-Talk, offline, push, IA y más.
-- Especificación comercial y límites del cotizador en `docs/COTIZADOR.md`.
+## Identidad y experiencia
+- Identidad YUNA (優奈): negro tinta, rosa sakura, marfil y rojo profundo.
+- Lenguaje visual japonés contemporáneo con ornamentación sakura discreta.
+- Logotipo, isotipo y asistente visual adaptados a YUNA.
+- Experiencia responsive en inicio, soluciones, tecnología, cotizador y contacto.
+- Cotizador modular con estimaciones híbridas para soluciones digitales.
 
 ## Arquitectura actual
 Frontend estático. El cotizador calcula en el navegador y deriva a WhatsApp con un mensaje que la persona revisa y envía. No hay autenticación, backend, almacenamiento central, CRM ni conexión a Supabase.
 
 ## Publicación
-GitHub Pages desde la raíz de `main`:
+El repositorio conserva su URL técnica de GitHub Pages:
 https://instructormap.github.io/kodexa.web/
 
-## Pendiente de validación comercial
-- Confirmar que el número de WhatsApp configurado es el canal oficial.
-- Confirmar que hola@kodexa.com es una dirección operativa.
-- Revisar precios y alcance del catálogo en `app.js`.
-- Definir alcance, impuestos, vigencia y condiciones comerciales de cada propuesta.
+## Validaciones pendientes antes de operar comercialmente
+- Confirmar el número de WhatsApp como canal oficial.
+- Definir y configurar el correo corporativo de YUNA.
+- Revisar precios, alcance y condiciones comerciales del cotizador.
 - Configurar dominio propio y analítica/consentimiento si se decide utilizarlos.
 
-## Alcance técnico y siguiente etapa
-Esta versión no incorpora Supabase ni simula capacidades de backend. Una futura etapa deberá definir autenticación, perfiles, organizaciones/tenants, roles, políticas RLS, persistencia de leads y gestión de proyectos antes de implementarlas.
+## Próxima etapa técnica
+Antes de conectar Supabase habrá que definir autenticación, perfiles, organizaciones/tenants, roles, políticas RLS, persistencia de leads y gestión de proyectos. Esta versión no incorpora ni simula esas capacidades.
