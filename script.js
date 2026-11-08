@@ -56,7 +56,7 @@
   const year = document.getElementById("current-year");
   if (year) year.textContent = String(new Date().getFullYear());
 
-  // KODEXA Copiloto: transparent, local guidance. No external AI or client-account access.
+  // YUNA Copiloto: transparent, local guidance. No external AI or client-account access.
   const launcher = document.getElementById("copilot-launcher");
   const panel = document.getElementById("copilot-panel");
   const closeButton = document.getElementById("copilot-close");
@@ -127,14 +127,14 @@
       addMessage("Los plazos se estiman después de definir alcance, contenidos, integraciones y validaciones. Preferimos darte un plazo realista antes que prometer uno sin analizar el proyecto.");
       addActions([{label:"Definir mi proyecto",href:"contacto.html?tipo=general&origen=copiloto"}]);
     } else if (/contact|humano|persona|asesor|whatsapp|hablar/.test(value)) {
-      addMessage("Claro. Podés contactar directamente al equipo de KODEXA.");
+      addMessage("Claro. Podés contactar directamente al equipo de YUNA.");
       addActions([{label:"Abrir WhatsApp",href:"contacto.html?tipo=general&origen=copiloto"}]);
     } else if (/seguimiento|estado de mi proyecto|mi proyecto/.test(value)) {
       addMessage("Este asistente todavía no accede a cuentas de clientes ni consulta estados de proyectos. Para una consulta concreta, te derivo al equipo.");
       addActions([{label:"Consultar al equipo",href:"contacto.html?tipo=general&origen=seguimiento"}]);
     } else {
       addMessage("Para orientarte con precisión, contame si buscás una web, una tienda online, una aplicación o un sistema de gestión. También podés hablar con el equipo.");
-      addActions([{label:"Ver soluciones",href:"soluciones.html"},{label:"Hablar con KODEXA",href:"contacto.html?tipo=general&origen=copiloto"}]);
+      addActions([{label:"Ver soluciones",href:"soluciones.html"},{label:"Hablar con YUNA",href:"contacto.html?tipo=general&origen=copiloto"}]);
     }
   };
 
