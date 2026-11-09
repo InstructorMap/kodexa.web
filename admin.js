@@ -88,7 +88,7 @@ function renderOverview() {
 function renderRequests() {
   const q = ($("#request-search")?.value || "").toLowerCase(), filter = $("#request-filter")?.value || "all";
   const rows = state.requests.filter(r => (filter === "all" || r.status === filter) && [r.name,r.company,r.email,r.phone,r.service,r.message].join(" ").toLowerCase().includes(q));
-  $("#requests-table").innerHTML = rows.length ? `<table class="admin-table"><thead><tr><th>Contacto</th><th>Servicio</th><th>Mensaje</th><th>Ingreso</th><th>Seguimiento</th></tr></thead><tbody>${rows.map(r => `<tr><td><div class="primary-cell">${safe(r.name)}</div><div class="secondary-cell">${safe(r.company || r.email || r.phone || "")}</div><div class="secondary-cell">${safe(r.email || "")}</div></td><td>${safe(r.service)}</td><td style="white-space:normal;min-width:210px;max-width:320px">${safe((r.message || "").slice(0,180))}${(r.message || "").length > 180 ? "…" : ""}</td><td class="secondary-cell">${date(r.created_at)}</td><td><select class="table-select" data-request-status="${r.id}" aria-label="Estado de solicitud"><option value="new" ${r.status==="new"?"selected":""}>Nueva</option><option value="contacted" ${r.status==="contacted"?"selected":""}>Contactada</option><option value="qualified" ${r.status==="qualified"?"selected":""}>Calificada</option><option value="closed" ${r.status==="closed"?"selected":""}>Cerrada</option><option value="spam" ${r.status==="spam"?"selected":""}>Spam</option></select></td></tr>`).join("")}</tbody></table>` : empty("No hay solicitudes que coincidan con el filtro.");
+  $("#requests-table").innerHTML = rows.length ? `<table class="admin-table"><thead><tr><th>Contacto</th><th>Servicio</th><th>Mensaje</th><th>Ingreso</th><th>Seguimiento</th></tr></thead><tbody>${rows.map(r => `<tr><td><div class="primary-cell">${safe(r.name)}</div><div class="secondary-cell">${safe(r.company || r.email || r.phone || "")}</div><div class="secondary-cell">${safe(r.email || "")}</div></td><td>${safe(r.service)}</td><td style="white-space:normal;min-width:210px;max-width:320px">${safe((r.message || "").slice(0,180))}${(r.message || "").length > 180 ? "…" : ""}</td><td class="secondary-cell">${date(r.created_at)}</td><td><select class="table-select" data-request-status="${r.id}" aria-label="Estado de solicitud"><option value="new" ${r.status==="new"?"selected":""}>Nueva</option><option value="contacted" ${r.status==="contacted"?"selected":""}>Contactada</option><option value="qualified" ${r.status==="qualified"?"selected":""}>Calificada</option><option value="closed" ${r.status==="closed"?"selected":""}>Cerrada</option><option value="spam" ${r.status==="spam"?"selected":""}>Spam</option></select><button class="row-action" data-convert-request="${r.id}" type="button">Convertir en cliente</button></td></tr>`).join("")}</tbody></table>` : empty("No hay solicitudes que coincidan con el filtro.");
 }
 function renderClients() {
   const q = ($("#client-search")?.value || "").toLowerCase();
@@ -110,6 +110,29 @@ async function updateStatus(table, id, status, collection, render) {
   if (error) { notify("No se pudo actualizar el estado: " + error.message, true); await loadAll(); return; }
   const item = collection.find(x => x.id === id); if (item) item.status = status;
   renderAll(); notify("Estado actualizado correctamente.");
+}
+async function convertRequestToClient(id) {
+  const request = state.requests.find(r => r.id === id);
+  if (!request) return notify("No se encontró la solicitud.", true);
+  let client = null;
+  if (request.email) client = state.clients.find(c => c.email && c.email.toLowerCase() === request.email.toLowerCase());
+  if (!client && request.phone) client = state.clients.find(c => c.phone && c.phone.replace(/\\D/g,"") === request.phone.replace(/\\D/g,""));
+  if (!client) {
+    const payload = {
+      legal_name: (request.company || request.name || "Cliente potencial").trim(),
+      contact_name: request.name || null,
+      email: request.email || null,
+      phone: request.phone || null,
+      notes: ["Servicio solicitado: " + request.service, request.message].filter(Boolean).join("\\n")
+    };
+    const { data, error } = await supabase.from("clients").insert(payload).select("id").single();
+    if (error) return notify("No se pudo crear el cliente: " + error.message, true);
+    client = data;
+  }
+  const { error } = await supabase.from("quote_requests").update({ status: "qualified" }).eq("id", id);
+  if (error) return notify("Cliente registrado, pero no se pudo actualizar la solicitud: " + error.message, true);
+  await loadAll();
+  notify("Solicitud convertida en cliente" + (client.id ? "." : "."));
 }
 async function saveClient(event) {
   event.preventDefault(); const form = event.currentTarget, button = $('button[type="submit"]', form);
@@ -164,6 +187,7 @@ $("#client-search").addEventListener("input", renderClients);
 $("#quote-search").addEventListener("input", renderQuotes);
 $("#project-search").addEventListener("input", renderProjects);
 $("#requests-table").addEventListener("change", event => { const el = event.target.closest("[data-request-status]"); if (el) updateStatus("quote_requests",el.dataset.requestStatus,el.value,state.requests,renderRequests); });
+$("#requests-table").addEventListener("click", event => { const el = event.target.closest("[data-convert-request]"); if (el) convertRequestToClient(el.dataset.convertRequest); });
 $("#projects-table").addEventListener("change", event => { const el = event.target.closest("[data-project-status]"); if (el) updateStatus("projects",el.dataset.projectStatus,el.value,state.projects,renderProjects); });
 $("#quotes-table").addEventListener("change", event => { const el = event.target.closest("[data-quote-status]"); if (el) updateStatus("quotes",el.dataset.quoteStatus,el.value,state.quotes,renderQuotes); });
 supabase.auth.onAuthStateChange((event, session) => { if (event === "SIGNED_OUT") showAuth(); });
