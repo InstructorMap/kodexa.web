@@ -43,3 +43,9 @@
 @media(max-width:850px){.lead-layout{grid-template-columns:1fr;gap:35px}.lead-context{position:static}.lead-context-card{display:inline-flex;vertical-align:top;width:31%;margin-right:1%;align-items:flex-start}.lead-context-card p{max-width:240px}}
 @media(max-width:620px){.lead-intro{padding-top:62px}.lead-intro h1{font-size:clamp(40px,10vw,55px)}.lead-proof{font-size:7px;gap:8px}.lead-section{padding-top:35px}.lead-context-card{width:100%;margin-right:0;margin-top:18px}.lead-form{padding:20px 16px}.lead-field-grid{grid-template-columns:1fr;gap:0}.lead-form-head{font-size:8px}.lead-form-intro h2{font-size:20px}}
 @media(prefers-reduced-motion:reduce){.lead-page *{scroll-behavior:auto!important;transition:none!important}}
+
+
+/* Secure intake form: invisible honeypot and submission feedback */
+.lead-honeypot{position:absolute!important;left:-10000px!important;top:auto!important;width:1px!important;height:1px!important;overflow:hidden!important}
+.lead-error.is-success{color:#79d6aa}
+.lead-submit:disabled{opacity:.72;cursor:wait}
