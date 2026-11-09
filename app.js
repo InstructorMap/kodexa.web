@@ -300,13 +300,55 @@
       const target = Number(btn.dataset.go);
       if (target < state.step) setStep(target);
     }));
-    $("#quote-client-form").addEventListener("submit", event => {
+    $("#quote-client-form").addEventListener("submit", async event => {
       event.preventDefault();
       if (!validateStage()) return;
-      const url = "https://wa.me/" + WA + "?text=" + encodeURIComponent(buildMessage());
-      const popup = window.open(url, "_blank", "noopener,noreferrer");
-      if (!popup) {
-        window.location.href = url;
+
+      const config = window.YUNA_SUPABASE_CONFIG;
+      const status = $("#quote-submit-status");
+      const button = $("#quote-send");
+      status.textContent = "";
+      status.classList.remove("is-success");
+
+      if (!config?.quoteRequestEndpoint || !config?.publishableKey) {
+        status.textContent = "El envío no está disponible en este momento. Volvé a intentarlo más tarde.";
+        return;
+      }
+
+      button.disabled = true;
+      button.textContent = "Enviando solicitud…";
+
+      try {
+        const response = await fetch(config.quoteRequestEndpoint, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "apikey": config.publishableKey
+          },
+          body: JSON.stringify({
+            name: state.name.trim(),
+            company: state.company.trim(),
+            phone: state.phone.trim(),
+            email: state.email.trim(),
+            service: solution().label,
+            message: buildMessage().slice(0, 3000),
+            source_page: "cotizador.html",
+            website: $("#quote-website")?.value || ""
+          })
+        });
+
+        const result = await response.json().catch(() => ({}));
+        if (!response.ok || !result.ok) {
+          throw new Error(result.error || "No pudimos registrar la solicitud.");
+        }
+
+        status.classList.add("is-success");
+        status.textContent = "¡Solicitud recibida! Guardamos tu configuración y nos comunicaremos para validar el alcance.";
+        button.textContent = "Solicitud enviada ✓";
+      } catch (error) {
+        status.textContent = error.message || "No pudimos enviar la solicitud. Intentá nuevamente.";
+        button.disabled = false;
+        button.textContent = "Reintentar envío ↗";
       }
     });
   }
