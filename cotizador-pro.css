@@ -103,3 +103,9 @@
 @media(max-width:600px){.quote-pro .quote-main{padding:34px 0 60px}.quote-pro-hero h1{font-size:43px}.quote-stepper button{justify-content:center;gap:5px;padding:13px 4px;flex-direction:column}.quote-stepper button b{font-size:8px}.quote-stage{padding:22px 16px}.solution-cards,.module-grid{grid-template-columns:1fr}.solution-card{min-height:138px}.choice-grid,.choice-grid-four,.form-grid{grid-template-columns:1fr 1fr}.quote-navigation{padding:14px 16px}.quote-navigation .button{min-width:0;flex:1;padding-inline:12px}.summary-content{padding:17px}.summary-price{font-size:28px}.transparency-grid{grid-template-columns:1fr}.quote-transparency{margin-top:38px}}
 @media(max-width:390px){.choice-grid,.choice-grid-four,.form-grid{grid-template-columns:1fr}.quote-stepper button span{font-size:9px}}
 @media(prefers-reduced-motion:reduce){.solution-card{transition:none}}
+
+
+/* Secure quote intake: invisible honeypot and submission feedback */
+.quote-honeypot{position:absolute!important;left:-10000px!important;top:auto!important;width:1px!important;height:1px!important;overflow:hidden!important}
+#quote-submit-status.is-success{color:#79d6aa}
+#quote-send:disabled{opacity:.72;cursor:wait}
