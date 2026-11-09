@@ -36,6 +36,7 @@
   form.addEventListener("submit", async event => {
     event.preventDefault();
     status.textContent = "";
+    status.classList.remove("is-success");
 
     if (!form.reportValidity()) return;
     if (!config?.quoteRequestEndpoint || !config?.publishableKey) {
