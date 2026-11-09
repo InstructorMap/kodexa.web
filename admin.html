@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="theme-color" content="#08090d">
+  <title>YUNA · Panel de gestión</title>
+  <link rel="icon" href="assets/yuna/yuna-icon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="yuna.css">
+  <link rel="stylesheet" href="admin.css">
+  <script src="supabase-config.js"></script>
+  <script type="module" src="admin.js"></script>
+</head>
+<body class="v5 admin-body">
+  <main class="admin-shell">
+    <section class="auth-screen" id="auth-screen">
+      <a class="admin-brand" href="index.html"><img src="assets/yuna/yuna-logo.svg" alt="YUNA Technology Company"></a>
+      <div class="auth-card">
+        <span class="admin-eyebrow">YUNA / CONTROL CENTER</span>
+        <h1>Gestión <em>centralizada.</em></h1>
+        <p>Ingresá con tu cuenta autorizada para administrar las operaciones.</p>
+        <form id="login-form" class="admin-form">
+          <label>Correo electrónico<input type="email" name="email" autocomplete="username" required maxlength="254" placeholder="equipo@empresa.com"></label>
+          <label>Contraseña<input type="password" name="password" autocomplete="current-password" required minlength="1"></label>
+          <button class="admin-button primary" type="submit" id="login-button">Ingresar al panel <span>↗</span></button>
+          <p class="form-feedback" id="login-feedback" role="status" aria-live="polite"></p>
+        </form>
+        <div class="auth-foot"><span class="pulse"></span> ACCESO RESTRINGIDO · YUNA</div>
+      </div>
+      <a class="back-home" href="index.html">← Volver al sitio</a>
+    </section>
+
+    <section class="dashboard-screen" id="dashboard-screen" hidden>
+      <aside class="admin-sidebar">
+        <a class="admin-brand" href="index.html"><img src="assets/yuna/yuna-logo.svg" alt="YUNA"></a>
+        <div class="sidebar-label">WORKSPACE</div>
+        <nav class="admin-nav" aria-label="Secciones del panel">
+          <button class="nav-item active" data-view="overview"><span>◫</span> Resumen</button>
+          <button class="nav-item" data-view="requests"><span>↗</span> Solicitudes <b id="nav-new-count">0</b></button>
+          <button class="nav-item" data-view="clients"><span>◇</span> Clientes</button>
+          <button class="nav-item" data-view="quotes"><span>▤</span> Cotizaciones</button>
+          <button class="nav-item" data-view="projects"><span>⌘</span> Proyectos</button>
+        </nav>
+        <div class="sidebar-bottom">
+          <div class="user-mini"><div class="user-avatar" id="user-avatar">Y</div><div><strong id="user-name">Equipo YUNA</strong><small id="user-role">STAFF</small></div></div>
+          <button class="logout-button" id="logout-button">↪ Cerrar sesión</button>
+          <a class="site-link" href="index.html">Abrir sitio público ↗</a>
+        </div>
+      </aside>
+
+      <div class="admin-main">
+        <header class="admin-topbar">
+          <div><span class="admin-eyebrow">YUNA / OPERACIONES</span><h1 id="page-title">Resumen general</h1></div>
+          <div class="topbar-right"><span class="live-status"><i></i> SISTEMA ACTIVO</span><button class="icon-button" id="refresh-button" title="Actualizar datos" aria-label="Actualizar datos">↻</button></div>
+        </header>
+
+        <div class="admin-content">
+          <div class="notice" id="global-notice" role="status" aria-live="polite" hidden></div>
+
+          <section class="view-panel active" id="view-overview">
+            <div class="welcome-row"><div><span class="admin-eyebrow">VISTA EJECUTIVA</span><h2>El estado de tu operación, <em>en un solo lugar.</em></h2></div><span class="today-date" id="today-date"></span></div>
+            <div class="metric-grid">
+              <article class="metric-card"><span>Solicitudes nuevas</span><strong id="metric-new">—</strong><small><i class="metric-dot pink"></i> Requieren seguimiento</small><b class="metric-icon">↗</b></article>
+              <article class="metric-card"><span>Clientes registrados</span><strong id="metric-clients">—</strong><small>Base de relaciones</small><b class="metric-icon">◇</b></article>
+              <article class="metric-card"><span>Cotizaciones activas</span><strong id="metric-quotes">—</strong><small>Enviadas o en preparación</small><b class="metric-icon">▤</b></article>
+              <article class="metric-card"><span>Proyectos en curso</span><strong id="metric-projects">—</strong><small>Planificación y ejecución</small><b class="metric-icon">⌘</b></article>
+            </div>
+            <div class="overview-grid">
+              <section class="panel-card recent-panel"><div class="panel-heading"><div><span class="admin-eyebrow">ENTRADAS RECIENTES</span><h3>Últimas solicitudes</h3></div><button class="text-action" data-goto="requests">Ver todas ↗</button></div><div id="overview-requests" class="table-wrap"><div class="empty-state">Cargando solicitudes…</div></div></section>
+              <section class="panel-card pipeline-panel"><div class="panel-heading"><div><span class="admin-eyebrow">ESTADO COMERCIAL</span><h3>Pipeline de solicitudes</h3></div></div><div id="pipeline-list" class="pipeline-list"></div></section>
+            </div>
+          </section>
+
+          <section class="view-panel" id="view-requests">
+            <div class="section-toolbar"><div><span class="admin-eyebrow">CAPTACIÓN / CRM</span><h2>Solicitudes recibidas</h2><p>Consultas enviadas desde el sitio y el cotizador de YUNA.</p></div><div class="toolbar-actions"><input class="search-input" id="request-search" type="search" placeholder="Buscar contacto…" aria-label="Buscar solicitudes"><select id="request-filter" aria-label="Filtrar solicitudes"><option value="all">Todos los estados</option><option value="new">Nuevas</option><option value="contacted">Contactadas</option><option value="qualified">Calificadas</option><option value="closed">Cerradas</option><option value="spam">Spam</option></select></div></div>
+            <div class="panel-card table-card"><div id="requests-table" class="table-wrap"><div class="empty-state">Cargando…</div></div></div>
+          </section>
+
+          <section class="view-panel" id="view-clients">
+            <div class="section-toolbar"><div><span class="admin-eyebrow">RELACIONES</span><h2>Clientes</h2><p>Empresas y contactos registrados en YUNA.</p></div><div class="toolbar-actions"><input class="search-input" id="client-search" type="search" placeholder="Buscar cliente…" aria-label="Buscar clientes"><button class="admin-button primary" id="new-client-button">＋ Nuevo cliente</button></div></div>
+            <div class="panel-card table-card"><div id="clients-table" class="table-wrap"><div class="empty-state">Cargando…</div></div></div>
+          </section>
+
+          <section class="view-panel" id="view-quotes">
+            <div class="section-toolbar"><div><span class="admin-eyebrow">PROPUESTAS COMERCIALES</span><h2>Cotizaciones</h2><p>Seguimiento de propuestas, importes y estados.</p></div><div class="toolbar-actions"><input class="search-input" id="quote-search" type="search" placeholder="Buscar cotización…" aria-label="Buscar cotizaciones"></div></div>
+            <div class="panel-card table-card"><div id="quotes-table" class="table-wrap"><div class="empty-state">Cargando…</div></div></div>
+          </section>
+
+          <section class="view-panel" id="view-projects">
+            <div class="section-toolbar"><div><span class="admin-eyebrow">ENTREGA / OPERACIONES</span><h2>Proyectos</h2><p>Organizá el trabajo y controlá cada etapa.</p></div><div class="toolbar-actions"><input class="search-input" id="project-search" type="search" placeholder="Buscar proyecto…" aria-label="Buscar proyectos"><button class="admin-button primary" id="new-project-button">＋ Nuevo proyecto</button></div></div>
+            <div class="panel-card table-card"><div id="projects-table" class="table-wrap"><div class="empty-state">Cargando…</div></div></div>
+          </section>
+        </div>
+        <footer class="admin-footer"><span>YUNA TECHNOLOGY COMPANY · CONTROL CENTER</span><span>SECURE WORKSPACE / 01</span></footer>
+      </div>
+    </section>
+  </main>
+
+  <dialog class="admin-dialog" id="client-dialog">
+    <form id="client-form" class="dialog-form">
+      <div class="dialog-head"><div><span class="admin-eyebrow">NUEVO REGISTRO</span><h2>Agregar cliente</h2></div><button type="button" class="dialog-close" data-close="client-dialog" aria-label="Cerrar">×</button></div>
+      <label>Nombre legal / empresa *<input name="legal_name" required maxlength="180" placeholder="Nombre de la empresa"></label>
+      <div class="form-two"><label>Persona de contacto<input name="contact_name" maxlength="160" placeholder="Nombre y apellido"></label><label>CUIT / identificación<input name="tax_id" maxlength="40" placeholder="Opcional"></label></div>
+      <div class="form-two"><label>Correo electrónico<input name="email" type="email" maxlength="254" placeholder="contacto@empresa.com"></label><label>Teléfono<input name="phone" maxlength="40" placeholder="+54…"></label></div>
+      <label>Sitio web<input name="website" type="url" maxlength="255" placeholder="https://"></label>
+      <label>Notas<textarea name="notes" rows="3" maxlength="2000" placeholder="Información útil para el equipo…"></textarea></label>
+      <p class="form-feedback" id="client-feedback" role="status"></p>
+      <div class="dialog-actions"><button type="button" class="admin-button secondary" data-close="client-dialog">Cancelar</button><button type="submit" class="admin-button primary">Guardar cliente</button></div>
+    </form>
+  </dialog>
+
+  <dialog class="admin-dialog" id="project-dialog">
+    <form id="project-form" class="dialog-form">
+      <div class="dialog-head"><div><span class="admin-eyebrow">NUEVO PROYECTO</span><h2>Crear proyecto</h2></div><button type="button" class="dialog-close" data-close="project-dialog" aria-label="Cerrar">×</button></div>
+      <label>Nombre del proyecto *<input name="name" required maxlength="180" placeholder="Nombre interno del proyecto"></label>
+      <label>Cliente *<select name="client_id" id="project-client" required><option value="">Seleccionar cliente…</option></select></label>
+      <label>Descripción<textarea name="description" rows="3" maxlength="3000" placeholder="Objetivo y alcance inicial…"></textarea></label>
+      <div class="form-two"><label>Inicio<input name="start_date" type="date"></label><label>Fecha objetivo<input name="target_date" type="date"></label></div>
+      <p class="form-feedback" id="project-feedback" role="status"></p>
+      <div class="dialog-actions"><button type="button" class="admin-button secondary" data-close="project-dialog">Cancelar</button><button type="submit" class="admin-button primary">Crear proyecto</button></div>
+    </form>
+  </dialog>
+</body>
+</html>
