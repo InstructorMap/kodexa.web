@@ -1,0 +1,56 @@
+name: YUNA Supabase smoke test
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/yuna-smoke-test.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  smoke-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify CORS preflight
+        shell: bash
+        run: |
+          set -euo pipefail
+          STATUS=$(curl -sS -o /tmp/preflight.txt -w "%{http_code}" -X OPTIONS \
+            "https://mlqnagmbbtmcounefmvz.supabase.co/functions/v1/submit-quote-request" \
+            -H "Origin: https://instructormap.github.io" \
+            -H "Access-Control-Request-Method: POST" \
+            -H "Access-Control-Request-Headers: apikey,content-type")
+          test "$STATUS" = "204"
+          grep -qi "access-control-allow-origin: https://instructormap.github.io" /tmp/preflight.txt || true
+          echo "CORS preflight HTTP $STATUS"
+
+      - name: Submit uniquely tagged test request
+        shell: bash
+        env:
+          RUN_ID: ${{ github.run_id }}
+          PUBLISHABLE_KEY: sb_publishable_1PZCiOgKGRJfOPAxBRrWWA_5gWzRhWq
+        run: |
+          set -euo pipefail
+          EMAIL="yuna-smoke-${RUN_ID}@example.invalid"
+          PAYLOAD=$(jq -n --arg email "$EMAIL" --arg run "$RUN_ID" '{
+            name: "YUNA Automated QA",
+            company: "Automated smoke test",
+            email: $email,
+            phone: "",
+            service: "YUNA QA TEST - DELETE",
+            message: ("Automated end-to-end smoke test. Run ID: " + $run),
+            source_page: "automated-smoke-test",
+            website: ""
+          }')
+          STATUS=$(curl -sS -o /tmp/response.json -w "%{http_code}" -X POST \
+            "https://mlqnagmbbtmcounefmvz.supabase.co/functions/v1/submit-quote-request" \
+            -H "Origin: https://instructormap.github.io" \
+            -H "Content-Type: application/json" \
+            -H "apikey: $PUBLISHABLE_KEY" \
+            --data "$PAYLOAD")
+          cat /tmp/response.json
+          test "$STATUS" = "201"
+          jq -e '.ok == true' /tmp/response.json
+          echo "Submission HTTP $STATUS for $EMAIL"
