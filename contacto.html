@@ -76,9 +76,10 @@
           <div class="lead-field"><label for="lead-budget">¿Cómo está definida la inversión?</label><select id="lead-budget" name="budget"><option value="">Prefiero conversarlo</option><option>Tengo un rango definido y quiero conversarlo</option><option>Necesito orientación para estimarla</option></select></div>
         </div>
         <div class="lead-field"><label for="lead-details">¿Qué necesitás resolver? *</label><textarea id="lead-details" name="details" rows="4" maxlength="1200" required placeholder="Contanos qué hace tu negocio, qué problema querés resolver o qué te gustaría construir."></textarea><small>Podés describirlo con tus palabras. No hace falta usar términos técnicos.</small></div>
-        <label class="lead-consent"><input type="checkbox" id="lead-consent" required><span>Acepto que YUNA utilice estos datos para responder esta consulta. Al continuar, se abrirá WhatsApp con el mensaje preparado; este sitio no envía ni almacena la información en un servidor.</span></label>
-        <button class="button button-primary lead-submit" type="submit">Preparar consulta en WhatsApp <span>↗</span></button>
-        <p class="lead-privacy">Tus datos solo se incorporan al mensaje cuando elegís continuar. Revisá el contenido en WhatsApp antes de enviarlo.</p>
+        <div class="lead-honeypot" aria-hidden="true"><label for="lead-website">No completar<input id="lead-website" name="website" type="text" tabindex="-1" autocomplete="off"></label></div>
+        <label class="lead-consent"><input type="checkbox" id="lead-consent" required><span>Acepto que YUNA utilice estos datos para responder esta consulta y que la información se envíe de forma segura para su gestión comercial.</span></label>
+        <button class="button button-primary lead-submit" id="lead-submit" type="submit">Enviar consulta <span>↗</span></button>
+        <p class="lead-privacy">La consulta se transmite a YUNA mediante una conexión segura y se registra para poder responderte. No compartimos tus datos con terceros para publicidad.</p>
         <p class="lead-error" id="lead-error" role="status" aria-live="polite"></p>
       </form>
     </div>
@@ -86,6 +87,7 @@
 </main>
 <footer class="site-footer"><div class="container footer-bottom"><span>© <span id="current-year">2026</span> YUNA Technology Company</span><span>Consultas comerciales · Argentina</span></div></footer>
 <script src="script.js" defer></script>
+<script src="supabase-config.js" defer></script>
 <script src="lead-capture.js" defer></script>
 </body>
 </html>
