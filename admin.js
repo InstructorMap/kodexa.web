@@ -98,7 +98,7 @@ function renderClients() {
 function renderQuotes() {
   const q = ($("#quote-search")?.value || "").toLowerCase();
   const rows = state.quotes.filter(x => [x.title,x.quote_number,x.clients?.legal_name,x.status].join(" ").toLowerCase().includes(q));
-  $("#quotes-table").innerHTML = rows.length ? `<table class="admin-table"><thead><tr><th>Número</th><th>Cliente</th><th>Concepto</th><th>Importe</th><th>Estado</th><th>Fecha</th></tr></thead><tbody>${rows.map(x => `<tr><td class="primary-cell">#${x.quote_number}</td><td>${safe(x.clients?.legal_name || "Sin cliente")}</td><td>${safe(x.title)}</td><td>${money(x.total,x.currency)}</td><td>${pill(x.status,"quote")}</td><td class="secondary-cell">${date(x.created_at)}</td></tr>`).join("")}</tbody></table>` : empty("Las cotizaciones creadas se mostrarán aquí.");
+  $("#quotes-table").innerHTML = rows.length ? `<table class="admin-table"><thead><tr><th>Número</th><th>Cliente</th><th>Concepto</th><th>Importe</th><th>Estado</th><th>Fecha</th></tr></thead><tbody>${rows.map(x => `<tr><td class="primary-cell">#${x.quote_number}</td><td>${safe(x.clients?.legal_name || "Sin cliente")}</td><td>${safe(x.title)}</td><td>${money(x.total,x.currency)}</td><td><select class="table-select" data-quote-status="${x.id}" aria-label="Estado de cotización">${Object.entries(labels.quote).map(([k,v])=>`<option value="${k}" ${x.status===k?"selected":""}>${v}</option>`).join("")}</select></td><td class="secondary-cell">${date(x.created_at)}</td></tr>`).join("")}</tbody></table>` : empty("Las cotizaciones creadas se mostrarán aquí.");
 }
 function renderProjects() {
   const q = ($("#project-search")?.value || "").toLowerCase();
@@ -165,5 +165,6 @@ $("#quote-search").addEventListener("input", renderQuotes);
 $("#project-search").addEventListener("input", renderProjects);
 $("#requests-table").addEventListener("change", event => { const el = event.target.closest("[data-request-status]"); if (el) updateStatus("quote_requests",el.dataset.requestStatus,el.value,state.requests,renderRequests); });
 $("#projects-table").addEventListener("change", event => { const el = event.target.closest("[data-project-status]"); if (el) updateStatus("projects",el.dataset.projectStatus,el.value,state.projects,renderProjects); });
+$("#quotes-table").addEventListener("change", event => { const el = event.target.closest("[data-quote-status]"); if (el) updateStatus("quotes",el.dataset.quoteStatus,el.value,state.quotes,renderQuotes); });
 supabase.auth.onAuthStateChange((event, session) => { if (event === "SIGNED_OUT") showAuth(); });
 checkSession().catch(error => { console.error("YUNA admin:", error); showAuth(); feedback($("#login-feedback"),"No se pudo conectar con el sistema. Intentá actualizar la página.","error"); });
