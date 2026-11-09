@@ -123,8 +123,10 @@
                 <label>Email<input id="client-email" name="email" type="email" maxlength="120" autocomplete="email" placeholder="tu@email.com"></label>
               </div>
               <label>¿Qué problema querés resolver o qué debería hacer la solución?<textarea id="client-notes" name="notes" rows="4" maxlength="1200" placeholder="Contanos el objetivo, cómo trabajan hoy y qué resultado esperan..."></textarea></label>
+              <div class="quote-honeypot" aria-hidden="true"><label for="quote-website">No completar<input id="quote-website" name="website" type="text" tabindex="-1" autocomplete="off"></label></div>
               <p id="client-error" class="field-error" role="alert"></p>
-              <p class="privacy-note">Tus datos no se guardan en esta web ni se envían a una base de datos. Al enviar, se prepara un mensaje en WhatsApp para que puedas revisarlo antes de compartirlo.</p>
+              <p id="quote-submit-status" class="field-error" role="status" aria-live="polite"></p>
+              <p class="privacy-note">Al enviar, tu solicitud y los datos de contacto se transmiten de forma segura a YUNA para su evaluación y seguimiento comercial.</p>
             </form>
           </section>
 
@@ -132,7 +134,7 @@
             <button type="button" id="quote-back" class="button button-secondary" hidden>← Anterior</button>
             <span class="navigation-spacer"></span>
             <button type="button" id="quote-next" class="button button-primary">Continuar <span>→</span></button>
-            <button type="submit" form="quote-client-form" id="quote-send" class="button button-primary" hidden>Enviar proyecto por WhatsApp <span>↗</span></button>
+            <button type="submit" form="quote-client-form" id="quote-send" class="button button-primary" hidden>Enviar solicitud <span>↗</span></button>
           </div>
         </section>
 
@@ -172,6 +174,7 @@
   </main>
 
   <footer class="site-footer"><div class="container footer-bottom"><span>© <span id="current-year">2026</span> YUNA Technology Company</span><span>Ingeniería digital · Soluciones a medida</span></div></footer>
-  <script src="app.js"></script>
+  <script src="supabase-config.js"></script>
+<script src="app.js"></script>
 </body>
 </html>
