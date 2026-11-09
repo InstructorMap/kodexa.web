@@ -312,6 +312,7 @@
   }
 
   function init() {
+    if (!$("#quote-builder") || !$("#solution-grid") || !$("#quote-client-form")) return;
     renderSolutionCards();
     renderModules();
     syncPlatformInputs();
