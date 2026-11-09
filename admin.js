@@ -103,7 +103,22 @@ function renderQuotes() {
 function renderProjects() {
   const q = ($("#project-search")?.value || "").toLowerCase();
   const rows = state.projects.filter(x => [x.name,x.clients?.legal_name,x.status].join(" ").toLowerCase().includes(q));
-  $("#projects-table").innerHTML = rows.length ? `<table class="admin-table"><thead><tr><th>Proyecto</th><th>Cliente</th><th>Estado</th><th>Inicio</th><th>Fecha objetivo</th></tr></thead><tbody>${rows.map(x => `<tr><td class="primary-cell">${safe(x.name)}</td><td>${safe(x.clients?.legal_name || "—")}</td><td><select class="table-select" data-project-status="${x.id}" aria-label="Estado de proyecto">${Object.entries(labels.project).map(([k,v])=>`<option value="${k}" ${x.status===k?"selected":""}>${v}</option>`).join("")}</select></td><td class="secondary-cell">${date(x.start_date)}</td><td class="secondary-cell">${date(x.target_date)}</td></tr>`).join("")}</tbody></table>` : empty("Creá un proyecto para empezar a organizar las entregas.");
+  $("#projects-table").innerHTML = rows.length ? `<table class="admin-table"><thead><tr><th>Proyecto</th><th>Cliente</th><th>Estado</th><th>Inicio</th><th>Fecha objetivo</th><th>Actividad</th></tr></thead><tbody>${rows.map(x => `<tr><td class="primary-cell">${safe(x.name)}</td><td>${safe(x.clients?.legal_name || "—")}</td><td><select class="table-select" data-project-status="${x.id}" aria-label="Estado de proyecto">${Object.entries(labels.project).map(([k,v])=>`<option value="${k}" ${x.status===k?"selected":""}>${v}</option>`).join("")}</select></td><td class="secondary-cell">${date(x.start_date)}</td><td class="secondary-cell">${date(x.target_date)}</td><td><button class="row-action" data-project-events="${x.id}" type="button">Ver historial</button></td></tr>`).join("")}</tbody></table>` : empty("Creá un proyecto para empezar a organizar las entregas.");
+}
+async function showProjectHistory(id) {
+  const project = state.projects.find(p => p.id === id);
+  if (!project) return notify("No se encontró el proyecto.", true);
+  let dialog = $("#project-history-dialog");
+  if (!dialog) {
+    document.body.insertAdjacentHTML("beforeend", '<dialog class="admin-dialog" id="project-history-dialog"><div class="dialog-form"><div class="dialog-head"><div><span class="admin-eyebrow">TRAZABILIDAD</span><h2 id="project-history-title">Historial del proyecto</h2></div><button type="button" class="dialog-close" data-close="project-history-dialog" aria-label="Cerrar">×</button></div><div id="project-history-content" class="table-wrap"></div></div></dialog>');
+    dialog = $("#project-history-dialog");
+  }
+  $("#project-history-title").textContent = project.name;
+  $("#project-history-content").innerHTML = '<div class="empty-state">Cargando actividad…</div>';
+  dialog.showModal();
+  const { data, error } = await supabase.from("project_events").select("event_type,description,created_at").eq("project_id", id).order("created_at", { ascending: false }).limit(100);
+  if (error) return $("#project-history-content").innerHTML = '<div class="empty-state">No se pudo cargar el historial: ' + safe(error.message) + '</div>';
+  $("#project-history-content").innerHTML = data.length ? '<table class="admin-table"><thead><tr><th>Fecha</th><th>Evento</th><th>Detalle</th></tr></thead><tbody>' + data.map(e => '<tr><td>' + date(e.created_at) + '</td><td>' + safe(e.event_type) + '</td><td>' + safe(e.description) + '</td></tr>').join("") + '</tbody></table>' : empty("Todavía no hay actividad registrada para este proyecto.");
 }
 async function updateStatus(table, id, status, collection, render) {
   const { error } = await supabase.from(table).update({ status }).eq("id", id);
@@ -189,6 +204,7 @@ $("#project-search").addEventListener("input", renderProjects);
 $("#requests-table").addEventListener("change", event => { const el = event.target.closest("[data-request-status]"); if (el) updateStatus("quote_requests",el.dataset.requestStatus,el.value,state.requests,renderRequests); });
 $("#requests-table").addEventListener("click", event => { const el = event.target.closest("[data-convert-request]"); if (el) convertRequestToClient(el.dataset.convertRequest); });
 $("#projects-table").addEventListener("change", event => { const el = event.target.closest("[data-project-status]"); if (el) updateStatus("projects",el.dataset.projectStatus,el.value,state.projects,renderProjects); });
+$("#projects-table").addEventListener("click", event => { const el = event.target.closest("[data-project-events]"); if (el) showProjectHistory(el.dataset.projectEvents); });
 $("#quotes-table").addEventListener("change", event => { const el = event.target.closest("[data-quote-status]"); if (el) updateStatus("quotes",el.dataset.quoteStatus,el.value,state.quotes,renderQuotes); });
 supabase.auth.onAuthStateChange((event, session) => { if (event === "SIGNED_OUT") showAuth(); });
 checkSession().catch(error => { console.error("YUNA admin:", error); showAuth(); feedback($("#login-feedback"),"No se pudo conectar con el sistema. Intentá actualizar la página.","error"); });
