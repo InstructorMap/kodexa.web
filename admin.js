@@ -124,7 +124,16 @@ async function showProjectHistory(id) {
 async function updateStatus(table, id, status, collection, render) {
   const { error } = await supabase.from(table).update({ status }).eq("id", id);
   if (error) { notify("No se pudo actualizar el estado: " + error.message, true); await loadAll(); return; }
-  const item = collection.find(x => x.id === id); if (item) item.status = status;
+  const item = collection.find(x => x.id === id);
+  if (table === "projects" && item && item.status !== status) {
+    const { error: eventError } = await supabase.from("project_events").insert({
+      project_id: id, event_type: "status_changed",
+      description: "Estado del proyecto actualizado: " + item.status + " → " + status,
+      metadata: { previous_status: item.status, new_status: status }
+    });
+    if (eventError) console.warn("No se pudo registrar el evento del proyecto:", eventError.message);
+  }
+  if (item) item.status = status;
   renderAll(); notify("Estado actualizado correctamente.");
 }
 async function convertRequestToClient(id) {
