@@ -215,7 +215,7 @@ $$(".nav-item").forEach(btn => btn.addEventListener("click", () => showView(btn.
 $$("[data-goto]").forEach(btn => btn.addEventListener("click", () => showView(btn.dataset.goto)));
 $$("[data-close]").forEach(btn => btn.addEventListener("click", () => $("#" + btn.dataset.close).close()));
 $("#new-client-button").addEventListener("click", () => { const form=$("#client-form"); delete form.dataset.editId; form.reset(); $("#client-dialog").querySelector("h2").textContent="Agregar cliente"; $("#client-dialog").showModal(); });
-$("#new-project-button").addEventListener("click", () => { delete $("#project-form").dataset.editId; $("#project-dialog").querySelector("h2").textContent="Crear proyecto"; openProjectDialog(); });
+$("#new-project-button").addEventListener("click", () => { const form=$("#project-form"); delete form.dataset.editId; form.reset(); $("#project-dialog").querySelector("h2").textContent="Crear proyecto"; openProjectDialog(); });
 $("#client-form").addEventListener("submit", saveClient);
 $("#project-form").addEventListener("submit", saveProject);
 $("#request-search").addEventListener("input", renderRequests);
