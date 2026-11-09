@@ -103,7 +103,7 @@ function renderQuotes() {
 function renderProjects() {
   const q = ($("#project-search")?.value || "").toLowerCase();
   const rows = state.projects.filter(x => [x.name,x.clients?.legal_name,x.status].join(" ").toLowerCase().includes(q));
-  $("#projects-table").innerHTML = rows.length ? `<table class="admin-table"><thead><tr><th>Proyecto</th><th>Cliente</th><th>Estado</th><th>Inicio</th><th>Fecha objetivo</th><th>Actividad</th></tr></thead><tbody>${rows.map(x => `<tr><td class="primary-cell">${safe(x.name)}</td><td>${safe(x.clients?.legal_name || "—")}</td><td><select class="table-select" data-project-status="${x.id}" aria-label="Estado de proyecto">${Object.entries(labels.project).map(([k,v])=>`<option value="${k}" ${x.status===k?"selected":""}>${v}</option>`).join("")}</select></td><td class="secondary-cell">${date(x.start_date)}</td><td class="secondary-cell">${date(x.target_date)}</td><td><button class="row-action" data-project-events="${x.id}" type="button">Ver historial</button></td></tr>`).join("")}</tbody></table>` : empty("Creá un proyecto para empezar a organizar las entregas.");
+  $("#projects-table").innerHTML = rows.length ? `<table class="admin-table"><thead><tr><th>Proyecto</th><th>Cliente</th><th>Estado</th><th>Inicio</th><th>Fecha objetivo</th><th>Actividad</th><th></th></tr></thead><tbody>${rows.map(x => `<tr><td class="primary-cell">${safe(x.name)}</td><td>${safe(x.clients?.legal_name || "—")}</td><td><select class="table-select" data-project-status="${x.id}" aria-label="Estado de proyecto">${Object.entries(labels.project).map(([k,v])=>`<option value="${k}" ${x.status===k?"selected":""}>${v}</option>`).join("")}</select></td><td class="secondary-cell">${date(x.start_date)}</td><td class="secondary-cell">${date(x.target_date)}</td><td><button class="row-action" data-project-events="${x.id}" type="button">Ver historial</button></td><td><button class="row-action" data-edit-project="${x.id}" type="button">Editar</button></td></tr>`).join("")}</tbody></table>` : empty("Creá un proyecto para empezar a organizar las entregas.");
 }
 async function showProjectHistory(id) {
   const project = state.projects.find(p => p.id === id);
@@ -178,10 +178,20 @@ async function saveProject(event) {
   data.name = data.name.trim(); data.description = data.description.trim() || null;
   data.start_date = data.start_date || null; data.target_date = data.target_date || null;
   setButtonBusy(button,true,"Creando…"); feedback($("#project-feedback"),"");
-  const { error } = await supabase.from("projects").insert(data);
+  const editId = form.dataset.editId;
+  const previous = state.projects.find(p => p.id === editId);
+  const query = editId ? supabase.from("projects").update(data).eq("id",editId) : supabase.from("projects").insert(data);
+  const { error } = await query;
   setButtonBusy(button,false);
-  if (error) return feedback($("#project-feedback"),"No se pudo crear: " + error.message,"error");
-  form.reset(); $("#project-dialog").close(); await loadAll(); notify("Proyecto creado correctamente.");
+  if (error) return feedback($("#project-feedback"),"No se pudo guardar: " + error.message,"error");
+  if (editId && previous) {
+    const changed = Object.keys(data).filter(k => (previous[k] ?? "") !== (data[k] ?? ""));
+    if (changed.length) {
+      const { error: eventError } = await supabase.from("project_events").insert({project_id:editId,event_type:"project_edited",description:"Se actualizaron datos del proyecto: "+changed.join(", "),metadata:{changed_fields:changed}});
+      if (eventError) console.warn("No se pudo registrar la edición del proyecto:",eventError.message);
+    }
+  }
+  delete form.dataset.editId; form.reset(); $("#project-dialog").close(); await loadAll(); notify(editId ? "Proyecto actualizado." : "Proyecto creado correctamente.");
 }
 async function openProjectDialog() {
   const select = $("#project-client");
@@ -205,7 +215,7 @@ $$(".nav-item").forEach(btn => btn.addEventListener("click", () => showView(btn.
 $$("[data-goto]").forEach(btn => btn.addEventListener("click", () => showView(btn.dataset.goto)));
 $$("[data-close]").forEach(btn => btn.addEventListener("click", () => $("#" + btn.dataset.close).close()));
 $("#new-client-button").addEventListener("click", () => { const form=$("#client-form"); delete form.dataset.editId; form.reset(); $("#client-dialog").querySelector("h2").textContent="Agregar cliente"; $("#client-dialog").showModal(); });
-$("#new-project-button").addEventListener("click", openProjectDialog);
+$("#new-project-button").addEventListener("click", () => { delete $("#project-form").dataset.editId; $("#project-dialog").querySelector("h2").textContent="Crear proyecto"; openProjectDialog(); });
 $("#client-form").addEventListener("submit", saveClient);
 $("#project-form").addEventListener("submit", saveProject);
 $("#request-search").addEventListener("input", renderRequests);
@@ -217,7 +227,7 @@ $("#project-search").addEventListener("input", renderProjects);
 $("#requests-table").addEventListener("change", event => { const el = event.target.closest("[data-request-status]"); if (el) updateStatus("quote_requests",el.dataset.requestStatus,el.value,state.requests,renderRequests); });
 $("#requests-table").addEventListener("click", event => { const el = event.target.closest("[data-convert-request]"); if (el) convertRequestToClient(el.dataset.convertRequest); });
 $("#projects-table").addEventListener("change", event => { const el = event.target.closest("[data-project-status]"); if (el) updateStatus("projects",el.dataset.projectStatus,el.value,state.projects,renderProjects); });
-$("#projects-table").addEventListener("click", event => { const el = event.target.closest("[data-project-events]"); if (el) showProjectHistory(el.dataset.projectEvents); });
+$("#projects-table").addEventListener("click", event => { const history = event.target.closest("[data-project-events]"); if (history) showProjectHistory(history.dataset.projectEvents); const edit = event.target.closest("[data-edit-project]"); if (edit) { const project=state.projects.find(p=>p.id===edit.dataset.editProject); if(!project)return notify("No se encontró el proyecto.",true); const form=$("#project-form"); form.dataset.editId=project.id; ["name","client_id","description","start_date","target_date"].forEach(key=>{const field=form.elements.namedItem(key);if(field)field.value=project[key]||"";}); $("#project-dialog").querySelector("h2").textContent="Editar proyecto"; $("#project-dialog").showModal(); } });
 $("#quotes-table").addEventListener("change", event => { const el = event.target.closest("[data-quote-status]"); if (el) updateStatus("quotes",el.dataset.quoteStatus,el.value,state.quotes,renderQuotes); });
 supabase.auth.onAuthStateChange((event, session) => { if (event === "SIGNED_OUT") showAuth(); });
 checkSession().catch(error => { console.error("YUNA admin:", error); showAuth(); feedback($("#login-feedback"),"No se pudo conectar con el sistema. Intentá actualizar la página.","error"); });
