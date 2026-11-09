@@ -93,7 +93,7 @@ function renderRequests() {
 function renderClients() {
   const q = ($("#client-search")?.value || "").toLowerCase();
   const rows = state.clients.filter(c => [c.legal_name,c.contact_name,c.email,c.phone,c.tax_id].join(" ").toLowerCase().includes(q));
-  $("#clients-table").innerHTML = rows.length ? `<table class="admin-table"><thead><tr><th>Empresa</th><th>Contacto</th><th>Correo</th><th>Teléfono</th><th>Alta</th></tr></thead><tbody>${rows.map(c => `<tr><td class="primary-cell">${safe(c.legal_name)}</td><td>${safe(c.contact_name || "—")}</td><td>${safe(c.email || "—")}</td><td>${safe(c.phone || "—")}</td><td class="secondary-cell">${date(c.created_at)}</td></tr>`).join("")}</tbody></table>` : empty("Todavía no hay clientes registrados.");
+  $("#clients-table").innerHTML = rows.length ? `<table class="admin-table"><thead><tr><th>Empresa</th><th>Contacto</th><th>Correo</th><th>Teléfono</th><th>Alta</th><th></th></tr></thead><tbody>${rows.map(c => `<tr><td class="primary-cell">${safe(c.legal_name)}</td><td>${safe(c.contact_name || "—")}</td><td>${safe(c.email || "—")}</td><td>${safe(c.phone || "—")}</td><td class="secondary-cell">${date(c.created_at)}</td><td><button class="row-action" type="button" data-edit-client="${c.id}">Editar</button></td></tr>`).join("")}</tbody></table>` : empty("Todavía no hay clientes registrados.");
 }
 function renderQuotes() {
   const q = ($("#quote-search")?.value || "").toLowerCase();
@@ -165,10 +165,12 @@ async function saveClient(event) {
   data.legal_name = data.legal_name.trim();
   ["contact_name","email","phone","tax_id","website","notes"].forEach(k => { data[k] = data[k].trim() || null; });
   setButtonBusy(button,true,"Guardando…"); feedback($("#client-feedback"),"");
-  const { error } = await supabase.from("clients").insert(data);
+  const editId = form.dataset.editId;
+  const query = editId ? supabase.from("clients").update(data).eq("id",editId) : supabase.from("clients").insert(data);
+  const { error } = await query;
   setButtonBusy(button,false);
   if (error) return feedback($("#client-feedback"),"No se pudo guardar: " + error.message,"error");
-  form.reset(); $("#client-dialog").close(); await loadAll(); notify("Cliente registrado.");
+  delete form.dataset.editId; form.reset(); $("#client-dialog").close(); await loadAll(); notify(editId ? "Ficha de cliente actualizada." : "Cliente registrado.");
 }
 async function saveProject(event) {
   event.preventDefault(); const form = event.currentTarget, button = $('button[type="submit"]', form);
@@ -202,13 +204,14 @@ $("#refresh-button").addEventListener("click", async () => { try { await loadAll
 $$(".nav-item").forEach(btn => btn.addEventListener("click", () => showView(btn.dataset.view)));
 $$("[data-goto]").forEach(btn => btn.addEventListener("click", () => showView(btn.dataset.goto)));
 $$("[data-close]").forEach(btn => btn.addEventListener("click", () => $("#" + btn.dataset.close).close()));
-$("#new-client-button").addEventListener("click", () => $("#client-dialog").showModal());
+$("#new-client-button").addEventListener("click", () => { const form=$("#client-form"); delete form.dataset.editId; form.reset(); $("#client-dialog").querySelector("h2").textContent="Agregar cliente"; $("#client-dialog").showModal(); });
 $("#new-project-button").addEventListener("click", openProjectDialog);
 $("#client-form").addEventListener("submit", saveClient);
 $("#project-form").addEventListener("submit", saveProject);
 $("#request-search").addEventListener("input", renderRequests);
 $("#request-filter").addEventListener("change", renderRequests);
 $("#client-search").addEventListener("input", renderClients);
+$("#clients-table").addEventListener("click", event => { const btn=event.target.closest("[data-edit-client]"); if(!btn)return; const client=state.clients.find(c=>c.id===btn.dataset.editClient); if(!client)return notify("No se encontró el cliente.",true); const form=$("#client-form"); form.dataset.editId=client.id; ["legal_name","contact_name","email","phone","tax_id","website","notes"].forEach(key=>{const field=form.elements.namedItem(key);if(field)field.value=client[key]||"";}); $("#client-dialog").querySelector("h2").textContent="Editar cliente"; $("#client-dialog").showModal(); });
 $("#quote-search").addEventListener("input", renderQuotes);
 $("#project-search").addEventListener("input", renderProjects);
 $("#requests-table").addEventListener("change", event => { const el = event.target.closest("[data-request-status]"); if (el) updateStatus("quote_requests",el.dataset.requestStatus,el.value,state.requests,renderRequests); });
