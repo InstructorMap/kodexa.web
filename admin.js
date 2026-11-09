@@ -112,6 +112,7 @@ async function showProjectHistory(id) {
   if (!dialog) {
     document.body.insertAdjacentHTML("beforeend", '<dialog class="admin-dialog" id="project-history-dialog"><div class="dialog-form"><div class="dialog-head"><div><span class="admin-eyebrow">TRAZABILIDAD</span><h2 id="project-history-title">Historial del proyecto</h2></div><button type="button" class="dialog-close" data-close="project-history-dialog" aria-label="Cerrar">×</button></div><div id="project-history-content" class="table-wrap"></div></div></dialog>');
     dialog = $("#project-history-dialog");
+    dialog.querySelector('[data-close="project-history-dialog"]').addEventListener("click", () => dialog.close());
   }
   $("#project-history-title").textContent = project.name;
   $("#project-history-content").innerHTML = '<div class="empty-state">Cargando actividad…</div>';
